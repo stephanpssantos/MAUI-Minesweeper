@@ -3,39 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiTest1.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <ContentPage.Resources>
+        <Style x:Key="baseToolbarButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="8, 3, 8, 3" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+        <Style x:Key="neutralToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource baseToolbarButtonStyle}">
+            <Setter Property="BackgroundColor" Value="#0051A0E1" />
+            <Setter Property="BorderColor" Value="#00000000" />
+        </Style>
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+        <!--Can't use this because MAUI doesn't have a concept of a cursor-->
+        <Style x:Key="focusedToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource baseToolbarButtonStyle}">
+            <Setter Property="BackgroundColor" Value="Blue" />
+            <Setter Property="BorderColor" Value="Blue" />
+        </Style>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+        <Style x:Key="openToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource baseToolbarButtonStyle}">
+            <Setter Property="BackgroundColor" Value="#5551A0E1" />
+            <Setter Property="BorderColor" Value="#AA51A0E1" />
+        </Style>
+    </ContentPage.Resources>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
+    <VerticalStackLayout>
+        <HorizontalStackLayout>
+            <Button x:Name="GameButton" Text="Game" 
+                    Style="{StaticResource neutralToolbarButtonStyle}" 
+                    Clicked="OnToolbarButtonClicked" />
+            <Button x:Name="HelpButton" Text="Help" 
+                    Style="{StaticResource neutralToolbarButtonStyle}" 
+                    Clicked="OnToolbarButtonClicked" />
+        </HorizontalStackLayout>
+        <BoxView HeightRequest="2" HorizontalOptions="Fill" Color="#EEE"/>
+        <HorizontalStackLayout>
+            <Label Text="Test" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
 
 </ContentPage>

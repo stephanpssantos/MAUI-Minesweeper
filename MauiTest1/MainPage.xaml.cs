@@ -2,23 +2,33 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+	Button activeButton;
 
 	public MainPage()
 	{
 		InitializeComponent();
-	}
+		//Resources["gameButtonStyle"] = Resources["neutralToolbarButtonStyle"];
+		//Resources["helpButtonStyle"] = Resources["neutralToolbarButtonStyle"];
+    }
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	private void OnToolbarButtonClicked(object sender, EventArgs e)
 	{
-		count++;
+        Button triggeredControl = sender as Button;
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
+		if (triggeredControl == activeButton)
+		{
+			activeButton = null;
+            triggeredControl.Style = (Style)Resources["neutralToolbarButtonStyle"];
+        }
 		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+		{
+			if (activeButton != null)
+			{
+                activeButton.Style = (Style)Resources["neutralToolbarButtonStyle"];
+            }
+            activeButton = triggeredControl;
+            activeButton.Style = (Style)Resources["openToolbarButtonStyle"];
+        }
+    }
 }
 
