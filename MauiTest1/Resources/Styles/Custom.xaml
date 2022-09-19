@@ -28,22 +28,12 @@
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="TextColor" Value="Black" />
 
-        --><!--<Style.Triggers>
+        <Style.Triggers>
             <Trigger TargetType="Button" Property="IsPressed" Value="True">
                 <Setter Property="BackgroundColor" Value="#5551A0E1" />
                 <Setter Property="BorderColor" Value="#AA51A0E1" />
             </Trigger>
-        </Style.Triggers>--><!--
-    </Style>
-
-    <Style x:Key="neutralToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource baseToolbarButtonStyle}">
-        <Setter Property="BackgroundColor" Value="#0051A0E1" />
-        <Setter Property="BorderColor" Value="#00000000" />
-    </Style>
-
-    <Style x:Key="openToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource baseToolbarButtonStyle}">
-        <Setter Property="BackgroundColor" Value="Red" />
-        <Setter Property="BorderColor" Value="#00000000" />
+        </Style.Triggers>
     </Style>-->
     
 </ResourceDictionary>
