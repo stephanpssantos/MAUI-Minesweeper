@@ -58,75 +58,75 @@
         <Grid x:Name="GameMenu"
             WidthRequest="200" 
             Margin="0, 30, 0, 0" 
-            RowDefinitions="25, 5, 25, 25, 25, 25, 5, 25, 25, 5, 25, 5, 25, 10"
+            RowDefinitions="5, 25, 5, 25, 25, 25, 25, 5, 25, 25, 5, 25, 5, 25, 10"
             ColumnDefinitions="30, *, 30"
             Background="#EEE">
             <!--GAME MENU VISUALS-->
-            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="0" Grid.Column="1" Text="New" Style="{StaticResource toolbarMenuText}"/>
-            <Label Grid.Row="0" Grid.Column="2" Text="F2" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
-            <!--1-->
-            <BoxView Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
+            <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="1" Grid.Column="1" Text="New" Style="{StaticResource toolbarMenuText}"/>
+            <Label Grid.Row="1" Grid.Column="2" Text="F2" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
             <!--2-->
-            <Label Grid.Row="2" Grid.Column="0" x:Name="gameMenuBeginnerCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="Beginner" Style="{StaticResource toolbarMenuText}"/>
+            <BoxView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
             <!--3-->
-            <Label Grid.Row="3" Grid.Column="0" x:Name="gameMenuIntermediateCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="Intermediate" Style="{StaticResource toolbarMenuText}"/>
+            <Label Grid.Row="3" Grid.Column="0" x:Name="gameMenuBeginnerCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="Beginner" Style="{StaticResource toolbarMenuText}"/>
             <!--4-->
-            <Label Grid.Row="4" Grid.Column="0" x:Name="gameMenuExpertCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="Expert" Style="{StaticResource toolbarMenuText}"/>
+            <Label Grid.Row="4" Grid.Column="0" x:Name="gameMenuIntermediateCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="Intermediate" Style="{StaticResource toolbarMenuText}"/>
             <!--5-->
-            <Label Grid.Row="5" Grid.Column="0" x:Name="gameMenuCustomCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Text="Custom..." Style="{StaticResource toolbarMenuText}"/>
+            <Label Grid.Row="5" Grid.Column="0" x:Name="gameMenuExpertCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Text="Expert" Style="{StaticResource toolbarMenuText}"/>
             <!--6-->
-            <BoxView Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
+            <Label Grid.Row="6" Grid.Column="0" x:Name="gameMenuCustomCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Text="Custom..." Style="{StaticResource toolbarMenuText}"/>
             <!--7-->
-            <Label Grid.Row="7" Grid.Column="0" x:Name="gameMenuMarksCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Text="Marks (?)" Style="{StaticResource toolbarMenuText}"/>
+            <BoxView Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
             <!--8-->
-            <Label Grid.Row="8" Grid.Column="0" x:Name="gameMenuColorCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Text="Color" Style="{StaticResource toolbarMenuText}"/>
+            <Label Grid.Row="8" Grid.Column="0" x:Name="gameMenuMarksCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Text="Marks (?)" Style="{StaticResource toolbarMenuText}"/>
             <!--9-->
-            <BoxView Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
+            <Label Grid.Row="9" Grid.Column="0" x:Name="gameMenuColorCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Text="Color" Style="{StaticResource toolbarMenuText}"/>
             <!--10-->
-            <Label Grid.Row="10" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Text="Best Times..." Style="{StaticResource toolbarMenuText}"/>
+            <BoxView Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
             <!--11-->
-            <BoxView Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
+            <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2" Text="Best Times..." Style="{StaticResource toolbarMenuText}"/>
             <!--12-->
-            <Label Grid.Row="12" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" Text="Exit" Style="{StaticResource toolbarMenuText}"/>
+            <BoxView Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
+            <!--13-->
+            <Label Grid.Row="13" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="2" Text="Exit" Style="{StaticResource toolbarMenuText}"/>
             <!--GAME MENU BUTTONS-->
-            <Button Grid.Row="0" Grid.ColumnSpan="3" x:Name="gameMenuNewButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuNewButtonClicked" />
-            <Button Grid.Row="2" Grid.ColumnSpan="3" x:Name="gameMenuBeginnerButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuDifficultyButtonClicked" />
-            <Button Grid.Row="3" Grid.ColumnSpan="3" x:Name="gameMenuIntermediateButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuDifficultyButtonClicked" />
-            <Button Grid.Row="4" Grid.ColumnSpan="3" x:Name="gameMenuExpertButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuDifficultyButtonClicked" />
-            <Button Grid.Row="5" Grid.ColumnSpan="3" x:Name="gameMenuCustomButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuDifficultyButtonClicked" />
-            <Button Grid.Row="7" Grid.ColumnSpan="3" x:Name="gameMenuMarksButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuMarksButtonClicked" />
-            <Button Grid.Row="8" Grid.ColumnSpan="3" x:Name="gameMenuColorButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuColorButtonClicked" />
-            <Button Grid.Row="10" Grid.ColumnSpan="3" x:Name="gameMenuBestTimesButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuBestTimesButtonClicked" />
-            <Button Grid.Row="12" Grid.ColumnSpan="3" x:Name="gameMenuExitButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuExitButtonClicked" />
+            <Button Grid.Row="1" Grid.ColumnSpan="3" x:Name="gameMenuNewButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuNewButtonClicked" />
+            <Button Grid.Row="3" Grid.ColumnSpan="3" x:Name="gameMenuBeginnerButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuDifficultyButtonClicked" />
+            <Button Grid.Row="4" Grid.ColumnSpan="3" x:Name="gameMenuIntermediateButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuDifficultyButtonClicked" />
+            <Button Grid.Row="5" Grid.ColumnSpan="3" x:Name="gameMenuExpertButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuDifficultyButtonClicked" />
+            <Button Grid.Row="6" Grid.ColumnSpan="3" x:Name="gameMenuCustomButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuDifficultyButtonClicked" />
+            <Button Grid.Row="8" Grid.ColumnSpan="3" x:Name="gameMenuMarksButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuMarksButtonClicked" />
+            <Button Grid.Row="9" Grid.ColumnSpan="3" x:Name="gameMenuColorButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuColorButtonClicked" />
+            <Button Grid.Row="11" Grid.ColumnSpan="3" x:Name="gameMenuBestTimesButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuBestTimesButtonClicked" />
+            <Button Grid.Row="13" Grid.ColumnSpan="3" x:Name="gameMenuExitButton" Style="{StaticResource toolbarMenuButton}" Clicked="OnGameMenuExitButtonClicked" />
         </Grid>
 
         <Grid x:Name="HelpMenu"
             WidthRequest="200" 
             Margin="56, 30, 0, 0" 
-            RowDefinitions="25, 25, 5, 25, 10"
+            RowDefinitions="5, 25, 25, 5, 25, 10"
             ColumnDefinitions="30, *, 30"
             Background="#EEE">
             <!--HELP MENU VISUALS-->
-            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="0" Grid.Column="1" Text="Contents" Style="{StaticResource toolbarMenuText}"/>
-            <Label Grid.Row="0" Grid.Column="2" Text="F1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
-            <!--1-->
             <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Using Help" Style="{StaticResource toolbarMenuText}"/>
+            <Label Grid.Row="1" Grid.Column="1" Text="Contents" Style="{StaticResource toolbarMenuText}"/>
+            <Label Grid.Row="1" Grid.Column="2" Text="F1" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" />
+            <!--1-->
+            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="Using Help" Style="{StaticResource toolbarMenuText}"/>
             <!--2-->
-            <BoxView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
+            <BoxView Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
             <!--3-->
-            <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
-            <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="About Minesweeper..." Style="{StaticResource toolbarMenuText}"/>
+            <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Text="About Minesweeper..." Style="{StaticResource toolbarMenuText}"/>
         </Grid>
     </AbsoluteLayout>
 </ContentView>
