@@ -5,19 +5,26 @@ namespace MauiTest1
 {
     public class DiagonalBlockShape : AbsoluteLayout
     {
-        public static readonly BindableProperty BorderDepthProperty = 
-            BindableProperty.Create(nameof(BorderDepth), typeof(int), typeof(DiagonalBlockShape), 5);
+        //public static readonly BindableProperty BorderDepthProperty = 
+        //    BindableProperty.Create(nameof(BorderDepth), typeof(int), typeof(DiagonalBlockShape), 5);
+        
+        private int BorderDepth = 5;
         public DiagonalBlockShape()
         {
             Loaded += ResizeShape;
             SizeChanged += ResizeShape;
         }
 
-        public int BorderDepth 
-        { 
-            get { return (int)GetValue(BorderDepthProperty); }
-            set { SetValue(BorderDepthProperty, value); } 
+        public DiagonalBlockShape(int borderDepth) : this()
+        {
+            BorderDepth = borderDepth;
         }
+
+        //public int BorderDepth 
+        //{ 
+        //    get { return (int)GetValue(BorderDepthProperty); }
+        //    set { SetValue(BorderDepthProperty, value); } 
+        //}
 
         private void ResizeShape(object sender, EventArgs e)
         {

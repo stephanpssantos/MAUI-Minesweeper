@@ -16,12 +16,20 @@
             Padding="10"
             RowSpacing="10"
             BackgroundColor="#C0C0C0">
-            <BoxView Grid.Row="0" Grid.Column="0" Color="#808080" />
-            <Label Grid.Row="0" Grid.Column="0" Margin="2" BackgroundColor="#C0C0C0" Text="TEST" />
-            <custom_components:DiagonalBlockShape Grid.Row="1" Grid.Column="0" BorderDepth="3"/>
-            <VerticalStackLayout Grid.Row="1" Grid.Column="0" Margin="3" >
+            <custom_components:DiagonalBlockShape Grid.Row="0" Grid.Column="0">
+                <x:Arguments>
+                    <x:Int32>3</x:Int32>
+                </x:Arguments>
+            </custom_components:DiagonalBlockShape>
+            <Label Grid.Row="0" Grid.Column="0" Margin="3" BackgroundColor="#C0C0C0" Text="TEST" />
+            <custom_components:DiagonalBlockShape Grid.Row="1" Grid.Column="0">
+                <x:Arguments>
+                    <x:Int32>5</x:Int32>
+                </x:Arguments>
+            </custom_components:DiagonalBlockShape>
+            <!--<VerticalStackLayout Grid.Row="1" Grid.Column="0" Margin="3" >
                 <Label BackgroundColor="#C0C0C0" Text="TEST" />
-            </VerticalStackLayout>
+            </VerticalStackLayout>-->
         </Grid>
     </Grid>
 
