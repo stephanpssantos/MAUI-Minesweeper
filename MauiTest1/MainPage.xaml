@@ -21,15 +21,34 @@
                     <x:Int32>3</x:Int32>
                 </x:Arguments>
             </custom_components:DiagonalBlockShape>
-            <Label Grid.Row="0" Grid.Column="0" Margin="3" BackgroundColor="#C0C0C0" Text="TEST" />
+            <FlexLayout Grid.Row="0" Grid.Column="0" JustifyContent="SpaceBetween" AlignItems="Center">
+                <AbsoluteLayout Margin="4, 4, 4, 4">
+                    <custom_components:DiagonalBlockShape AbsoluteLayout.LayoutBounds="0, 0, 42, 26">
+                        <x:Arguments>
+                            <x:Int32>2</x:Int32>
+                        </x:Arguments>
+                    </custom_components:DiagonalBlockShape>
+                    <custom_components:ScoreboardNumber Number="3" AbsoluteLayout.LayoutBounds="2, 1, 13, 24" />
+                    <custom_components:ScoreboardNumber Number="1" AbsoluteLayout.LayoutBounds="15, 1, 13, 24"/>
+                    <custom_components:ScoreboardNumber Number="6" AbsoluteLayout.LayoutBounds="28, 1, 13, 24"/>
+                </AbsoluteLayout>
+                <AbsoluteLayout Margin="4, 4, 4, 4">
+                    <custom_components:DiagonalBlockShape AbsoluteLayout.LayoutBounds="0, 0, 42, 26">
+                        <x:Arguments>
+                            <x:Int32>2</x:Int32>
+                        </x:Arguments>
+                    </custom_components:DiagonalBlockShape>
+                    <custom_components:ScoreboardNumber Number="9" AbsoluteLayout.LayoutBounds="2, 1, 13, 24" />
+                    <custom_components:ScoreboardNumber Number="9" AbsoluteLayout.LayoutBounds="15, 1, 13, 24"/>
+                    <custom_components:ScoreboardNumber Number="9" AbsoluteLayout.LayoutBounds="28, 1, 13, 24"/>
+                </AbsoluteLayout>
+            </FlexLayout>
+            <!--<Label Grid.Row="0" Grid.Column="0" Margin="3" BackgroundColor="#C0C0C0" Text="TEST" />-->
             <custom_components:DiagonalBlockShape Grid.Row="1" Grid.Column="0">
                 <x:Arguments>
                     <x:Int32>5</x:Int32>
                 </x:Arguments>
             </custom_components:DiagonalBlockShape>
-            <!--<VerticalStackLayout Grid.Row="1" Grid.Column="0" Margin="3" >
-                <Label BackgroundColor="#C0C0C0" Text="TEST" />
-            </VerticalStackLayout>-->
         </Grid>
     </Grid>
 
