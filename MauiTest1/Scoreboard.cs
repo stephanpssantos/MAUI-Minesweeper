@@ -1,15 +1,17 @@
-﻿namespace MauiTest1
+﻿using System.ComponentModel; // PropertyChangedEventArgs
+
+namespace MauiTest1
 {
     public class Scoreboard : AbsoluteLayout
     {
-        public static readonly BindableProperty NumberProperty =
-            BindableProperty.Create(nameof(Number), typeof(string), typeof(Scoreboard), "000");
-
         public Scoreboard()
         {
             Loaded += RenderScoreboard;
             PropertyChanged += ChangeScore;
         }
+
+        public static readonly BindableProperty NumberProperty =
+            BindableProperty.Create(nameof(Number), typeof(string), typeof(Scoreboard), "000");
 
         public string Number
         {
@@ -46,6 +48,10 @@
 
         private void ChangeScore(object sender, EventArgs e)
         {
+            if (e is not PropertyChangedEventArgs args) return;
+
+            if (args.PropertyName != "Number") return;
+
             if (Children.Count < 4)
             {
                 return;

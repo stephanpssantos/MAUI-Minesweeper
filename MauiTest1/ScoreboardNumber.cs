@@ -1,12 +1,9 @@
-﻿using Microsoft.Maui.Layouts;
+﻿using System.ComponentModel; // PropertyChangedEventArgs
 
 namespace MauiTest1
 {
     public class ScoreboardNumber : AbsoluteLayout
     {
-        public static readonly BindableProperty NumberProperty =
-            BindableProperty.Create(nameof(Number), typeof(int), typeof(ScoreboardNumber), 0);
-
         public ScoreboardNumber()
         {
             BackgroundColor = Colors.Black;
@@ -18,6 +15,9 @@ namespace MauiTest1
             PropertyChanged += ChangeNumber;
         }
 
+        public static readonly BindableProperty NumberProperty =
+            BindableProperty.Create(nameof(Number), typeof(int), typeof(ScoreboardNumber), 0);
+
         public int Number
         {
             get { return (int)GetValue(NumberProperty); }
@@ -26,6 +26,10 @@ namespace MauiTest1
 
         private void ChangeNumber(object sender, EventArgs e)
         {
+            if (e is not PropertyChangedEventArgs args) return;
+
+            if (args.PropertyName != "Number") return;
+
             if (Children.Count < 1) return;
 
             ScoreboardNumberCell top = Children[0] as ScoreboardNumberCell;

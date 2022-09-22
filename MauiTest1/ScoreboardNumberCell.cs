@@ -1,15 +1,11 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
+using System.ComponentModel; // PropertyChangedEventArgs
 using Path = Microsoft.Maui.Controls.Shapes.Path;
 
 namespace MauiTest1
 {
     public class ScoreboardNumberCell : AbsoluteLayout
     {
-        public static readonly BindableProperty ThisStateProperty =
-            BindableProperty.Create(nameof(ThisState), typeof(CellState), typeof(ScoreboardNumberCell), CellState.RedDisabled);
-        public static readonly BindableProperty ThisOrientationProperty =
-            BindableProperty.Create(nameof(ThisOrientation), typeof(CellOrientation), typeof(ScoreboardNumberCell), CellOrientation.Top);
-
         public enum LineOrientation { Horizontal, Vertical };
         public enum CellOrientation { Top, Bottom, Left, Right, Center };
         public enum CellState { RedEnabled, RedDisabled };
@@ -27,6 +23,11 @@ namespace MauiTest1
             PropertyChanged += SetCellColor;
         }
 
+        public static readonly BindableProperty ThisStateProperty =
+            BindableProperty.Create(nameof(ThisState), typeof(CellState), typeof(ScoreboardNumberCell), CellState.RedDisabled);
+        public static readonly BindableProperty ThisOrientationProperty =
+            BindableProperty.Create(nameof(ThisOrientation), typeof(CellOrientation), typeof(ScoreboardNumberCell), CellOrientation.Top);
+
         public CellOrientation ThisOrientation
         {
             get { return (CellOrientation)GetValue(ThisOrientationProperty); }
@@ -40,6 +41,10 @@ namespace MauiTest1
 
         private void SetCellColor(object sender, EventArgs e)
         {
+            if (e is not PropertyChangedEventArgs args) return;
+
+            if (args.PropertyName != "ThisState") return;
+
             if (Children.Count != 6) return;
             
             string rowAColor = string.Empty;
@@ -144,7 +149,7 @@ namespace MauiTest1
                 y3 = 2;
             }
 
-            SetCellColor(this, null);
+            SetCellColor(this, new PropertyChangedEventArgs("ThisState"));
 
             AbsoluteLayout.SetLayoutBounds(line1_1, new Rect(x1, y1, WidthRequest, HeightRequest));
             AbsoluteLayout.SetLayoutBounds(line1_2, new Rect(x1, y1, WidthRequest, HeightRequest));
