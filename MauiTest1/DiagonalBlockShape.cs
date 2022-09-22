@@ -5,7 +5,11 @@ namespace MauiTest1
 {
     public class DiagonalBlockShape : AbsoluteLayout
     {
-        private int BorderDepth = 5;
+        private int TopBorderDepth = 5;
+        private int BottomBorderDepth = 5;
+        private string TopColor = "#808080";
+        private string BottomColor = "#FFFFFF";
+
         public DiagonalBlockShape()
         {
             Loaded += ResizeShape;
@@ -14,7 +18,16 @@ namespace MauiTest1
 
         public DiagonalBlockShape(int borderDepth) : this()
         {
-            BorderDepth = borderDepth;
+            TopBorderDepth = borderDepth;
+            BottomBorderDepth = borderDepth;
+        }
+
+        public DiagonalBlockShape(int topBorderDepth, int bottomBorderDepth, string topColor, string bottomColor) : this()
+        {
+            TopBorderDepth = topBorderDepth;
+            BottomBorderDepth = bottomBorderDepth;
+            TopColor = topColor;
+            BottomColor = bottomColor;
         }
 
         private void ResizeShape(object sender, EventArgs e)
@@ -29,12 +42,12 @@ namespace MauiTest1
                 {
                     new Point(0, 0),
                     new Point(ThisObject.Width, 0),
-                    new Point(ThisObject.Width - BorderDepth, BorderDepth),
-                    new Point(BorderDepth, BorderDepth),
-                    new Point(BorderDepth, ThisObject.Height - BorderDepth),
+                    new Point(ThisObject.Width - TopBorderDepth, TopBorderDepth),
+                    new Point(TopBorderDepth, TopBorderDepth),
+                    new Point(TopBorderDepth, ThisObject.Height - TopBorderDepth),
                     new Point(0, ThisObject.Height)
                 },
-                Fill = new SolidColorBrush(Color.FromArgb("#808080"))
+                Fill = new SolidColorBrush(Color.FromArgb(TopColor))
             };
 
             Polygon shape2 = new()
@@ -42,13 +55,13 @@ namespace MauiTest1
                 Points = new PointCollection()
                 {
                     new Point(ThisObject.Width, 0),
-                    new Point(ThisObject.Width - BorderDepth, BorderDepth),
-                    new Point(ThisObject.Width - BorderDepth, ThisObject.Height - BorderDepth),
-                    new Point(BorderDepth, ThisObject.Height - BorderDepth),
+                    new Point(ThisObject.Width - BottomBorderDepth, BottomBorderDepth),
+                    new Point(ThisObject.Width - BottomBorderDepth, ThisObject.Height - BottomBorderDepth),
+                    new Point(BottomBorderDepth, ThisObject.Height - BottomBorderDepth),
                     new Point(0, ThisObject.Height),
                     new Point(ThisObject.Width, ThisObject.Height)
                 },
-                Fill = new SolidColorBrush(Color.FromArgb("#FFFFFF"))
+                Fill = new SolidColorBrush(Color.FromArgb(BottomColor))
             };
 
             ThisObject.Children.Add(shape1);
