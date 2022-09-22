@@ -9,6 +9,7 @@ namespace MauiTest1
 
         private string number = "000";
         private string timeElapsed = "000";
+        private bool clockIsRunning = false;
 
         // this attribute sets the propertyName parameter
         // using the context in which this method is called
@@ -29,6 +30,12 @@ namespace MauiTest1
         {
             get => timeElapsed;
             set { timeElapsed = value; NotifyPropertyChanged(); }
+        }
+
+        public bool ClockIsRunning
+        {
+            get => clockIsRunning;
+            set { clockIsRunning = value; NotifyPropertyChanged(); }
         }
     }
 }

@@ -24,12 +24,18 @@
 
             timer.Start();
         }
+
+        public static void StopClock()
+        {
+            timer.Stop();
+        }
+
         private static void UpdateClock(object sender, EventArgs e)
         {
             int timeElapsed = Int32.Parse(state.TimeElapsed);
             if (timeElapsed == 999)
             {
-                // TODO: GameTimer.StopClock();
+                StopClock();
                 return;
             }
             timeElapsed++;

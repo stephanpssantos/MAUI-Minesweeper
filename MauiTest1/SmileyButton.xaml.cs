@@ -7,6 +7,15 @@ public partial class SmileyButton : ContentView
 		InitializeComponent();
 	}
 
+    public static readonly BindableProperty ClockIsRunningProperty =
+            BindableProperty.Create(nameof(ClockIsRunning), typeof(bool), typeof(SmileyButton), false);
+
+    public bool ClockIsRunning
+    {
+        get { return (bool)GetValue(ClockIsRunningProperty); }
+        set { SetValue(ClockIsRunningProperty, value); }
+    }
+
     private void OnUnframedSmileyButtonPressed(object sender, EventArgs e)
     {
         SmileyButtonUpDiagonal.IsVisible = false;
@@ -19,5 +28,7 @@ public partial class SmileyButton : ContentView
         SmileyButtonUpDiagonal.IsVisible = true;
         SmileyButtonDownDiagonal.IsVisible = false;
         UnframedSmileyButton.Padding = new Thickness(2, 2, 1, 1);
+
+        ClockIsRunning = ClockIsRunning == true ? false : true;
     }
 }

@@ -23,7 +23,7 @@
             </custom_components:DiagonalBlockShape>
             <FlexLayout Grid.Row="0" Grid.Column="0" JustifyContent="SpaceBetween" AlignItems="Center">
                 <custom_components:Scoreboard Margin="4" Number="{Binding Number}" />
-                <custom_components:SmileyButton HeightRequest="26" WidthRequest="26" />
+                <custom_components:SmileyButton HeightRequest="26" WidthRequest="26" ClockIsRunning="{Binding ClockIsRunning, Mode=TwoWay}" />
                 <custom_components:Scoreboard Margin="4" Number="{Binding TimeElapsed}" />
             </FlexLayout>
             <custom_components:DiagonalBlockShape Grid.Row="1" Grid.Column="0">
