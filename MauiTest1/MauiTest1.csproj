@@ -58,6 +58,9 @@
 	  <MauiXaml Update="Resources\Styles\Custom.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SmileyButton.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Toolbar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

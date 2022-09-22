@@ -51,8 +51,8 @@ namespace MauiTest1
 
             if (Children.Count != 6) return;
             
-            string rowAColor = string.Empty;
-            string rowBColor = string.Empty;
+            string rowAColor;
+            string rowBColor;
 
             if (ThisState == CellState.RedEnabled)
             {
