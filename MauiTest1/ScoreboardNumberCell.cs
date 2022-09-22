@@ -12,14 +12,18 @@ namespace MauiTest1
 
         public ScoreboardNumberCell()
         {
+            CreateCell();
+            PropertyChanged += SetCellColor;
         }
 
+        // This is intentionally not calling the parameterless constructor.
+        // It will not render correctly if orientation is set after CreateCell is called.
         public ScoreboardNumberCell(CellOrientation orientation, CellState state)
         {
             ThisOrientation = orientation;
             ThisState = state;
 
-            Loaded += CreateCell;
+            CreateCell();
             PropertyChanged += SetCellColor;
         }
 
@@ -76,7 +80,7 @@ namespace MauiTest1
             line3_2.Fill = Color.FromArgb(rowBColor);
         }
 
-        private void CreateCell(object sender, EventArgs e)
+        private void CreateCell()
         {
             LineOrientation orientation = LineOrientation.Horizontal;
 

@@ -11,7 +11,7 @@ namespace MauiTest1
             HeightRequest = 23;
             WidthRequest = 13;
 
-            Loaded += RenderNumber;
+            RenderNumber();
             PropertyChanged += ChangeNumber;
         }
 
@@ -51,7 +51,7 @@ namespace MauiTest1
             center.ThisState = positions.center;
         }
 
-        private void RenderNumber(object sender, EventArgs e)
+        private void RenderNumber()
         {
             if (Number < 0 || Number > 9)
             {

@@ -6,7 +6,7 @@ namespace MauiTest1
     {
         public Scoreboard()
         {
-            Loaded += RenderScoreboard;
+            RenderScoreboard();
             PropertyChanged += ChangeScore;
         }
 
@@ -15,18 +15,22 @@ namespace MauiTest1
 
         public string Number
         {
-            get { return (string)GetValue(NumberProperty); }
+            get
+            {
+                string temp = (string)GetValue(NumberProperty);
+                if (temp.Length < 3)
+                {
+                    temp = temp.PadLeft(3, '0');
+                    SetValue(NumberProperty, temp);
+                }
+                return temp;
+            }
             set { SetValue(NumberProperty, value); }
         }
 
-        private void RenderScoreboard(object sender, EventArgs e)
+        private void RenderScoreboard()
         {
             string tempNumber = Number;
-
-            if (Number.Length < 3)
-            {
-                tempNumber = Number.PadLeft(3, '0');
-            }
 
             DiagonalBlockShape border = new(2);
             Children.Add(border);
@@ -57,21 +61,13 @@ namespace MauiTest1
                 return;
             }
 
-            //maybe change this number padding stuff in the setter for Number
-            string tempNumber = Number;
-
-            if (Number.Length < 3)
-            {
-                tempNumber = Number.PadLeft(3, '0');
-            }
-
             ScoreboardNumber scoreboardNumber1 = Children[1] as ScoreboardNumber;
             ScoreboardNumber scoreboardNumber2 = Children[2] as ScoreboardNumber;
             ScoreboardNumber scoreboardNumber3 = Children[3] as ScoreboardNumber;
 
-            scoreboardNumber1.Number = tempNumber[0] - '0';
-            scoreboardNumber2.Number = tempNumber[1] - '0';
-            scoreboardNumber3.Number = tempNumber[2] - '0';
+            scoreboardNumber1.Number = Number[0] - '0';
+            scoreboardNumber2.Number = Number[1] - '0';
+            scoreboardNumber3.Number = Number[2] - '0';
         }
     }
 }

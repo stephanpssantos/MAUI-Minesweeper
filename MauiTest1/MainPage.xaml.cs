@@ -23,6 +23,7 @@ public partial class MainPage : ContentPage
         SmileyButtonUpDiagonal.IsVisible = false;
         SmileyButtonDownDiagonal.IsVisible = true;
         SmileyButton.Padding = new Thickness(3, 3, 0, 0);
+        InitiateClock(this, null);
     }
 
     private void OnSmileyButtonReleased(object sender, EventArgs e)
