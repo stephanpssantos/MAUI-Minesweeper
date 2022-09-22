@@ -7,7 +7,6 @@ namespace MauiTest1
         public static readonly BindableProperty NumberProperty =
             BindableProperty.Create(nameof(Number), typeof(int), typeof(ScoreboardNumber), 0);
 
-        //public int Number = 0;
         public ScoreboardNumber()
         {
             BackgroundColor = Colors.Black;
@@ -16,18 +15,36 @@ namespace MauiTest1
             WidthRequest = 13;
 
             Loaded += RenderNumber;
-            //SizeChanged += RenderNumber; // (?)
+            PropertyChanged += ChangeNumber;
         }
-
-        //public ScoreboardNumber(int number) : this()
-        //{
-        //    Number = number;
-        //}
 
         public int Number
         {
             get { return (int)GetValue(NumberProperty); }
             set { SetValue(NumberProperty, value); }
+        }
+
+        private void ChangeNumber(object sender, EventArgs e)
+        {
+            if (Children.Count < 1) return;
+
+            ScoreboardNumberCell top = Children[0] as ScoreboardNumberCell;
+            ScoreboardNumberCell upperRight = Children[1] as ScoreboardNumberCell;
+            ScoreboardNumberCell lowerRight = Children[2] as ScoreboardNumberCell;
+            ScoreboardNumberCell bottom = Children[3] as ScoreboardNumberCell;
+            ScoreboardNumberCell lowerLeft = Children[4] as ScoreboardNumberCell;
+            ScoreboardNumberCell upperLeft = Children[5] as ScoreboardNumberCell;
+            ScoreboardNumberCell center = Children[6] as ScoreboardNumberCell;
+
+            ScoreboardPositions positions = DetermineScoreboardPositions(Number);
+
+            top.ThisState = positions.top;
+            upperRight.ThisState = positions.upperRight;
+            lowerRight.ThisState = positions.lowerRight;
+            bottom.ThisState = positions.bottom;
+            lowerLeft.ThisState = positions.lowerLeft;
+            upperLeft.ThisState = positions.upperLeft;
+            center.ThisState = positions.center;
         }
 
         private void RenderNumber(object sender, EventArgs e)
@@ -37,97 +54,17 @@ namespace MauiTest1
                 return;
             }
 
-            ScoreboardNumberCell.CellState topColor = ScoreboardNumberCell.CellState.RedDisabled;
-            ScoreboardNumberCell.CellState upperRightColor = ScoreboardNumberCell.CellState.RedDisabled;
-            ScoreboardNumberCell.CellState lowerRightColor = ScoreboardNumberCell.CellState.RedDisabled;
-            ScoreboardNumberCell.CellState bottomColor = ScoreboardNumberCell.CellState.RedDisabled;
-            ScoreboardNumberCell.CellState lowerLeftColor = ScoreboardNumberCell.CellState.RedDisabled;
-            ScoreboardNumberCell.CellState upperLeftColor = ScoreboardNumberCell.CellState.RedDisabled;
-            ScoreboardNumberCell.CellState centerColor = ScoreboardNumberCell.CellState.RedDisabled;
+            ScoreboardPositions positions = DetermineScoreboardPositions(Number);
 
-            switch (Number)
-            {
-                case 0:
-                    topColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    bottomColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerLeftColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperLeftColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    break;
-                case 1:
-                    upperRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    break;
-                case 2:
-                    topColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    bottomColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerLeftColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    centerColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    break;
-                case 3:
-                    topColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    bottomColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    centerColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    break;
-                case 4:
-                    upperRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperLeftColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    centerColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    break;
-                case 5:
-                    topColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    bottomColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperLeftColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    centerColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    break;
-                case 6:
-                    topColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    bottomColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerLeftColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperLeftColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    centerColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    break;
-                case 7:
-                    topColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    break;
-                case 8:
-                    topColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    bottomColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerLeftColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperLeftColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    centerColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    break;
-                case 9:
-                default:
-                    topColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    lowerRightColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    bottomColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    upperLeftColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    centerColor = ScoreboardNumberCell.CellState.RedEnabled;
-                    break;
-            }
+            ScoreboardNumberCell top = new(ScoreboardNumberCell.CellOrientation.Top, positions.top);
+            ScoreboardNumberCell upperRight = new(ScoreboardNumberCell.CellOrientation.Right, positions.upperRight);
+            ScoreboardNumberCell lowerRight = new(ScoreboardNumberCell.CellOrientation.Right, positions.lowerRight);
+            ScoreboardNumberCell bottom = new(ScoreboardNumberCell.CellOrientation.Bottom, positions.bottom);
+            ScoreboardNumberCell lowerLeft = new(ScoreboardNumberCell.CellOrientation.Left, positions.lowerLeft);
+            ScoreboardNumberCell upperLeft = new(ScoreboardNumberCell.CellOrientation.Left, positions.upperLeft);
+            ScoreboardNumberCell center = new(ScoreboardNumberCell.CellOrientation.Center, positions.center);
 
-            ScoreboardNumberCell top = new(ScoreboardNumberCell.CellOrientation.Top, topColor);
-            ScoreboardNumberCell upperRight = new(ScoreboardNumberCell.CellOrientation.Right, upperRightColor);
-            ScoreboardNumberCell lowerRight = new(ScoreboardNumberCell.CellOrientation.Right, lowerRightColor);
-            ScoreboardNumberCell bottom = new(ScoreboardNumberCell.CellOrientation.Bottom, bottomColor);
-            ScoreboardNumberCell lowerLeft = new(ScoreboardNumberCell.CellOrientation.Left, lowerLeftColor);
-            ScoreboardNumberCell upperLeft = new(ScoreboardNumberCell.CellOrientation.Left, upperLeftColor);
-            ScoreboardNumberCell center = new(ScoreboardNumberCell.CellOrientation.Center, centerColor);
-
-            Children.Clear();
+            // Children.Clear();
 
             Children.Add(top);
             Children.Add(upperRight);
@@ -145,5 +82,95 @@ namespace MauiTest1
             AbsoluteLayout.SetLayoutBounds(upperLeft, new Rect(0, 1, 3, 9));
             AbsoluteLayout.SetLayoutBounds(center, new Rect(1, 9, 9, 3));
         }
+
+        public ScoreboardPositions DetermineScoreboardPositions (int number)
+        {
+            ScoreboardPositions positions = new();
+            switch (Number)
+            {
+                case 0:
+                    positions.top = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.bottom = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerLeft = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperLeft = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
+                case 1:
+                    positions.upperRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
+                case 2:
+                    positions.top = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.bottom = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerLeft = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.center = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
+                case 3:
+                    positions.top = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.bottom = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.center = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
+                case 4:
+                    positions.upperRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperLeft = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.center = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
+                case 5:
+                    positions.top = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.bottom = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperLeft = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.center = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
+                case 6:
+                    positions.top = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.bottom = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerLeft = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperLeft = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.center = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
+                case 7:
+                    positions.top = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
+                case 8:
+                    positions.top = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.bottom = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerLeft = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperLeft = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.center = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
+                case 9:
+                default:
+                    positions.top = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.lowerRight = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.bottom = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.upperLeft = ScoreboardNumberCell.CellState.RedEnabled;
+                    positions.center = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
+            }
+
+            return positions;
+        }
+}
+
+    public class ScoreboardPositions {
+        public ScoreboardNumberCell.CellState top { get; set; } = ScoreboardNumberCell.CellState.RedDisabled;
+        public ScoreboardNumberCell.CellState upperRight { get; set; } = ScoreboardNumberCell.CellState.RedDisabled;
+        public ScoreboardNumberCell.CellState lowerRight { get; set; } = ScoreboardNumberCell.CellState.RedDisabled;
+        public ScoreboardNumberCell.CellState bottom { get; set; } = ScoreboardNumberCell.CellState.RedDisabled;
+        public ScoreboardNumberCell.CellState lowerLeft { get; set; } = ScoreboardNumberCell.CellState.RedDisabled;
+        public ScoreboardNumberCell.CellState upperLeft { get; set; } = ScoreboardNumberCell.CellState.RedDisabled;
+        public ScoreboardNumberCell.CellState center { get; set; } = ScoreboardNumberCell.CellState.RedDisabled;
     }
 }

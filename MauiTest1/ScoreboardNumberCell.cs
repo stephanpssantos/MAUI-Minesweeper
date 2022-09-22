@@ -3,13 +3,16 @@ using Path = Microsoft.Maui.Controls.Shapes.Path;
 
 namespace MauiTest1
 {
-    internal class ScoreboardNumberCell : AbsoluteLayout
+    public class ScoreboardNumberCell : AbsoluteLayout
     {
+        public static readonly BindableProperty ThisStateProperty =
+            BindableProperty.Create(nameof(ThisState), typeof(CellState), typeof(ScoreboardNumberCell), CellState.RedDisabled);
+        public static readonly BindableProperty ThisOrientationProperty =
+            BindableProperty.Create(nameof(ThisOrientation), typeof(CellOrientation), typeof(ScoreboardNumberCell), CellOrientation.Top);
+
         public enum LineOrientation { Horizontal, Vertical };
         public enum CellOrientation { Top, Bottom, Left, Right, Center };
         public enum CellState { RedEnabled, RedDisabled };
-        public CellOrientation ThisOrientation = CellOrientation.Top;
-        public CellState ThisState = CellState.RedDisabled;
 
         public ScoreboardNumberCell()
         {
@@ -21,13 +24,24 @@ namespace MauiTest1
             ThisState = state;
 
             Loaded += CreateCell;
-            // SizeChanged += CreateCell; // (?)
+            PropertyChanged += SetCellColor;
         }
 
-        private void CreateCell(object sender, EventArgs e)
+        public CellOrientation ThisOrientation
         {
-            LineOrientation orientation = LineOrientation.Horizontal;
+            get { return (CellOrientation)GetValue(ThisOrientationProperty); }
+            set { SetValue(ThisOrientationProperty, value); }
+        }
+        public CellState ThisState
+        {
+            get { return (CellState)GetValue(ThisStateProperty); }
+            set { SetValue(ThisStateProperty, value); }
+        }
 
+        private void SetCellColor(object sender, EventArgs e)
+        {
+            if (Children.Count != 6) return;
+            
             string rowAColor = string.Empty;
             string rowBColor = string.Empty;
 
@@ -41,6 +55,25 @@ namespace MauiTest1
                 rowAColor = "#FF800000";
                 rowBColor = "#FF000000";
             }
+
+            Path line1_1 = Children[0] as Path;
+            Path line1_2 = Children[1] as Path;
+            Path line2_1 = Children[2] as Path;
+            Path line2_2 = Children[3] as Path;
+            Path line3_1 = Children[4] as Path;
+            Path line3_2 = Children[5] as Path;
+
+            line1_1.Fill = Color.FromArgb(rowAColor);
+            line1_2.Fill = Color.FromArgb(rowBColor);
+            line2_1.Fill = Color.FromArgb(rowAColor);
+            line2_2.Fill = Color.FromArgb(rowBColor);
+            line3_1.Fill = Color.FromArgb(rowAColor);
+            line3_2.Fill = Color.FromArgb(rowBColor);
+        }
+
+        private void CreateCell(object sender, EventArgs e)
+        {
+            LineOrientation orientation = LineOrientation.Horizontal;
 
             if (ThisOrientation == CellOrientation.Left || ThisOrientation == CellOrientation.Right)
             {
@@ -58,18 +91,18 @@ namespace MauiTest1
             Path line1_2;
             if (ThisOrientation == CellOrientation.Center)
             {
-                line1_1 = CreateLine(5, 2, rowAColor, orientation);
-                line1_2 = CreateLine(3, 3, rowBColor, orientation);
+                line1_1 = CreateLine(5, 2, null, orientation);
+                line1_2 = CreateLine(3, 3, null, orientation);
             }
             else
             {
-                line1_1 = CreateLine(9, 0, rowAColor, orientation);
-                line1_2 = CreateLine(7, 1, rowBColor, orientation);
+                line1_1 = CreateLine(9, 0, null, orientation);
+                line1_2 = CreateLine(7, 1, null, orientation);
             }
-            Path line2_1 = CreateLine(7, 1, rowAColor, orientation);
-            Path line2_2 = CreateLine(5, 2, rowBColor, orientation);
-            Path line3_1 = CreateLine(5, 2, rowAColor, orientation);
-            Path line3_2 = CreateLine(3, 3, rowBColor, orientation);
+            Path line2_1 = CreateLine(7, 1, null, orientation);
+            Path line2_2 = CreateLine(5, 2, null, orientation);
+            Path line3_1 = CreateLine(5, 2, null, orientation);
+            Path line3_2 = CreateLine(3, 3, null, orientation);
 
             Children.Add(line1_1);
             Children.Add(line1_2);
@@ -111,13 +144,14 @@ namespace MauiTest1
                 y3 = 2;
             }
 
+            SetCellColor(this, null);
+
             AbsoluteLayout.SetLayoutBounds(line1_1, new Rect(x1, y1, WidthRequest, HeightRequest));
             AbsoluteLayout.SetLayoutBounds(line1_2, new Rect(x1, y1, WidthRequest, HeightRequest));
             AbsoluteLayout.SetLayoutBounds(line2_1, new Rect(x2, y2, WidthRequest, HeightRequest));
             AbsoluteLayout.SetLayoutBounds(line2_2, new Rect(x2, y2, WidthRequest, HeightRequest));
             AbsoluteLayout.SetLayoutBounds(line3_1, new Rect(x3, y3, WidthRequest, HeightRequest));
             AbsoluteLayout.SetLayoutBounds(line3_2, new Rect(x3, y3, WidthRequest, HeightRequest));
-
         }
 
         private Path CreateLine(

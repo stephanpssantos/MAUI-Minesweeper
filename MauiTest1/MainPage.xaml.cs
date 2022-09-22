@@ -1,12 +1,22 @@
-﻿using Microsoft.Maui.Controls.Shapes;
-
-namespace MauiTest1;
+﻿namespace MauiTest1;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
+    public MainPage()
 	{
-		InitializeComponent();
+        InitializeComponent();
+        GameStateViewModel GameState = new();
+        BindingContext = GameState;
     }
+
+    private void TestIncrementValue(object sender, EventArgs e)
+    {
+        Button button = sender as Button;
+        if (button.BindingContext is not GameStateViewModel s) return;
+        int tempScoreboardNumber = Int32.Parse(s.Number);
+        tempScoreboardNumber++;
+        s.Number = tempScoreboardNumber.ToString();
+    }
+
 }
 
