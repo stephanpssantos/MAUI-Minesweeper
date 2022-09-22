@@ -2,8 +2,6 @@
 
 public partial class MainPage : ContentPage
 {
-    static System.Timers.Timer timer;
-
     public MainPage()
 	{
         InitializeComponent();
@@ -22,23 +20,7 @@ public partial class MainPage : ContentPage
 
     private void InitiateClock(object sender, EventArgs e)
     {
-        if (timer == null)
-        {
-            timer = new System.Timers.Timer(interval: 1000);
-            timer.Elapsed += UpdateClock;
-        }
-
-        timer.Start();
-    }
-
-    private void UpdateClock(object sender, EventArgs e)
-    {
-        GameStateViewModel gameState = BindingContext as GameStateViewModel;
-        int timeElapsed = Int32.Parse(gameState.TimeElapsed);
-        timeElapsed++;
-        string newTimeElapsed = timeElapsed.ToString().PadLeft(3, '0');
-        
-        gameState.TimeElapsed = newTimeElapsed;
+        GameTimer.InitiateClock(BindingContext);
     }
 }
 
