@@ -18,6 +18,20 @@ public partial class MainPage : ContentPage
         s.Number = tempScoreboardNumber.ToString();
     }
 
+    private void OnSmileyButtonPressed(object sender, EventArgs e)
+    {
+        SmileyButtonUpDiagonal.IsVisible = false;
+        SmileyButtonDownDiagonal.IsVisible = true;
+        SmileyButton.Padding = new Thickness(3, 3, 0, 0);
+    }
+
+    private void OnSmileyButtonReleased(object sender, EventArgs e)
+    {
+        SmileyButtonUpDiagonal.IsVisible = true;
+        SmileyButtonDownDiagonal.IsVisible = false;
+        SmileyButton.Padding = new Thickness(2, 2, 1, 1);
+    }
+
     private void InitiateClock(object sender, EventArgs e)
     {
         GameTimer.InitiateClock(BindingContext);
