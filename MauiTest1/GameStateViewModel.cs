@@ -8,6 +8,7 @@ namespace MauiTest1
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string number = "000";
+        private string timeElapsed = "000";
 
         // this attribute sets the propertyName parameter
         // using the context in which this method is called
@@ -22,6 +23,12 @@ namespace MauiTest1
         {
             get => number;
             set { number = value; NotifyPropertyChanged(); }
+        }
+
+        public string TimeElapsed
+        {
+            get => timeElapsed;
+            set { timeElapsed = value; NotifyPropertyChanged(); }
         }
     }
 }
