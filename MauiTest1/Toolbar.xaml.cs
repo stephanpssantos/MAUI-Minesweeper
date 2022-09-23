@@ -3,10 +3,6 @@ namespace MauiTest1;
 public partial class Toolbar : ContentView
 {
     Button activeButton;
-    bool isBeginner = true;
-    bool isIntermediate = false;
-    bool isExpert = false;
-    bool isCustom = false;
     bool marks = false;
     bool color = false;
 
@@ -15,6 +11,18 @@ public partial class Toolbar : ContentView
 		InitializeComponent();
         GameMenu.IsVisible = false;
         HelpMenu.IsVisible = false;
+    }
+
+    public static readonly BindableProperty GameModeProperty =
+            BindableProperty.Create(nameof(GameMode), 
+                typeof(GameStateViewModel.GameModeSetting), 
+                typeof(Toolbar), 
+                GameStateViewModel.GameModeSetting.Beginner);
+
+    public GameStateViewModel.GameModeSetting GameMode
+    {
+        get { return (GameStateViewModel.GameModeSetting)GetValue(GameModeProperty); }
+        set { SetValue(GameModeProperty, value); }
     }
 
     private void OnToolbarButtonClicked(object sender, EventArgs e)
@@ -74,23 +82,27 @@ public partial class Toolbar : ContentView
 
         if (sender == gameMenuBeginnerButton)
         {
-            isBeginner = true;
             gameMenuBeginnerCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            if (GameMode == GameStateViewModel.GameModeSetting.Beginner) return;
+            GameMode = GameStateViewModel.GameModeSetting.Beginner;
         }
         else if (sender == gameMenuIntermediateButton)
         {
-            isIntermediate = true;
             gameMenuIntermediateCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            if (GameMode == GameStateViewModel.GameModeSetting.Intermediate) return;
+            GameMode = GameStateViewModel.GameModeSetting.Intermediate;
         }
         else if (sender == gameMenuExpertButton)
         {
-            isExpert = true;
             gameMenuExpertCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            if (GameMode == GameStateViewModel.GameModeSetting.Expert) return;
+            GameMode = GameStateViewModel.GameModeSetting.Expert;
         }
         else if (sender == gameMenuCustomButton)
         {
-            isCustom = true;
             gameMenuCustomCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            if (GameMode == GameStateViewModel.GameModeSetting.Custom) return;
+            GameMode = GameStateViewModel.GameModeSetting.Custom;
         }
         else
         {
@@ -136,11 +148,6 @@ public partial class Toolbar : ContentView
 
     private void ResetGameMenuDifficultyButtons()
     {
-        isBeginner = false;
-        isIntermediate = false;
-        isExpert = false;
-        isCustom = false;
-
         gameMenuBeginnerCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
         gameMenuIntermediateCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
         gameMenuExpertCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];

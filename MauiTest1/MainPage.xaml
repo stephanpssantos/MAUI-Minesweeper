@@ -8,7 +8,8 @@
         <AbsoluteLayout ZIndex="1">
             <custom_components:Toolbar 
                 AbsoluteLayout.LayoutFlags="None"
-                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
+                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                GameMode="{Binding GameMode, Mode=TwoWay}" />
         </AbsoluteLayout>
         <Grid Margin="0, 30, 0, 0"
             ColumnDefinitions="*"
@@ -31,6 +32,12 @@
                     <x:Int32>5</x:Int32>
                 </x:Arguments>
             </custom_components:DiagonalBlockShape>
+            <!--<Grid Grid.Row="1" Grid.Column="0" 
+                  Margin="5" BackgroundColor="#808080"
+                  ColumnSpacing="0" RowSpacing="0">
+                <custom_components:GameboardCell />
+            </Grid>-->
+            <custom_components:Gameboard Grid.Row="1" Grid.Column="0" Margin="3"  HorizontalOptions="Center" VerticalOptions="Center"/>
         </Grid>
     </Grid>
 

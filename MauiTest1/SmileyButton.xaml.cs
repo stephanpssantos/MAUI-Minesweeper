@@ -29,6 +29,6 @@ public partial class SmileyButton : ContentView
         SmileyButtonDownDiagonal.IsVisible = false;
         UnframedSmileyButton.Padding = new Thickness(2, 2, 1, 1);
 
-        ClockIsRunning = ClockIsRunning == true ? false : true;
+        ClockIsRunning = !ClockIsRunning;
     }
 }

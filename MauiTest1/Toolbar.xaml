@@ -68,7 +68,7 @@
             <!--2-->
             <BoxView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource toolbarMenuLine}" />
             <!--3-->
-            <Label Grid.Row="3" Grid.Column="0" x:Name="gameMenuBeginnerCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />
+            <Label Grid.Row="3" Grid.Column="0" x:Name="gameMenuBeginnerCheckbox" Style="{StaticResource toolbarMenuCheckboxChecked}" />
             <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="Beginner" Style="{StaticResource toolbarMenuText}"/>
             <!--4-->
             <Label Grid.Row="4" Grid.Column="0" x:Name="gameMenuIntermediateCheckbox" Style="{StaticResource toolbarMenuCheckbox}" />

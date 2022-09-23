@@ -7,9 +7,15 @@ namespace MauiTest1
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public enum GameModeSetting { Beginner, Intermediate, Expert, Custom };
+
         private string number = "000";
         private string timeElapsed = "000";
         private bool clockIsRunning = false;
+        private GameModeSetting gameMode = GameModeSetting.Beginner;
+        private int boardWidth = 8;
+        private int boardHeight = 8;
+        private int boardMines = 10;
 
         // this attribute sets the propertyName parameter
         // using the context in which this method is called
@@ -36,6 +42,12 @@ namespace MauiTest1
         {
             get => clockIsRunning;
             set { clockIsRunning = value; NotifyPropertyChanged(); }
+        }
+
+        public GameModeSetting GameMode
+        {
+            get => gameMode;
+            set { gameMode = value; NotifyPropertyChanged(); }
         }
     }
 }
