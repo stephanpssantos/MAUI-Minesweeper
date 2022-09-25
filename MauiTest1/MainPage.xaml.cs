@@ -9,7 +9,7 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         GameStateViewModel GameState = new();
         BindingContext = GameState;
-        GameState.PropertyChanged += GameStateEventHandler;
+        GameState.PropertyChanged += GameStateEventHandler;      
     }
 
     private void GameStateEventHandler(object sender, EventArgs e)

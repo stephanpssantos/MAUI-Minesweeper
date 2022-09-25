@@ -22,19 +22,21 @@ public partial class App : MauiWinUIApplication
         int windowHeight = 900;
         int windowWidth = 900;
 
-		this.InitializeComponent();
+        this.InitializeComponent();
 
         Microsoft.Maui.Handlers.WindowHandler.Mapper.AppendToMapping(nameof(IWindow), (handler, view) =>
         {
-#if WINDOWS
             var mauiWindow = handler.VirtualView;
             var nativeWindow = handler.PlatformView;
             nativeWindow.Activate();
             IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
             WindowId windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(windowHandle);
-            AppWindow appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+            AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
             appWindow.Resize(new SizeInt32(windowWidth, windowHeight));
-#endif
+            if (appWindow.Presenter is OverlappedPresenter presenter)
+            {
+                presenter.IsResizable = false;
+            };
         });
     }
 

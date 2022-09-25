@@ -50,7 +50,7 @@ namespace MauiTest1
 
         private void ResizeShape(object sender, EventArgs e)
         {
-            if (Children.Count < 1) return;
+            if (Children.Count < 2) return;
 
             AbsoluteLayout ThisObject = sender as AbsoluteLayout;
 
