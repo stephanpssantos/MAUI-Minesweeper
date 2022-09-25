@@ -30,6 +30,24 @@ namespace MauiTest1
             BottomColor = bottomColor;
         }
 
+        private void MakeShape(object sender, EventArgs e)
+        {
+            AbsoluteLayout ThisObject = sender as AbsoluteLayout;
+
+            Polygon shape1 = new() { Fill = new SolidColorBrush(Color.FromArgb(TopColor)) };
+            Polygon shape2 = new() { Fill = new SolidColorBrush(Color.FromArgb(BottomColor)) };
+
+            ThisObject.Children.Add(shape1);
+            ThisObject.Children.Add(shape2);
+
+            AbsoluteLayout.SetLayoutFlags(shape1, AbsoluteLayoutFlags.SizeProportional);
+            AbsoluteLayout.SetLayoutFlags(shape2, AbsoluteLayoutFlags.SizeProportional);
+            AbsoluteLayout.SetLayoutBounds(shape1, new Rect(0, 0, 1, 1));
+            AbsoluteLayout.SetLayoutBounds(shape2, new Rect(0, 0, 1, 1));
+
+            ResizeShape(this, null);
+        }
+
         private void ResizeShape(object sender, EventArgs e)
         {
             if (Children.Count < 1) return;
@@ -61,47 +79,6 @@ namespace MauiTest1
 
             Child0.Points = new0;
             Child1.Points = new1;
-        }
-
-        private void MakeShape(object sender, EventArgs e)
-        {
-            AbsoluteLayout ThisObject = sender as AbsoluteLayout;
-
-            Polygon shape1 = new()
-            {
-                Points = new PointCollection()
-                {
-                    new Point(0, 0),
-                    new Point(ThisObject.Width, 0),
-                    new Point(ThisObject.Width - TopBorderDepth, TopBorderDepth),
-                    new Point(TopBorderDepth, TopBorderDepth),
-                    new Point(TopBorderDepth, ThisObject.Height - TopBorderDepth),
-                    new Point(0, ThisObject.Height)
-                },
-                Fill = new SolidColorBrush(Color.FromArgb(TopColor))
-            };
-
-            Polygon shape2 = new()
-            {
-                Points = new PointCollection()
-                {
-                    new Point(ThisObject.Width, 0),
-                    new Point(ThisObject.Width - BottomBorderDepth, BottomBorderDepth),
-                    new Point(ThisObject.Width - BottomBorderDepth, ThisObject.Height - BottomBorderDepth),
-                    new Point(BottomBorderDepth, ThisObject.Height - BottomBorderDepth),
-                    new Point(0, ThisObject.Height),
-                    new Point(ThisObject.Width, ThisObject.Height)
-                },
-                Fill = new SolidColorBrush(Color.FromArgb(BottomColor))
-            };
-
-            ThisObject.Children.Add(shape1);
-            ThisObject.Children.Add(shape2);
-
-            AbsoluteLayout.SetLayoutFlags(shape1, AbsoluteLayoutFlags.SizeProportional);
-            AbsoluteLayout.SetLayoutFlags(shape2, AbsoluteLayoutFlags.SizeProportional);
-            AbsoluteLayout.SetLayoutBounds(shape1, new Rect(0, 0, 1, 1));
-            AbsoluteLayout.SetLayoutBounds(shape2, new Rect(0, 0, 1, 1));
         }
     }
 }
