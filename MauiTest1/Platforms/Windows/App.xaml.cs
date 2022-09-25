@@ -19,10 +19,11 @@ public partial class App : MauiWinUIApplication
 	/// </summary>
 	public App()
 	{
-        int windowHeight = 200;
-        int windowWidth = 300;
+        int windowHeight = 900;
+        int windowWidth = 900;
 
 		this.InitializeComponent();
+
         Microsoft.Maui.Handlers.WindowHandler.Mapper.AppendToMapping(nameof(IWindow), (handler, view) =>
         {
 #if WINDOWS

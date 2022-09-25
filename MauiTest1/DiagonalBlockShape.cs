@@ -12,7 +12,7 @@ namespace MauiTest1
 
         public DiagonalBlockShape()
         {
-            Loaded += ResizeShape;
+            Loaded += MakeShape;
             SizeChanged += ResizeShape;
         }
 
@@ -32,9 +32,40 @@ namespace MauiTest1
 
         private void ResizeShape(object sender, EventArgs e)
         {
+            if (Children.Count < 1) return;
+
             AbsoluteLayout ThisObject = sender as AbsoluteLayout;
 
-            ThisObject.Children.Clear();
+            PointCollection new0 = new()
+            {
+                new Point(0, 0),
+                new Point(ThisObject.Width, 0),
+                new Point(ThisObject.Width - TopBorderDepth, TopBorderDepth),
+                new Point(TopBorderDepth, TopBorderDepth),
+                new Point(TopBorderDepth, ThisObject.Height - TopBorderDepth),
+                new Point(0, ThisObject.Height)
+            };
+
+            PointCollection new1 = new()
+            {
+                new Point(ThisObject.Width, 0),
+                new Point(ThisObject.Width - BottomBorderDepth, BottomBorderDepth),
+                new Point(ThisObject.Width - BottomBorderDepth, ThisObject.Height - BottomBorderDepth),
+                new Point(BottomBorderDepth, ThisObject.Height - BottomBorderDepth),
+                new Point(0, ThisObject.Height),
+                new Point(ThisObject.Width, ThisObject.Height)
+            };
+
+            Polygon Child0 = Children[0] as Polygon;
+            Polygon Child1 = Children[1] as Polygon;
+
+            Child0.Points = new0;
+            Child1.Points = new1;
+        }
+
+        private void MakeShape(object sender, EventArgs e)
+        {
+            AbsoluteLayout ThisObject = sender as AbsoluteLayout;
 
             Polygon shape1 = new()
             {

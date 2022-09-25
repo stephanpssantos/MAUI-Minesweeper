@@ -32,12 +32,194 @@
                     <x:Int32>5</x:Int32>
                 </x:Arguments>
             </custom_components:DiagonalBlockShape>
-            <!--<Grid Grid.Row="1" Grid.Column="0" 
-                  Margin="5" BackgroundColor="#808080"
-                  ColumnSpacing="0" RowSpacing="0">
-                <custom_components:GameboardCell />
-            </Grid>-->
             <custom_components:Gameboard Grid.Row="1" Grid.Column="0" Margin="3"  HorizontalOptions="Center" VerticalOptions="Center"/>
+            <!--<custom_components:Gameboard Grid.Row="1" Grid.Column="0" Margin="3"  HorizontalOptions="Center" VerticalOptions="Center"/>-->
+            <!--<Grid Grid.Row="1" Grid.Column="0" Margin="3"  HorizontalOptions="Center" VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    --><!--<RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>-->
+                    <!--<RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>--><!--
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="0" Grid.Column="11" />
+
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="1" Grid.Column="11" />
+
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="2" Grid.Column="11" />
+
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="3" Grid.Column="11" />
+
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="4" Grid.Column="11" />
+
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="5" Grid.Column="11" />
+
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="6" Grid.Column="11" />
+
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="7" Grid.Column="11" />-->
+
+                <!--<custom_components:GameboardCell Grid.Row="8" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="8" Grid.Column="11" />
+
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="9" Grid.Column="11" />-->
+
+                <!--<custom_components:GameboardCell Grid.Row="10" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="10" Grid.Column="11" />
+
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="0" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="1" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="2" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="3" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="4" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="5" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="6" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="7" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="8" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="9" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="10" />
+                <custom_components:GameboardCell Grid.Row="11" Grid.Column="11" />-->
+            <!--</Grid>-->
         </Grid>
     </Grid>
 
