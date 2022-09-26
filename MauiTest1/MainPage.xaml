@@ -9,7 +9,7 @@
             <custom_components:Toolbar 
                 AbsoluteLayout.LayoutFlags="None"
                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                GameMode="{Binding GameMode, Mode=TwoWay}" />
+                Gameboard="{Binding Gameboard, Mode=TwoWay}" />
         </AbsoluteLayout>
         <Grid Margin="0, 30, 0, 0"
             ColumnDefinitions="*"
