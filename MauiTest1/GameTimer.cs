@@ -1,47 +1,30 @@
 ﻿namespace MauiTest1
 {
-    public static class GameTimer
+    public class GameTimer
     {
-        static System.Timers.Timer timer;
-        static GameStateViewModel state;
+        System.Timers.Timer timer;
 
-        public static void InitiateClock()
+        public GameTimer()
         {
-            if (timer == null) return;
-            timer.Start();
-        }
+            timer = new System.Timers.Timer(interval: 1000);
+            timer.Elapsed += UpdateClock;
 
-        public static void InitiateClock(object BindingContext)
-        {
-            if (BindingContext is not GameStateViewModel s) return;
-
-            if (timer == null)
+            MessagingCenter.Subscribe<GameStateViewModel, bool>(timer, "ClockIsRunning", (sender, arg) =>
             {
-                state = s;
-                timer = new System.Timers.Timer(interval: 1000);
-                timer.Elapsed += UpdateClock;
-            }
-
-            timer.Start();
+                if (arg)
+                {
+                    timer.Start();
+                }
+                else
+                {
+                    timer.Stop();
+                }
+            });
         }
 
-        public static void StopClock()
+        private void UpdateClock(object sender, EventArgs e)
         {
-            timer.Stop();
-        }
-
-        private static void UpdateClock(object sender, EventArgs e)
-        {
-            int timeElapsed = Int32.Parse(state.TimeElapsed);
-            if (timeElapsed == 999)
-            {
-                StopClock();
-                return;
-            }
-            timeElapsed++;
-            string newTimeElapsed = timeElapsed.ToString().PadLeft(3, '0');
-
-            state.TimeElapsed = newTimeElapsed;
+            MessagingCenter.Send<GameTimer>(this, "ClockTick");
         }
     }
 }

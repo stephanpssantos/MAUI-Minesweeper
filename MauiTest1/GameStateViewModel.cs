@@ -21,6 +21,14 @@ namespace MauiTest1
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public GameStateViewModel()
+        {
+            MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) =>
+            {
+                IncrementTimeElapsed();
+            });
+        }
+
         public string Number
         {
             get => number;
@@ -30,13 +38,20 @@ namespace MauiTest1
         public string TimeElapsed
         {
             get => timeElapsed;
-            set { timeElapsed = value; NotifyPropertyChanged(); }
+            set { 
+                timeElapsed = value; 
+                NotifyPropertyChanged(); 
+            }
         }
 
         public bool ClockIsRunning
         {
             get => clockIsRunning;
-            set { clockIsRunning = value; NotifyPropertyChanged(); }
+            set { 
+                clockIsRunning = value; 
+                NotifyPropertyChanged();
+                MessagingCenter.Send<GameStateViewModel, bool>(this, "ClockIsRunning", value);
+            }
         }
 
         public GameboardSetup Gameboard
@@ -48,6 +63,18 @@ namespace MauiTest1
                 NotifyPropertyChanged();
                 MessagingCenter.Send<GameStateViewModel, GameboardSetup>(this, "Gameboard", value);
             }
+        }
+
+        private void IncrementTimeElapsed(int value = 1)
+        {
+            int timeElapsed = Int32.Parse(TimeElapsed);
+            if (timeElapsed == 999)
+            {
+                ClockIsRunning = false;
+                return;
+            }
+            timeElapsed += value;
+            TimeElapsed = timeElapsed.ToString().PadLeft(3, '0');
         }
     }
 }
