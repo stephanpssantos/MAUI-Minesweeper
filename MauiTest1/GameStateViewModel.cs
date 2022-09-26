@@ -23,10 +23,7 @@ namespace MauiTest1
 
         public GameStateViewModel()
         {
-            MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) =>
-            {
-                IncrementTimeElapsed();
-            });
+            MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
         }
 
         public string Number

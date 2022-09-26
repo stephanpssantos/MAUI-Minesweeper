@@ -28,7 +28,7 @@ public partial class App : MauiWinUIApplication
             IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
             WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
             AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
-            appWindow.Resize(new SizeInt32(364, 466));
+            appWindow.Resize(new SizeInt32(340, 332));
 
             if (appWindow.Presenter is OverlappedPresenter presenter)
             {
@@ -46,8 +46,12 @@ public partial class App : MauiWinUIApplication
 
     static void ResizeWindow(AppWindow winuiAppWindow, GameboardSetup setup)
     {
-        int width = (setup.BoardWidth * 16) + 108;
-        int height = (setup.BoardHeight * 16) + 210;
+        int width = (setup.BoardWidth * 16) + 44;
+        int height = (setup.BoardHeight * 16) + 146;
+
+        width = width < 340 ? 340 : width;
+        height = height < 332 ? 332 : height;
+
         winuiAppWindow.Resize(new SizeInt32(width, height));
     }
 }

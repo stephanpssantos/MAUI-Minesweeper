@@ -9,7 +9,7 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         GameTimer Timer = new();
         GameStateViewModel GameState = new();
-        BindingContext = GameState;    
+        BindingContext = GameState;
     }
 }
 

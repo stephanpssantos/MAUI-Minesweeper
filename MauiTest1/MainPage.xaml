@@ -32,7 +32,12 @@
                     <x:Int32>5</x:Int32>
                 </x:Arguments>
             </custom_components:DiagonalBlockShape>
-            <custom_components:Gameboard Grid.Row="1" Grid.Column="0" Margin="3"  HorizontalOptions="Center" VerticalOptions="Center"/>
+            <custom_components:Gameboard Grid.Row="1" 
+                                         Grid.Column="0" 
+                                         BoardSetup="{Binding Gameboard}"
+                                         Margin="3"  
+                                         HorizontalOptions="Center" 
+                                         VerticalOptions="Center"/>
         </Grid>
     </Grid>
 

@@ -1,4 +1,6 @@
-﻿namespace MauiTest1
+﻿using System.ComponentModel;
+
+namespace MauiTest1
 {
     public class Gameboard : Grid
     {
@@ -8,38 +10,47 @@
             ColumnSpacing = 0;
             RowSpacing = 0;
             GenerateBoard();
+
+            PropertyChanged += RegenerateBoard;
         }
 
-        public static readonly BindableProperty BoardHeightProperty =
-            BindableProperty.Create(nameof(BoardHeight), typeof(int), typeof(Gameboard), 20);
-        public static readonly BindableProperty BoardWidthProperty =
-             BindableProperty.Create(nameof(BoardWidth), typeof(int), typeof(Gameboard), 20);
+        public static readonly BindableProperty BoardSetupProperty =
+            BindableProperty.Create(nameof(BoardSetup), typeof(GameboardSetup), typeof(Gameboard), GameboardSetupFactory.NewBeginnerSetup());
 
-        public int BoardHeight
+        public GameboardSetup BoardSetup
         {
-            get { return (int)GetValue(BoardHeightProperty); }
-            set { SetValue(BoardHeightProperty, value); }
+            get { return (GameboardSetup)GetValue(BoardSetupProperty); }
+            set { SetValue(BoardSetupProperty, value); }
         }
-        public int BoardWidth
+
+        private void RegenerateBoard(object sender, EventArgs e)
         {
-            get { return (int)GetValue(BoardWidthProperty); }
-            set { SetValue(BoardWidthProperty, value); }
+            if (e is not PropertyChangedEventArgs args) return;
+            if (args.PropertyName != "BoardSetup") return;
+            if (Children.Count > 0)
+            {
+                RowDefinitions.Clear();
+                ColumnDefinitions.Clear();
+                Children.Clear();
+            }
+
+            GenerateBoard();
         }
 
         private void GenerateBoard()
         {
-            for (int i = 0; i < BoardHeight; i++)
+            for (int i = 0; i < BoardSetup.BoardHeight; i++)
             {
                 RowDefinitions.Add(new RowDefinition { Height = new GridLength(16) });
             }
-            for (int i = 0; i < BoardWidth; i++)
+            for (int i = 0; i < BoardSetup.BoardWidth; i++)
             {
                 ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(16) });
             }
 
-            for (int i = 0; i < BoardHeight; i++)
+            for (int i = 0; i < BoardSetup.BoardHeight; i++)
             {
-                for (int j = 0; j < BoardWidth; j++)
+                for (int j = 0; j < BoardSetup.BoardWidth; j++)
                 {
                     GameboardCell cell = new();
                     Add(cell);
