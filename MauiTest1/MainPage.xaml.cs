@@ -23,14 +23,10 @@ public partial class MainPage : ContentPage
                 if (context.ClockIsRunning)
                 {
                     GameTimer.InitiateClock(BindingContext);
-                    //context.GameMode = GameStateViewModel.GameModeSetting.Expert;
-                    //context.Gameboard = GameboardSetupFactory.NewExpertSetup();
                 }
                 else
                 {
                     GameTimer.StopClock();
-                    //context.GameMode = GameStateViewModel.GameModeSetting.Beginner;
-                    //context.Gameboard = GameboardSetupFactory.NewIntermediateSetup();
                 }
                 break;
             default:

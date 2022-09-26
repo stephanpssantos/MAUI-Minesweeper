@@ -10,7 +10,7 @@ namespace MauiTest1
         private string number = "000";
         private string timeElapsed = "000";
         private bool clockIsRunning = false;
-        public GameboardSetup gameboard;
+        private GameboardSetup gameboard = GameboardSetupFactory.NewBeginnerSetup();
 
         // this attribute sets the propertyName parameter
         // using the context in which this method is called
