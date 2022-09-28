@@ -12,9 +12,12 @@ public partial class GameboardOptionsPopup : ContentView
 
 	private void GameboardCellClicked(GameboardCellOptions options)
 	{
-		int newX = options.ParentX + (options.XPosition * 16) - 28;
-        int newY = options.ParentY + (options.YPosition * 16) - 36;
+		// 27 = 16 block size + (16 / 2) to center + 3 padding of one side
+		int newX = options.ParentX + (options.XPosition * 16) - 27;
+        // 38 = 16 block size * 2 rows + 6 padding
+        int newY = options.ParentY + (options.YPosition * 16) - 38;
 
+		// 14 = 10 padding + 4 border (?)
 		int xWidthCalc = (options.XBoardSize * 16) + (options.ParentX * 2) - 14;
 		if (newX + 70 > xWidthCalc) newX = xWidthCalc - 70;
         if (newX < 14) newX = 14;
