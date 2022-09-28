@@ -5,12 +5,13 @@
              x:Class="MauiTest1.MainPage">
     
     <Grid>
-        <AbsoluteLayout ZIndex="1">
+        <AbsoluteLayout x:Name="ToolbarContainer">
             <custom_components:Toolbar 
                 AbsoluteLayout.LayoutFlags="None"
                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                 Gameboard="{Binding Gameboard, Mode=TwoWay}" />
         </AbsoluteLayout>
+        <custom_components:GameboardOptionsPopup x:Name="PopupContainer" Margin="0, 30, 0, 0" />
         <Grid Margin="0, 30, 0, 0"
             ColumnDefinitions="*"
             RowDefinitions="40, *"

@@ -52,7 +52,7 @@ namespace MauiTest1
             {
                 for (int j = 0; j < BoardSetup.BoardWidth; j++)
                 {
-                    GameboardCell cell = new();
+                    GameboardCell cell = new(j, i, BoardSetup.BoardWidth, BoardSetup.BoardHeight);
                     Add(cell);
                     SetRow(cell as IView, i);
                     SetColumn(cell as IView, j);
