@@ -11,6 +11,7 @@ namespace MauiTest1
         private string timeElapsed = "000";
         private bool clockIsRunning = false;
         private GameboardSetup gameboard = GameboardSetupFactory.NewBeginnerSetup();
+        private int[,] gameboardState = new int[8, 8];
 
         // this attribute sets the propertyName parameter
         // using the context in which this method is called
@@ -24,6 +25,7 @@ namespace MauiTest1
         public GameStateViewModel()
         {
             MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
+            MessagingCenter.Subscribe<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", (sender, args) => { PopupCellOptionClicked(args); });
         }
 
         public string Number
@@ -62,6 +64,12 @@ namespace MauiTest1
             }
         }
 
+        public int[,] GameboardState
+        {
+            get => gameboardState;
+            set { gameboardState = value; NotifyPropertyChanged(); }
+        }
+
         private void IncrementTimeElapsed(int value = 1)
         {
             int timeElapsed = Int32.Parse(TimeElapsed);
@@ -72,6 +80,12 @@ namespace MauiTest1
             }
             timeElapsed += value;
             TimeElapsed = timeElapsed.ToString().PadLeft(3, '0');
+        }
+
+        private void PopupCellOptionClicked(SelectedPopupCellOptions options)
+        {
+            // CONTINUE HERE;
+            // selectedOptions has string ActionName; int XPosition; int YPosition;
         }
     }
 }

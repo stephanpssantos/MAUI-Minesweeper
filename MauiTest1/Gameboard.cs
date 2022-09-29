@@ -12,15 +12,25 @@ namespace MauiTest1
             GenerateBoard();
 
             PropertyChanged += RegenerateBoard;
+            PropertyChanged += UpdateBoardState;
         }
 
         public static readonly BindableProperty BoardSetupProperty =
             BindableProperty.Create(nameof(BoardSetup), typeof(GameboardSetup), typeof(Gameboard), GameboardSetupFactory.NewBeginnerSetup());
 
+        public static readonly BindableProperty BoardStateProperty =
+            BindableProperty.Create(nameof(BoardState), typeof(int[,]), typeof(Gameboard), new int[8, 8]);
+
         public GameboardSetup BoardSetup
         {
             get { return (GameboardSetup)GetValue(BoardSetupProperty); }
             set { SetValue(BoardSetupProperty, value); }
+        }
+
+        public int[,] BoardState 
+        { 
+            get { return (int[,])GetValue(BoardStateProperty); }
+            set { SetValue(BoardStateProperty, value); }
         }
 
         private void RegenerateBoard(object sender, EventArgs e)
@@ -35,6 +45,44 @@ namespace MauiTest1
             }
 
             GenerateBoard();
+        }
+
+        private void UpdateBoardState(object sender, EventArgs e)
+        {
+            if (e is not PropertyChangedEventArgs args) return;
+            if (args.PropertyName != "BoardState") return;
+
+            for (int i = 0; i < BoardSetup.BoardHeight; i++)
+            {
+                for (int j = 0; j < BoardSetup.BoardWidth; j++)
+                {
+                    if (Children[(i * BoardSetup.BoardWidth) + j] is not GameboardCell cell) return;
+                    int boardStateCode = BoardState[j, i];
+                    switch(boardStateCode)
+                    {
+                        case 0: // closed
+                            cell.CellStyle = "Blank";
+                            break;
+                        case 1: // question mark
+                            cell.CellStyle = "Mark";
+                            break;
+                        case 2:
+                            cell.CellStyle = "Flag";
+                            break;
+                        case 3: // Opened
+                            cell.CellStyle = "Cleared";
+                            break;
+                        case 4:
+                            cell.CellStyle = "Exploded";
+                            break;
+                        case 5:
+                            cell.CellStyle = "ExplosionSite";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
 
         private void GenerateBoard()
@@ -52,12 +100,19 @@ namespace MauiTest1
             {
                 for (int j = 0; j < BoardSetup.BoardWidth; j++)
                 {
-                    GameboardCell cell = new(j, i, BoardSetup.BoardWidth, BoardSetup.BoardHeight);
+                    GameboardCell cell = new(j, i, BoardSetup.BoardWidth, BoardSetup.BoardHeight, BoardSetup.BoardPositions[j, i]);
                     Add(cell);
                     SetRow(cell as IView, i);
                     SetColumn(cell as IView, j);
                 }
             }
+
+            ResetBoardState();
+        }
+
+        private void ResetBoardState()
+        {
+            BoardState = new int[BoardSetup.BoardWidth, BoardSetup.BoardHeight];
         }
     }
 }

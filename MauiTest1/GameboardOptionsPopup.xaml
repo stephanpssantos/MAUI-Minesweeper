@@ -25,10 +25,26 @@
                     RowSpacing="0"
                     ColumnSpacing="0"
                     BackgroundColor="#EEE">
-                    <custom_components:OptionsPopupCell Grid.Row="0" Grid.Column="0" />
-                    <custom_components:OptionsPopupCell Grid.Row="0" Grid.Column="1" />
-                    <custom_components:OptionsPopupCell Grid.Row="0" Grid.Column="2" />
-                    <custom_components:OptionsPopupCell Grid.Row="0" Grid.Column="3" />
+                    <custom_components:OptionsPopupCell x:Name="ClearButton" Grid.Row="0" Grid.Column="0" CellStyle="Clear">
+                        <x:Arguments>
+                            <x:String>Clear</x:String>
+                        </x:Arguments>
+                    </custom_components:OptionsPopupCell>
+                    <custom_components:OptionsPopupCell x:Name="MarkButton" Grid.Row="0" Grid.Column="1" CellStyle="Mark">
+                        <x:Arguments>
+                            <x:String>Mark</x:String>
+                        </x:Arguments>
+                    </custom_components:OptionsPopupCell>
+                    <custom_components:OptionsPopupCell x:Name="FlagButton" Grid.Row="0" Grid.Column="2" CellStyle="Flag">
+                        <x:Arguments>
+                            <x:String>Flag</x:String>
+                        </x:Arguments>
+                    </custom_components:OptionsPopupCell>
+                    <custom_components:OptionsPopupCell x:Name="CancelButton" Grid.Row="0" Grid.Column="3" CellStyle="Cancel">
+                        <x:Arguments>
+                            <x:String>Cancel</x:String>
+                        </x:Arguments>
+                    </custom_components:OptionsPopupCell>
                     <Button Text="Cancel" 
                         Grid.Row="1" 
                         Grid.ColumnSpan="4" 

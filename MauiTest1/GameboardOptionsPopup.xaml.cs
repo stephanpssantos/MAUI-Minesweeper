@@ -12,8 +12,17 @@ public partial class GameboardOptionsPopup : ContentView
 
 	private void GameboardCellClicked(GameboardCellOptions options)
 	{
-		// 27 = 16 block size + (16 / 2) to center + 3 padding of one side
-		int newX = options.ParentX + (options.XPosition * 16) - 27;
+		ClearButton.xPosition = options.XPosition;
+		ClearButton.yPosition = options.YPosition;
+        MarkButton.xPosition = options.XPosition;
+        MarkButton.yPosition = options.YPosition;
+        FlagButton.xPosition = options.XPosition;
+        FlagButton.yPosition = options.YPosition;
+        CancelButton.xPosition = options.XPosition;
+        CancelButton.yPosition = options.YPosition;
+
+        // 27 = 16 block size + (16 / 2) to center + 3 padding of one side
+        int newX = options.ParentX + (options.XPosition * 16) - 27;
         // 38 = 16 block size * 2 rows + 6 padding
         int newY = options.ParentY + (options.YPosition * 16) - 38;
 
