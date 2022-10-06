@@ -54,7 +54,8 @@
                         CornerRadius="0"
                         FontSize="10"
                         BackgroundColor="#EEEEEE"
-                        TextColor="Black"/>
+                        TextColor="Black"
+                        Pressed="ClosePopup"/>
                 </Grid>
             </Border>
         </Border>
