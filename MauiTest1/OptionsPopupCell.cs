@@ -8,6 +8,10 @@ namespace MauiTest1
         public new int xPosition;
         public new int yPosition;
 
+        public OptionsPopupCell()
+        {
+        }
+
         public OptionsPopupCell(string actionName)
         {
             this.actionName = actionName;

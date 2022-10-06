@@ -68,15 +68,18 @@ namespace MauiTest1
                     SetPressedStatus();
                     thisButton.ImageSource = "";
                     if (internalValue > 0) thisButton.Text = internalValue.ToString();
+                    thisButton.Pressed -= OnCellPress;
                     break;
                 case "Exploded":
                     SetPressedStatus();
                     thisButton.ImageSource = "mine.png";
+                    thisButton.Pressed -= OnCellPress;
                     break;
                 case "ExplosionSite":
                     SetPressedStatus();
                     thisButton.BackgroundColor = Colors.Red;
                     thisButton.ImageSource = "exploded_mine.png";
+                    thisButton.Pressed -= OnCellPress;
                     break;
                 default:
                     break;
@@ -174,7 +177,7 @@ namespace MauiTest1
             thisFrame.IsVisible = false;
         }
 
-        protected void ResetCellStatus()
+        internal void ResetCellStatus()
         {
             thisButton.BackgroundColor = Color.FromArgb("#C0C0C0");
             thisButton.HeightRequest = 14;

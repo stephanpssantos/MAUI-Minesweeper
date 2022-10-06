@@ -3,15 +3,25 @@ namespace MauiTest1;
 public partial class GameboardOptionsPopup : ContentView
 {
 	private bool isOpen = false;
+	private GameboardCell lastClicked;
+
 	public GameboardOptionsPopup()
 	{
 		IsVisible = false;
 		InitializeComponent();
-        MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => { GameboardCellClicked(arg); });
+        MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => {
+			GameboardCellClicked(arg);
+            if (sender is GameboardCell clicked) lastClicked = clicked;
+        });
     }
 
 	private void GameboardCellClicked(GameboardCellOptions options)
 	{
+		if (isOpen && lastClicked is not null)
+		{
+			lastClicked.ResetCellStatus();
+		}
+
 		ClearButton.xPosition = options.XPosition;
 		ClearButton.yPosition = options.YPosition;
         MarkButton.xPosition = options.XPosition;

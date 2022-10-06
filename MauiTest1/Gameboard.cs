@@ -19,7 +19,7 @@ namespace MauiTest1
             BindableProperty.Create(nameof(BoardSetup), typeof(GameboardSetup), typeof(Gameboard), GameboardSetupFactory.NewBeginnerSetup());
 
         public static readonly BindableProperty BoardStateProperty =
-            BindableProperty.Create(nameof(BoardState), typeof(int[,]), typeof(Gameboard), new int[8, 8]);
+            BindableProperty.Create(nameof(BoardState), typeof(int[,]), typeof(Gameboard), null);
 
         public GameboardSetup BoardSetup
         {
@@ -49,6 +49,7 @@ namespace MauiTest1
 
         private void UpdateBoardState(object sender, EventArgs e)
         {
+            if (BoardState is null) return;
             if (e is not PropertyChangedEventArgs args) return;
             if (args.PropertyName != "BoardState") return;
 
