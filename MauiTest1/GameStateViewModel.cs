@@ -1,4 +1,5 @@
-﻿using System.ComponentModel; // INotifyPropertyChanged
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel; // INotifyPropertyChanged
 using System.Runtime.CompilerServices;
 
 namespace MauiTest1
@@ -11,13 +12,13 @@ namespace MauiTest1
         private string timeElapsed = "000";
         private bool clockIsRunning = false;
         private GameboardSetup gameboard = GameboardSetupFactory.NewBeginnerSetup();
-        private int[,] gameboardState = new int[8, 8];
+        private ObservableCollection<int> gameboardState = new();
 
         // this attribute sets the propertyName parameter
         // using the context in which this method is called
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            // if an event handler has been set then invoke
+            // if an event handler has been set, then invoke
             // the delegate and pass the name of the property
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -64,7 +65,7 @@ namespace MauiTest1
             }
         }
 
-        public int[,] GameboardState
+        public ObservableCollection<int> GameboardState
         {
             get => gameboardState;
             set { gameboardState = value; NotifyPropertyChanged(); }
@@ -86,6 +87,12 @@ namespace MauiTest1
         {
             // CONTINUE HERE;
             // selectedOptions has string ActionName; int XPosition; int YPosition;
+            // Action names: Clear, Mark, Flag, Cancel
+            if (options.ActionName == "Clear")
+            {
+                int cellIndex = (options.YPosition * Gameboard.BoardWidth) + options.XPosition;
+                GameboardState[cellIndex] = 3;
+            }
         }
     }
 }

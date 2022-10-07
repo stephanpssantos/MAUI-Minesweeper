@@ -36,7 +36,7 @@
             <custom_components:Gameboard Grid.Row="1" 
                                          Grid.Column="0" 
                                          BoardSetup="{Binding Gameboard}"
-                                         BoardState="{Binding GameboardState}"
+                                         BoardState="{Binding GameboardState, Mode=TwoWay}"
                                          Margin="3"  
                                          HorizontalOptions="Center" 
                                          VerticalOptions="Center"/>

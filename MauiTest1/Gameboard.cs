@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace MauiTest1
 {
@@ -12,14 +13,13 @@ namespace MauiTest1
             GenerateBoard();
 
             PropertyChanged += RegenerateBoard;
-            PropertyChanged += UpdateBoardState;
         }
 
         public static readonly BindableProperty BoardSetupProperty =
             BindableProperty.Create(nameof(BoardSetup), typeof(GameboardSetup), typeof(Gameboard), GameboardSetupFactory.NewBeginnerSetup());
 
         public static readonly BindableProperty BoardStateProperty =
-            BindableProperty.Create(nameof(BoardState), typeof(int[,]), typeof(Gameboard), null);
+            BindableProperty.Create(nameof(BoardState), typeof(ObservableCollection<int>), typeof(Gameboard), null);
 
         public GameboardSetup BoardSetup
         {
@@ -27,9 +27,9 @@ namespace MauiTest1
             set { SetValue(BoardSetupProperty, value); }
         }
 
-        public int[,] BoardState 
-        { 
-            get { return (int[,])GetValue(BoardStateProperty); }
+        public ObservableCollection<int> BoardState
+        {
+            get { return (ObservableCollection<int>)GetValue(BoardStateProperty); }
             set { SetValue(BoardStateProperty, value); }
         }
 
@@ -49,16 +49,16 @@ namespace MauiTest1
 
         private void UpdateBoardState(object sender, EventArgs e)
         {
-            if (BoardState is null) return;
-            if (e is not PropertyChangedEventArgs args) return;
-            if (args.PropertyName != "BoardState") return;
+            //if (BoardState is null || BoardState.Count == 0) return;
+            //if (e is not PropertyChangedEventArgs args) return;
+            //if (args.PropertyName != "BoardState") return;
 
             for (int i = 0; i < BoardSetup.BoardHeight; i++)
             {
                 for (int j = 0; j < BoardSetup.BoardWidth; j++)
                 {
                     if (Children[(i * BoardSetup.BoardWidth) + j] is not GameboardCell cell) return;
-                    int boardStateCode = BoardState[j, i];
+                    int boardStateCode = BoardState[(i * BoardSetup.BoardWidth) + j];
                     switch(boardStateCode)
                     {
                         case 0: // closed
@@ -108,12 +108,22 @@ namespace MauiTest1
                 }
             }
 
-            ResetBoardState();
+            BoardState = ResetBoardState(BoardSetup.BoardWidth, BoardSetup.BoardHeight);
+            BoardState.CollectionChanged += UpdateBoardState;
         }
 
-        private void ResetBoardState()
+        private static ObservableCollection<int> ResetBoardState(int width, int height)
         {
-            BoardState = new int[BoardSetup.BoardWidth, BoardSetup.BoardHeight];
+            ObservableCollection<int> boardState = new();
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    boardState.Add(0);
+                }
+            }
+
+            return boardState;
         }
     }
 }
