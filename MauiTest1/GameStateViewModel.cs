@@ -99,12 +99,42 @@ namespace MauiTest1
                 }
                 else if (cellValue < 0)
                 {
-                    GameboardState[cellIndex] = 4;
+                    // Game over
+                    GameboardState[cellIndex] = 5;
                 }
                 else if (cellValue == 0)
                 {
-                    GameboardState[cellIndex] = 3;
+                    OpenSurroundings(options.XPosition, options.YPosition);
                 }
+            }
+        }
+
+        private void OpenSurroundings(int xPosition, int yPosition)
+        {
+            int cellIndex = (yPosition * Gameboard.BoardWidth) + xPosition;
+            int cellValue = Gameboard.BoardPositions[xPosition, yPosition];
+
+            if (GameboardState[cellIndex] != 0) return;
+            if (cellValue == -1) return;
+            if (cellValue >= 0) GameboardState[cellIndex] = 3;
+            if (cellValue == 0)
+            {
+                // Check left
+                if (xPosition - 1 >= 0) OpenSurroundings(xPosition - 1, yPosition);
+                // Check top left
+                if (xPosition - 1 >= 0 && yPosition - 1 >= 0) OpenSurroundings(xPosition - 1, yPosition - 1);
+                // Check top
+                if (yPosition - 1 >= 0) OpenSurroundings(xPosition, yPosition - 1);
+                // Check top right
+                if (xPosition + 1 < Gameboard.BoardWidth && yPosition - 1 >= 0) OpenSurroundings(xPosition + 1, yPosition - 1);
+                // Check right
+                if (xPosition + 1 < Gameboard.BoardWidth) OpenSurroundings(xPosition + 1, yPosition);
+                // Check bottom right
+                if (xPosition + 1 < Gameboard.BoardWidth && yPosition + 1 < Gameboard.BoardHeight) OpenSurroundings(xPosition + 1, yPosition + 1);
+                // Check bottom
+                if (yPosition + 1 < Gameboard.BoardHeight) OpenSurroundings(xPosition, yPosition + 1);
+                // Check bottom left
+                if (xPosition - 1 >= 0 && yPosition + 1 < Gameboard.BoardHeight) OpenSurroundings(xPosition - 1, yPosition + 1);
             }
         }
     }
