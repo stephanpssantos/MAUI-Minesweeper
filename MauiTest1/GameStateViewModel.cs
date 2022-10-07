@@ -88,10 +88,23 @@ namespace MauiTest1
             // CONTINUE HERE;
             // selectedOptions has string ActionName; int XPosition; int YPosition;
             // Action names: Clear, Mark, Flag, Cancel
+            int cellIndex = (options.YPosition * Gameboard.BoardWidth) + options.XPosition;
+            int cellValue = Gameboard.BoardPositions[options.XPosition, options.YPosition];
+
             if (options.ActionName == "Clear")
             {
-                int cellIndex = (options.YPosition * Gameboard.BoardWidth) + options.XPosition;
-                GameboardState[cellIndex] = 3;
+                if (cellValue > 0) 
+                {
+                    GameboardState[cellIndex] = 3;
+                }
+                else if (cellValue < 0)
+                {
+                    GameboardState[cellIndex] = 4;
+                }
+                else if (cellValue == 0)
+                {
+                    GameboardState[cellIndex] = 3;
+                }
             }
         }
     }

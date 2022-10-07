@@ -33,16 +33,8 @@ namespace MauiTest1
             button.WidthRequest = 16;
             button.Padding = new Thickness(3, 3, 1, 1);
             AbsoluteLayout.SetLayoutBounds(button, new Rect(0, 0, 16, 16));
-
+            
             frame.IsVisible = false;
-
-            SelectedPopupCellOptions selectedOptions = new() { 
-                ActionName = actionName,
-                XPosition = xPosition,
-                YPosition = yPosition
-            };
-
-            MessagingCenter.Send<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", selectedOptions);
         }
 
         protected override void OnCellRelease(object sender, EventArgs e)
@@ -57,6 +49,16 @@ namespace MauiTest1
             AbsoluteLayout.SetLayoutBounds(button, new Rect(2, 2, 12, 12));
 
             frame.IsVisible = true;
+
+            SelectedPopupCellOptions selectedOptions = new()
+            {
+                ActionName = actionName,
+                XPosition = xPosition,
+                YPosition = yPosition
+            };
+
+            MessagingCenter.Send<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", selectedOptions);
+            MessagingCenter.Send<OptionsPopupCell>(this, "ClosePopup");
         }
     }
 

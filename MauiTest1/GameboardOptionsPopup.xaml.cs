@@ -21,6 +21,8 @@ public partial class GameboardOptionsPopup : ContentView
                 lastClicked = clicked;
 			}
         });
+
+        MessagingCenter.Subscribe<OptionsPopupCell>(this, "ClosePopup", (sender) => { ClosePopup(null, null); });
     }
 
 	private void GameboardCellClicked(GameboardCellOptions options)
@@ -59,10 +61,10 @@ public partial class GameboardOptionsPopup : ContentView
 
 	private void ClosePopup(object sender, EventArgs e)
 	{
-		if (lastClicked is not null)
+		if (sender is not null && lastClicked is not null)
 		{
-			lastClicked.ResetCellStatus();
-		}
+            lastClicked.ResetCellStatus();
+        }
 
 		isOpen = false;
 		IsVisible = false;

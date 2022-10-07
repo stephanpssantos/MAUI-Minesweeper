@@ -149,8 +149,6 @@ namespace MauiTest1
 
             SetPressedStatus();
 
-            thisButton.BackgroundColor = Color.FromArgb("#808080");
-
             GameboardCellOptions options = new() { 
                 XBoardSize = xBoardSize,
                 YBoardSize = yBoardSize,
@@ -171,7 +169,9 @@ namespace MauiTest1
         {
             thisButton.HeightRequest = 16;
             thisButton.WidthRequest = 16;
-            
+
+            //thisButton.BackgroundColor = Color.FromArgb("#808080");
+
             AbsoluteLayout.SetLayoutBounds(thisButton, new Rect(0, 0, 16, 16));
 
             thisFrame.IsVisible = false;
