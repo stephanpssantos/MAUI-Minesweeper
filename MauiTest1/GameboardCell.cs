@@ -73,13 +73,13 @@ namespace MauiTest1
                 case "Exploded":
                     SetPressedStatus();
                     thisButton.ImageSource = "mine.png";
-                    thisButton.Pressed -= OnCellPress;
+                    //thisButton.Pressed -= OnCellPress; // The containing grid is disabled instead
                     break;
                 case "ExplosionSite":
                     SetPressedStatus();
                     thisButton.BackgroundColor = Colors.Red;
                     thisButton.ImageSource = "exploded_mine.png";
-                    thisButton.Pressed -= OnCellPress;
+                    //thisButton.Pressed -= OnCellPress;
                     break;
                 default:
                     break;

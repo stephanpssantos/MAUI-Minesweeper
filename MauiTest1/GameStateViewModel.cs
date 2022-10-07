@@ -100,11 +100,32 @@ namespace MauiTest1
                 else if (cellValue < 0)
                 {
                     // Game over
-                    GameboardState[cellIndex] = 5;
+                    ExplodeAll(options.XPosition, options.YPosition);
                 }
                 else if (cellValue == 0)
                 {
                     OpenSurroundings(options.XPosition, options.YPosition);
+                }
+            }
+        }
+
+        private void ExplodeAll(int xPosition, int yPosition)
+        {
+            // xPosition and yPosition are the coordinates for the clicked mine
+            int cellIndex = (yPosition * Gameboard.BoardWidth) + xPosition;
+            GameboardState[cellIndex] = 5;
+
+            for (int y = 0; y < Gameboard.BoardHeight; y++)
+            {
+                for (int x = 0; x < Gameboard.BoardWidth; x++)
+                {
+                    int currentCellIndex = (y * Gameboard.BoardWidth) + x;
+                    int currentCellValue = Gameboard.BoardPositions[x, y];
+
+                    if (currentCellValue == -1 && GameboardState[currentCellIndex] == 0)
+                    {
+                        GameboardState[currentCellIndex] = 4;
+                    }
                 }
             }
         }
