@@ -82,6 +82,10 @@ namespace MauiTest1
                         case 6:
                             cell.CellStyle = "FalseFlag";
                             break;
+                        // Same properties as closed. Used to retrigger 'closed' property changed.
+                        case 7:
+                            cell.CellStyle = "Reset";
+                            break;
                         default:
                             break;
                     }

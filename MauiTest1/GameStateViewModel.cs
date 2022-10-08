@@ -151,6 +151,8 @@ namespace MauiTest1
                     mineCountInt++;
                     MineCount = mineCountInt.ToString();
                 }
+                // 7 is 'reset' to force property changed event trigger
+                GameboardState[cellIndex] = 7;
                 GameboardState[cellIndex] = 0;
             }
         }

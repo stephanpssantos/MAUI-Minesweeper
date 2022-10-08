@@ -54,15 +54,19 @@ namespace MauiTest1
                     break;
                 case "Mark":
                     thisButton.ImageSource = "question.png";
+                    ResetCellStatus();
                     break;
                 case "Flag":
                     thisButton.ImageSource = "flag.png";
+                    ResetCellStatus();
                     break;
                 case "Clear": // For OptionsPopupCell
                     thisButton.ImageSource = "clear_mark.png";
+                    ResetCellStatus();
                     break;
                 case "Cancel": // For OptionsPopupCell
                     thisButton.ImageSource = "cancel_mark.png";
+                    ResetCellStatus();
                     break;
                 case "Cleared":
                     SetPressedStatus();
@@ -83,6 +87,10 @@ namespace MauiTest1
                     break;
                 case "FalseFlag":
                     thisButton.ImageSource = "not_a_mine.png";
+                    ResetCellStatus();
+                    break;
+                case "Reset":
+                    // Do nothing
                     break;
                 default:
                     break;
@@ -99,7 +107,7 @@ namespace MauiTest1
             button.Padding = 1;
             button.BackgroundColor = Color.FromArgb("#C0C0C0");
             button.FontFamily = "8Bit";
-            button.FontSize = 14;
+            button.FontSize = 12;
             button.ContentLayout = new Button.ButtonContentLayout(Button.ButtonContentLayout.ImagePosition.Left, 0);
 
             switch (internalValue)
@@ -172,6 +180,7 @@ namespace MauiTest1
         {
             thisButton.HeightRequest = 16;
             thisButton.WidthRequest = 16;
+            thisButton.Padding = 2;
 
             //thisButton.BackgroundColor = Color.FromArgb("#808080");
 
@@ -185,6 +194,7 @@ namespace MauiTest1
             thisButton.BackgroundColor = Color.FromArgb("#C0C0C0");
             thisButton.HeightRequest = 14;
             thisButton.WidthRequest = 14;
+            thisButton.Padding = 1;
             AbsoluteLayout.SetLayoutBounds(thisButton, new Rect(1, 1, 14, 14));
 
             thisFrame.IsVisible = true;
