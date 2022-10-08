@@ -8,7 +8,7 @@ namespace MauiTest1
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string number = "000";
+        private string mineCount = "000";
         private string timeElapsed = "000";
         private bool clockIsRunning = false;
         private GameboardSetup gameboard = GameboardSetupFactory.NewBeginnerSetup();
@@ -29,16 +29,37 @@ namespace MauiTest1
             MessagingCenter.Subscribe<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", (sender, args) => { PopupCellOptionClicked(args); });
         }
 
-        public string Number
+        public string MineCount
         {
-            get => number;
-            set { number = value; NotifyPropertyChanged(); }
+            get => mineCount;
+            set 
+            {
+                int negativeCheck = Int32.Parse(value);
+                if (negativeCheck < 0)
+                {
+                    // possibly verify that it's less than 99
+                    negativeCheck *= -1;
+                    value = '-' + negativeCheck.ToString().PadLeft(2, '0');
+                }
+                else if (value.Length < 3)
+                {
+                    value = value.PadLeft(3, '0');
+                }
+                mineCount = value; 
+                NotifyPropertyChanged(); 
+            }
         }
 
         public string TimeElapsed
         {
             get => timeElapsed;
-            set { 
+            set 
+            {
+                if (Int32.Parse(value) < 0) return;
+                if (value.Length < 3)
+                {
+                    value = value.PadLeft(3, '0');
+                }
                 timeElapsed = value; 
                 NotifyPropertyChanged(); 
             }
@@ -47,7 +68,8 @@ namespace MauiTest1
         public bool ClockIsRunning
         {
             get => clockIsRunning;
-            set { 
+            set 
+            {
                 clockIsRunning = value; 
                 NotifyPropertyChanged();
                 MessagingCenter.Send<GameStateViewModel, bool>(this, "ClockIsRunning", value);
@@ -60,6 +82,7 @@ namespace MauiTest1
             set
             {
                 gameboard = value;
+                MineCount = gameboard.BoardMines.ToString();
                 NotifyPropertyChanged();
                 MessagingCenter.Send<GameStateViewModel, GameboardSetup>(this, "Gameboard", value);
             }
@@ -80,7 +103,7 @@ namespace MauiTest1
                 return;
             }
             timeElapsed += value;
-            TimeElapsed = timeElapsed.ToString().PadLeft(3, '0');
+            TimeElapsed = timeElapsed.ToString();
         }
 
         private void PopupCellOptionClicked(SelectedPopupCellOptions options)
@@ -107,6 +130,29 @@ namespace MauiTest1
                     OpenSurroundings(options.XPosition, options.YPosition);
                 }
             }
+            else if (options.ActionName == "Mark")
+            {
+                GameboardState[cellIndex] = 1;
+            }
+            else if (options.ActionName == "Flag")
+            {
+                int mineCountInt = Int32.Parse(MineCount);
+                mineCountInt--;
+                //flagCount++;
+                MineCount = mineCountInt.ToString();
+                GameboardState[cellIndex] = 2;
+            }
+            else if (options.ActionName == "Cancel")
+            {
+                if (GameboardState[cellIndex] == 2)
+                {
+                    int test = GameboardState[cellIndex];
+                    int mineCountInt = Int32.Parse(MineCount);
+                    mineCountInt++;
+                    MineCount = mineCountInt.ToString();
+                }
+                GameboardState[cellIndex] = 0;
+            }
         }
 
         private void ExplodeAll(int xPosition, int yPosition)
@@ -125,6 +171,10 @@ namespace MauiTest1
                     if (currentCellValue == -1 && GameboardState[currentCellIndex] == 0)
                     {
                         GameboardState[currentCellIndex] = 4;
+                    }
+                    if (currentCellValue != -1 && GameboardState[currentCellIndex] == 2)
+                    {
+                        GameboardState[currentCellIndex] = 6;
                     }
                 }
             }

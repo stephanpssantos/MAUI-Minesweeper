@@ -81,6 +81,9 @@ namespace MauiTest1
                     thisButton.ImageSource = "exploded_mine.png";
                     //thisButton.Pressed -= OnCellPress;
                     break;
+                case "FalseFlag":
+                    thisButton.ImageSource = "not_a_mine.png";
+                    break;
                 default:
                     break;
             }

@@ -17,15 +17,12 @@ namespace MauiTest1
         {
             get
             {
-                string temp = (string)GetValue(NumberProperty);
-                if (temp.Length < 3)
-                {
-                    temp = temp.PadLeft(3, '0');
-                    SetValue(NumberProperty, temp);
-                }
-                return temp;
+                return (string)GetValue(NumberProperty);
             }
-            set { SetValue(NumberProperty, value); }
+            set 
+            {
+                SetValue(NumberProperty, value); 
+            }
         }
 
         private void RenderScoreboard()
@@ -36,8 +33,11 @@ namespace MauiTest1
             Children.Add(border);
             AbsoluteLayout.SetLayoutBounds(border, new Rect(0, 0, 42, 26));
 
+            // to allow for negative numbers
+            int firstNumber = tempNumber[0] == '-' ? -1 : tempNumber[0] - '0';
+
             // - '0' is to convert the char number to an int. Int32.Parse doesn't work.
-            ScoreboardNumber scoreboardNumber1 = new() { Number = tempNumber[0] - '0' };
+            ScoreboardNumber scoreboardNumber1 = new() { Number = firstNumber };
             ScoreboardNumber scoreboardNumber2 = new() { Number = tempNumber[1] - '0' };
             ScoreboardNumber scoreboardNumber3 = new() { Number = tempNumber[2] - '0' };
 
@@ -65,7 +65,9 @@ namespace MauiTest1
             ScoreboardNumber scoreboardNumber2 = Children[2] as ScoreboardNumber;
             ScoreboardNumber scoreboardNumber3 = Children[3] as ScoreboardNumber;
 
-            scoreboardNumber1.Number = Number[0] - '0';
+            int firstNumber = Number[0] == '-' ? -1 : Number[0] - '0';
+
+            scoreboardNumber1.Number = firstNumber;
             scoreboardNumber2.Number = Number[1] - '0';
             scoreboardNumber3.Number = Number[2] - '0';
         }

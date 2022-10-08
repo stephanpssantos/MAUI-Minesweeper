@@ -53,7 +53,7 @@ namespace MauiTest1
 
         private void RenderNumber()
         {
-            if (Number < 0 || Number > 9)
+            if (Number < -1 || Number > 9)
             {
                 return;
             }
@@ -92,6 +92,9 @@ namespace MauiTest1
             ScoreboardPositions positions = new();
             switch (Number)
             {
+                case -1:
+                    positions.center = ScoreboardNumberCell.CellState.RedEnabled;
+                    break;
                 case 0:
                     positions.top = ScoreboardNumberCell.CellState.RedEnabled;
                     positions.upperRight = ScoreboardNumberCell.CellState.RedEnabled;

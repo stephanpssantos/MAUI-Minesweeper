@@ -79,6 +79,9 @@ namespace MauiTest1
                         case 5:
                             cell.CellStyle = "ExplosionSite";
                             break;
+                        case 6:
+                            cell.CellStyle = "FalseFlag";
+                            break;
                         default:
                             break;
                     }
