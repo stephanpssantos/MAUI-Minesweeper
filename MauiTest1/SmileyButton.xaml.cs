@@ -5,7 +5,8 @@ public partial class SmileyButton : ContentView
 	public SmileyButton()
 	{
 		InitializeComponent();
-	}
+        MessagingCenter.Subscribe<GameboardCell, int>(this, "GameButtonShockFace", (sender, args) => { DisplayFace(args); });
+    }
 
     public static readonly BindableProperty ClockIsRunningProperty =
             BindableProperty.Create(nameof(ClockIsRunning), typeof(bool), typeof(SmileyButton), false);
@@ -30,5 +31,26 @@ public partial class SmileyButton : ContentView
         UnframedSmileyButton.Padding = new Thickness(2, 2, 1, 1);
 
         ClockIsRunning = !ClockIsRunning;
+    }
+
+    private void DisplayFace(int faceId)
+    {
+        string sourceName;
+
+        switch (faceId)
+        {
+            case 1:
+                sourceName = "shocked_face.png";
+                break;
+            case 2:
+                sourceName = "smiley_shades.png";
+                break;
+            case 0:
+            default:
+                sourceName = "smiley_face.png";
+                break;
+        }
+
+        UnframedSmileyButton.Source = sourceName;
     }
 }

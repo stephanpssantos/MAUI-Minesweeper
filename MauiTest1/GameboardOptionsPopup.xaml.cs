@@ -29,7 +29,7 @@ public partial class GameboardOptionsPopup : ContentView
 	{
 		if (isOpen && lastClicked is not null)
 		{
-			lastClicked.ResetCellStatus();
+			lastClicked.ResetCellStatus(1);
 		}
 
 		ClearButton.xPosition = options.XPosition;

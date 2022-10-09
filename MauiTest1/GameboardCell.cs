@@ -187,10 +187,16 @@ namespace MauiTest1
             AbsoluteLayout.SetLayoutBounds(thisButton, new Rect(0, 0, 16, 16));
 
             thisFrame.IsVisible = false;
+            MessagingCenter.Send<GameboardCell, int>(this, "GameButtonShockFace", 1);
         }
 
-        internal void ResetCellStatus()
+        internal void ResetCellStatus(int toggleSmiley = 0)
         {
+            if (toggleSmiley == 0)
+            {
+                // GameboardOptionsPopup.xaml
+                MessagingCenter.Send<GameboardCell, int>(this, "GameButtonShockFace", 0);
+            }
             thisButton.BackgroundColor = Color.FromArgb("#C0C0C0");
             thisButton.HeightRequest = 14;
             thisButton.WidthRequest = 14;
