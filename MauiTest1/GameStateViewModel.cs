@@ -27,6 +27,13 @@ namespace MauiTest1
         {
             MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
             MessagingCenter.Subscribe<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", (sender, args) => { PopupCellOptionClicked(args); });
+            MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => 
+            {
+                if (ClockIsRunning == false)
+                {
+                    ClockIsRunning = true;
+                }
+            });
         }
 
         public string MineCount
@@ -108,7 +115,6 @@ namespace MauiTest1
 
         private void PopupCellOptionClicked(SelectedPopupCellOptions options)
         {
-            // CONTINUE HERE;
             // selectedOptions has string ActionName; int XPosition; int YPosition;
             // Action names: Clear, Mark, Flag, Cancel
             int cellIndex = (options.YPosition * Gameboard.BoardWidth) + options.XPosition;
