@@ -31,6 +31,7 @@ public partial class SmileyButton : ContentView
         UnframedSmileyButton.Padding = new Thickness(2, 2, 1, 1);
 
         ClockIsRunning = !ClockIsRunning;
+        MessagingCenter.Send<SmileyButton>(this, "NewGame");
     }
 
     private void DisplayFace(int faceId)

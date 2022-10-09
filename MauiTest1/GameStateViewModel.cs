@@ -25,6 +25,8 @@ namespace MauiTest1
 
         public GameStateViewModel()
         {
+            MessagingCenter.Subscribe<Toolbar>(this, "NewGame", (sender) => { NewGame(); });
+            MessagingCenter.Subscribe<SmileyButton>(this, "NewGame", (sender) => { NewGame(); });
             MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
             MessagingCenter.Subscribe<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", (sender, args) => { PopupCellOptionClicked(args); });
             MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => 
@@ -99,6 +101,19 @@ namespace MauiTest1
         {
             get => gameboardState;
             set { gameboardState = value; NotifyPropertyChanged(); }
+        }
+
+        private void NewGame()
+        {
+            GameboardSetup newGameboardSetup = new()
+            {
+                BoardHeight = Gameboard.BoardHeight,
+                BoardWidth = Gameboard.BoardWidth,
+                BoardMines = Gameboard.BoardMines
+            };
+
+            Gameboard = newGameboardSetup;
+            TimeElapsed = "000";
         }
 
         private void IncrementTimeElapsed(int value = 1)
