@@ -108,6 +108,10 @@ namespace MauiTest1
             {
                 for (int j = 0; j < BoardSetup.BoardWidth; j++)
                 {
+                    var testA = BoardSetup.BoardPositions;
+                    var testB = i;
+                    var testC = j;
+                    var teeest = 2;
                     GameboardCell cell = new(j, i, BoardSetup.BoardWidth, BoardSetup.BoardHeight, BoardSetup.BoardPositions[j, i]);
                     Add(cell);
                     SetRow(cell as IView, i);

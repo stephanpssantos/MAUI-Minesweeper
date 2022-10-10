@@ -30,6 +30,8 @@ namespace MauiTest1
 
             GenerateCell();
             PropertyChanged += SetCellStyle;
+
+            MessagingCenter.Subscribe<GameStateViewModel>(this, "LockBoard", (sender) => { LockCell(); });
         }
 
         public static readonly BindableProperty CellStyleProperty =
@@ -39,6 +41,11 @@ namespace MauiTest1
         {
             get { return (string)GetValue(CellStyleProperty); }
             set { SetValue(CellStyleProperty, value); }
+        }
+
+        protected void LockCell()
+        {
+            thisButton.IsEnabled = false;
         }
 
         protected void SetCellStyle(object sender, EventArgs e)
@@ -187,16 +194,11 @@ namespace MauiTest1
             AbsoluteLayout.SetLayoutBounds(thisButton, new Rect(0, 0, 16, 16));
 
             thisFrame.IsVisible = false;
-            MessagingCenter.Send<GameboardCell, int>(this, "GameButtonShockFace", 1);
+            MessagingCenter.Send<GameboardCell, int>(this, "SmileyFace", 1);
         }
 
-        internal void ResetCellStatus(int toggleSmiley = 0)
+        internal void ResetCellStatus()
         {
-            if (toggleSmiley == 0)
-            {
-                // GameboardOptionsPopup.xaml
-                MessagingCenter.Send<GameboardCell, int>(this, "GameButtonShockFace", 0);
-            }
             thisButton.BackgroundColor = Color.FromArgb("#C0C0C0");
             thisButton.HeightRequest = 14;
             thisButton.WidthRequest = 14;

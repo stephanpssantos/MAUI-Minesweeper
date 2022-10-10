@@ -59,7 +59,6 @@ namespace MauiTest1
 
             MessagingCenter.Send<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", selectedOptions);
             MessagingCenter.Send<OptionsPopupCell>(this, "ClosePopup");
-            MessagingCenter.Send<GameboardCell, int>(this, "GameButtonShockFace", 0);
         }
     }
 

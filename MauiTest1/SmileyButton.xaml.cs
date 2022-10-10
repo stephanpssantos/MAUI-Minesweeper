@@ -2,10 +2,13 @@ namespace MauiTest1;
 
 public partial class SmileyButton : ContentView
 {
+    private bool gameOver = false;
+
 	public SmileyButton()
 	{
 		InitializeComponent();
-        MessagingCenter.Subscribe<GameboardCell, int>(this, "GameButtonShockFace", (sender, args) => { DisplayFace(args); });
+        MessagingCenter.Subscribe<GameboardCell, int>(this, "SmileyFace", (sender, args) => { DisplayFace(args); });
+        MessagingCenter.Subscribe<GameStateViewModel, int>(this, "SmileyFace", (sender, args) => { DisplayFace(args); });
     }
 
     public static readonly BindableProperty ClockIsRunningProperty =
@@ -30,8 +33,13 @@ public partial class SmileyButton : ContentView
         SmileyButtonDownDiagonal.IsVisible = false;
         UnframedSmileyButton.Padding = new Thickness(2, 2, 1, 1);
 
-        ClockIsRunning = !ClockIsRunning;
+        if (gameOver == false)
+        {
+            ClockIsRunning = !ClockIsRunning;
+        }
+        
         MessagingCenter.Send<SmileyButton>(this, "NewGame");
+        DisplayFace(0);
     }
 
     private void DisplayFace(int faceId)
@@ -46,9 +54,14 @@ public partial class SmileyButton : ContentView
             case 2:
                 sourceName = "smiley_shades.png";
                 break;
+            case 3:
+                sourceName = "exploded_face.png";
+                gameOver = true;
+                break;
             case 0:
             default:
                 sourceName = "smiley_face.png";
+                gameOver=false;
                 break;
         }
 

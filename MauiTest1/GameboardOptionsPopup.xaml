@@ -55,7 +55,7 @@
                         FontSize="10"
                         BackgroundColor="#EEEEEE"
                         TextColor="Black"
-                        Pressed="ClosePopup"/>
+                        Pressed="ClosePopupButtonClicked"/>
                 </Grid>
             </Border>
         </Border>

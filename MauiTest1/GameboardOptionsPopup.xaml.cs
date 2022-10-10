@@ -14,7 +14,8 @@ public partial class GameboardOptionsPopup : ContentView
 			{
 				if (clicked == lastClicked)
 				{
-					ClosePopup(this, null);
+                    MessagingCenter.Send<GameboardCell, int>(lastClicked, "SmileyFace", 0);
+                    ClosePopup(this, null);
 					return;
 				}
                 GameboardCellClicked(arg);
@@ -25,11 +26,17 @@ public partial class GameboardOptionsPopup : ContentView
         MessagingCenter.Subscribe<OptionsPopupCell>(this, "ClosePopup", (sender) => { ClosePopup(null, null); });
     }
 
+	private void ClosePopupButtonClicked(object sender, EventArgs e)
+	{
+        MessagingCenter.Send<GameboardCell, int>(lastClicked, "SmileyFace", 0);
+        ClosePopup(this, null);
+	}
+
 	private void GameboardCellClicked(GameboardCellOptions options)
 	{
 		if (isOpen && lastClicked is not null)
 		{
-			lastClicked.ResetCellStatus(1);
+            lastClicked.ResetCellStatus();
 		}
 
 		ClearButton.xPosition = options.XPosition;
@@ -66,7 +73,7 @@ public partial class GameboardOptionsPopup : ContentView
             lastClicked.ResetCellStatus();
         }
 
-		isOpen = false;
+        isOpen = false;
 		IsVisible = false;
 		lastClicked = null;
 	}

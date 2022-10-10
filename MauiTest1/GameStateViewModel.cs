@@ -105,15 +105,17 @@ namespace MauiTest1
 
         private void NewGame()
         {
-            GameboardSetup newGameboardSetup = new()
-            {
-                BoardHeight = Gameboard.BoardHeight,
-                BoardWidth = Gameboard.BoardWidth,
-                BoardMines = Gameboard.BoardMines
-            };
+            GameboardSetup newGameboardSetup = new(Gameboard.BoardWidth, Gameboard.BoardHeight, Gameboard.BoardMines);
 
             Gameboard = newGameboardSetup;
             TimeElapsed = "000";
+        }
+
+        private void LockBoard()
+        {
+            // Each button has a listener that individually disables them.
+            // This is what I am doing because I cannot just disable the gameboard. It is a MAUI bug.
+            MessagingCenter.Send<GameStateViewModel>(this, "LockBoard");
         }
 
         private void IncrementTimeElapsed(int value = 1)
@@ -140,23 +142,30 @@ namespace MauiTest1
                 if (cellValue > 0) 
                 {
                     GameboardState[cellIndex] = 3;
+                    MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                 }
                 else if (cellValue < 0)
                 {
                     // Game over
+                    ClockIsRunning = false;
                     ExplodeAll(options.XPosition, options.YPosition);
+                    LockBoard();
+                    MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 3);
                 }
                 else if (cellValue == 0)
                 {
                     OpenSurroundings(options.XPosition, options.YPosition);
+                    MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                 }
             }
             else if (options.ActionName == "Mark")
             {
+                MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                 GameboardState[cellIndex] = 1;
             }
             else if (options.ActionName == "Flag")
             {
+                MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                 int mineCountInt = Int32.Parse(MineCount);
                 mineCountInt--;
                 //flagCount++;
@@ -165,6 +174,7 @@ namespace MauiTest1
             }
             else if (options.ActionName == "Cancel")
             {
+                MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                 if (GameboardState[cellIndex] == 2)
                 {
                     int test = GameboardState[cellIndex];
