@@ -53,6 +53,7 @@ public partial class SmileyButton : ContentView
                 break;
             case 2:
                 sourceName = "smiley_shades.png";
+                gameOver = true;
                 break;
             case 3:
                 sourceName = "exploded_face.png";

@@ -143,6 +143,7 @@ namespace MauiTest1
                 {
                     GameboardState[cellIndex] = 3;
                     MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
+                    CheckVictory();
                 }
                 else if (cellValue < 0)
                 {
@@ -171,6 +172,7 @@ namespace MauiTest1
                 //flagCount++;
                 MineCount = mineCountInt.ToString();
                 GameboardState[cellIndex] = 2;
+                if (mineCountInt == 0) CheckVictory();
             }
             else if (options.ActionName == "Cancel")
             {
@@ -185,6 +187,62 @@ namespace MauiTest1
                 // 7 is 'reset' to force property changed event trigger
                 GameboardState[cellIndex] = 7;
                 GameboardState[cellIndex] = 0;
+            }
+        }
+
+        private void CheckVictory()
+        {
+            bool unflaggedMines = false;
+            bool unopenedNumbers = false;
+
+            for (int y = 0; y < Gameboard.BoardHeight; y++)
+            {
+                for (int x = 0; x < Gameboard.BoardWidth; x++)
+                {
+                    int currentCellIndex = (y * Gameboard.BoardWidth) + x;
+                    int currentCellValue = Gameboard.BoardPositions[x, y];
+
+                    // if currentCell has mine and is not flagged
+                    if (currentCellValue == -1 && GameboardState[currentCellIndex] != 2)
+                    {
+                        unflaggedMines = true;
+                    }
+                    // if currentCell is number and is not open
+                    if (currentCellValue > 0 && GameboardState[currentCellIndex] != 3)
+                    {
+                        unopenedNumbers = true;
+                    }
+                }
+            }
+
+            if (!unflaggedMines || !unopenedNumbers)
+            {
+                ClockIsRunning = false;
+                MineCount = "000";
+                OpenAll();
+                LockBoard();
+                MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 2);
+            }
+        }
+
+        private void OpenAll()
+        {
+            for (int y = 0; y < Gameboard.BoardHeight; y++)
+            {
+                for (int x = 0; x < Gameboard.BoardWidth; x++)
+                {
+                    int currentCellIndex = (y * Gameboard.BoardWidth) + x;
+                    int currentCellValue = Gameboard.BoardPositions[x, y];
+
+                    if (currentCellValue == -1 && GameboardState[currentCellIndex] != 2)
+                    {
+                        GameboardState[currentCellIndex] = 2;
+                    }
+                    if (currentCellValue > 0 && GameboardState[currentCellIndex] != 3)
+                    {
+                        GameboardState[currentCellIndex] = 3;
+                    }
+                }
             }
         }
 
