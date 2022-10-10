@@ -28,7 +28,40 @@ public partial class App : MauiWinUIApplication
             IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
             WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
             AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
-            appWindow.Resize(new SizeInt32(340, 332));
+
+            int boardWidth;
+            int boardHeight;
+            int appWindowWidth;
+            int appWindowHeight;
+            
+            switch (LocalConfig.ConfigJson.LastGameDifficulty)
+            {
+                case "Intermediate":
+                    boardWidth = 16;
+                    boardHeight = 16;
+                    break;
+                case "Expert":
+                    boardWidth = 30;
+                    boardHeight = 16;
+                    break;
+                case "Custom":
+                    boardWidth = 16;
+                    boardHeight = 16;
+                    break;
+                case "Beginner":
+                default:
+                    boardWidth = 8;
+                    boardHeight = 8;
+                    break;
+            }
+
+            appWindowWidth = (boardWidth * 16) + 44;
+            appWindowHeight = (boardHeight * 16) + 146;
+
+            appWindowWidth = appWindowWidth < 340 ? 340 : appWindowWidth;
+            appWindowHeight = appWindowHeight < 332 ? 332 : appWindowHeight;
+
+            appWindow.Resize(new SizeInt32(appWindowWidth, appWindowHeight));
 
             if (appWindow.Presenter is OverlappedPresenter presenter)
             {

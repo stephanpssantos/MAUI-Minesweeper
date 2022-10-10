@@ -11,7 +11,7 @@ namespace MauiTest1
         private string mineCount = "000";
         private string timeElapsed = "000";
         private bool clockIsRunning = false;
-        private GameboardSetup gameboard = GameboardSetupFactory.NewBeginnerSetup();
+        private GameboardSetup gameboard;
         private ObservableCollection<int> gameboardState = new();
 
         // this attribute sets the propertyName parameter
@@ -36,6 +36,25 @@ namespace MauiTest1
                     ClockIsRunning = true;
                 }
             });
+
+            string difficulty = LocalConfig.ConfigJson.LastGameDifficulty;
+            switch (difficulty)
+            {
+                case "Intermediate":
+                    Gameboard = GameboardSetupFactory.NewIntermediateSetup();
+                    break;
+                case "Expert":
+                    Gameboard = GameboardSetupFactory.NewExpertSetup();
+                    break;
+                // TODO
+                case "Custom":
+                    Gameboard = GameboardSetupFactory.NewBeginnerSetup();
+                    break;
+                default:
+                case "Beginner":
+                    Gameboard = GameboardSetupFactory.NewBeginnerSetup();
+                    break;
+            }
         }
 
         public string MineCount
@@ -169,7 +188,6 @@ namespace MauiTest1
                 MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                 int mineCountInt = Int32.Parse(MineCount);
                 mineCountInt--;
-                //flagCount++;
                 MineCount = mineCountInt.ToString();
                 GameboardState[cellIndex] = 2;
                 if (mineCountInt == 0) CheckVictory();
@@ -179,7 +197,6 @@ namespace MauiTest1
                 MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                 if (GameboardState[cellIndex] == 2)
                 {
-                    int test = GameboardState[cellIndex];
                     int mineCountInt = Int32.Parse(MineCount);
                     mineCountInt++;
                     MineCount = mineCountInt.ToString();

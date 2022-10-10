@@ -124,6 +124,9 @@ public partial class Toolbar : ContentView
         {
             // Do something?
         }
+
+        LocalConfig.ConfigJson.LastGameDifficulty = difficultySetting;
+        LocalConfig.OverwriteConfig();
     }
 
     private void OnGameMenuMarksButtonClicked(object sender, EventArgs e)
