@@ -177,17 +177,7 @@ public partial class Toolbar : ContentView
     private void OpenBestTimesWindow()
     {
         Window secondWindow = new Window(new HighScoresPage());
-
+        secondWindow.Title = "HighScoresPage";
         Application.Current.OpenWindow(secondWindow);
-
-        //Microsoft.Maui.Handlers.WindowHandler.Mapper.AppendToMapping(nameof(IWindow), (handler, view) =>
-        //{
-        //    var mauiWindow = handler.VirtualView;
-        //    var nativeWindow = handler.PlatformView;
-        //    nativeWindow.Activate();
-        //    IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
-        //    WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
-        //    AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
-        //});
     }
 }

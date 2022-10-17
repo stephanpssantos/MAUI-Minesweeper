@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiTest1.HighScoresPage"
-             Title="HighScoresPage">
+             Title="Fastest Mine Sweepers">
     <Grid 
         RowDefinitions="*, 30, 30, 30, *"
         ColumnDefinitions="*, *, *"
@@ -10,7 +10,7 @@
         BackgroundColor="#F0F0F0">
         <Label
             Text="Fastest Mine Sweepers"
-            VerticalOptions="End"
+            VerticalOptions="Center"
             HorizontalOptions="Center"
             Grid.Row="0"
             Grid.Column="0"
