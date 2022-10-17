@@ -119,7 +119,7 @@ namespace MauiTest1
 
         private void NewGame()
         {
-            GameboardSetup newGameboardSetup = new(Gameboard.BoardWidth, Gameboard.BoardHeight, Gameboard.BoardMines);
+            GameboardSetup newGameboardSetup = new(Gameboard.BoardWidth, Gameboard.BoardHeight, Gameboard.BoardMines, Gameboard.BoardPreset);
 
             Gameboard = newGameboardSetup;
             TimeElapsed = "000";
@@ -240,7 +240,41 @@ namespace MauiTest1
 
         private void CheckHighScores()
         {
-            //Window secondWindow = new Window(new MainPage());
+            int timeElapsed = Int32.Parse(TimeElapsed);
+            int record = Gameboard.BoardPreset switch
+            {
+                "Beginner" => LocalConfig.ConfigJson.BeginnerTime,
+                "Intermediate" => LocalConfig.ConfigJson.IntermediateTime,
+                "Expert" => LocalConfig.ConfigJson.ExpertTime,
+                _ => 0
+            };
+
+            if (record == 0) return;
+            if (timeElapsed > record) return;
+
+            switch (Gameboard.BoardPreset)
+            {
+                case "Beginner":
+                    LocalConfig.ConfigJson.BeginnerTime = timeElapsed;
+                    LocalConfig.ConfigJson.BegginerName = "Anonymous";
+                    break;
+                case "Intermediate":
+                    LocalConfig.ConfigJson.IntermediateTime = timeElapsed;
+                    LocalConfig.ConfigJson.IntermediateName = "Anonymous";
+                    break;
+                case "Expert":
+                    LocalConfig.ConfigJson.ExpertTime = timeElapsed;
+                    LocalConfig.ConfigJson.ExpertName = "Anonymous";
+                    break;
+            }
+
+            LocalConfig.OverwriteConfig();
+
+            // Should open new high score window instead
+            //Window secondWindow = new(new HighScoresPage())
+            //{
+            //    Title = "Fasetest Mine Sweepers"
+            //};
             //Application.Current.OpenWindow(secondWindow);
         }
 

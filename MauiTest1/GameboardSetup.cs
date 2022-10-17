@@ -2,11 +2,12 @@
 {
     public class GameboardSetup
     {
-        public GameboardSetup(int boardWidth = 8, int boardHeight = 8, int boardMines = 10)
+        public GameboardSetup(int boardWidth = 8, int boardHeight = 8, int boardMines = 10, string boardPreset = "Custom")
         {
             BoardWidth = boardWidth;
             BoardHeight = boardHeight;
             BoardMines = boardMines;
+            BoardPreset = boardPreset;
             RandomizeBoardMines();
         }
 
@@ -14,6 +15,7 @@
         public int BoardHeight { get; set; }
         public int BoardMines { get; set; }
         public int[,] BoardPositions { get; set; }
+        public string BoardPreset { get; set; }
 
         private void RandomizeBoardMines()
         {
@@ -99,22 +101,22 @@
     {
         public static GameboardSetup NewBeginnerSetup()
         {
-            return new GameboardSetup(8, 8, 10);
+            return new GameboardSetup(8, 8, 10, "Beginner");
         }
 
         public static GameboardSetup NewIntermediateSetup()
         {
-            return new GameboardSetup(16, 16, 40);
+            return new GameboardSetup(16, 16, 40, "Intermediate");
         }
 
         public static GameboardSetup NewExpertSetup()
         {
-            return new GameboardSetup(30, 16, 99);
+            return new GameboardSetup(30, 16, 99, "Expert");
         }
 
         public static GameboardSetup NewCustomSetup(int width, int height, int mines)
         {
-            return new GameboardSetup(width, height, mines);
+            return new GameboardSetup(width, height, mines, "Custom");
         }
     }
 }

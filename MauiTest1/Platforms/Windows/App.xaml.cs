@@ -111,7 +111,7 @@ public partial class App : MauiWinUIApplication
         if (appWindow.Presenter is OverlappedPresenter presenter)
         {
             presenter.IsResizable = false;
-            //presenter.IsAlwaysOnTop = true; // This works but I don't like it
+            presenter.IsAlwaysOnTop = true;
             //Properties below do not work as expected
             //presenter.IsMaximizable = false;
             //presenter.IsMinimizable = false;

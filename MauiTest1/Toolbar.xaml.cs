@@ -177,8 +177,10 @@ public partial class Toolbar : ContentView
 
     private void OpenBestTimesWindow()
     {
-        Window secondWindow = new Window(new HighScoresPage());
-        secondWindow.Title = "Fasetest Mine Sweepers";
+        Window secondWindow = new(new HighScoresPage())
+        {
+            Title = "Fasetest Mine Sweepers"
+        };
         Application.Current.OpenWindow(secondWindow);
     }
 }
