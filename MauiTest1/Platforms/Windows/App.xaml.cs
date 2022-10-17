@@ -33,7 +33,7 @@ public partial class App : MauiWinUIApplication
             WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
             AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
 
-            if (appWindow.Title == "HighScoresPage")
+            if (appWindow.Title == "Fasetest Mine Sweepers")
             {
                 ScoreWindowId = windowId;
                 ResizeHighScoreWindow();
@@ -105,14 +105,14 @@ public partial class App : MauiWinUIApplication
 
         appWindow.Resize(new SizeInt32(370, 270));
         
-        // Unnecessary
+        //Unnecessary
         //appWindow.SetPresenter(AppWindowPresenterKind.Overlapped);
 
         if (appWindow.Presenter is OverlappedPresenter presenter)
         {
             presenter.IsResizable = false;
-            presenter.IsAlwaysOnTop = true;
-            // Properties below do not work as expected
+            //presenter.IsAlwaysOnTop = true; // This works but I don't like it
+            //Properties below do not work as expected
             //presenter.IsMaximizable = false;
             //presenter.IsMinimizable = false;
             //presenter.SetBorderAndTitleBar(true, false);

@@ -160,6 +160,7 @@ public partial class Toolbar : ContentView
     private void OnGameMenuBestTimesButtonClicked(object sender, EventArgs e)
     {
         OpenBestTimesWindow();
+        OnToolbarButtonClicked(GameButton, null); // Close game menu
     }
 
     private void OnGameMenuExitButtonClicked(object sender, EventArgs e)
@@ -177,7 +178,7 @@ public partial class Toolbar : ContentView
     private void OpenBestTimesWindow()
     {
         Window secondWindow = new Window(new HighScoresPage());
-        secondWindow.Title = "HighScoresPage";
+        secondWindow.Title = "Fasetest Mine Sweepers";
         Application.Current.OpenWindow(secondWindow);
     }
 }

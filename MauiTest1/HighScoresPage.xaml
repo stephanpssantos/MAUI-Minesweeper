@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiTest1.HighScoresPage"
-             Title="Fastest Mine Sweepers">
+             x:Class="MauiTest1.HighScoresPage">
     <Grid 
         RowDefinitions="*, 30, 30, 30, *"
         ColumnDefinitions="*, *, *"
@@ -23,13 +22,13 @@
             Grid.Row="1"
             Grid.Column="0" />
         <Label
-            Text="79 seconds"
+            x:Name="BeginnerTimeLabel"
             VerticalOptions="Center"
             HorizontalOptions="Start"
             Grid.Row="1"
             Grid.Column="1" />
         <Label
-            Text="Ass"
+            x:Name="BeginnerNameLabel"
             VerticalOptions="Center"
             HorizontalOptions="Start"
             Grid.Row="1"
@@ -42,13 +41,13 @@
             Grid.Row="2"
             Grid.Column="0" />
         <Label
-            Text="999 seconds"
+            x:Name="IntermediateTimeLabel"
             VerticalOptions="Center"
             HorizontalOptions="Start"
             Grid.Row="2"
             Grid.Column="1" />
         <Label
-            Text="Anonymous"
+            x:Name="IntermediateNameLabel"
             VerticalOptions="Center"
             HorizontalOptions="Start"
             Grid.Row="2"
@@ -61,13 +60,13 @@
             Grid.Row="3"
             Grid.Column="0" />
         <Label
-            Text="999 seconds"
+            x:Name="ExpertTimeLabel"
             VerticalOptions="Center"
             HorizontalOptions="Start"
             Grid.Row="3"
             Grid.Column="1" />
         <Label
-            Text="Anonymous"
+            x:Name="ExpertNameLabel"
             VerticalOptions="Center"
             HorizontalOptions="Start"
             Grid.Row="3"
@@ -80,6 +79,7 @@
             JustifyContent="SpaceEvenly"
             AlignItems="Center">
             <Button 
+                x:Name="ResetButton"
                 Text="Reset Scores" 
                 Padding="5"
                 CornerRadius="0"
@@ -88,6 +88,7 @@
                 BackgroundColor="#F0F0F0"
                 BorderColor="#A0A0A0"/>
             <Button 
+                x:Name="OKButton"
                 Text="OK"
                 Padding="5"
                 CornerRadius="0"
