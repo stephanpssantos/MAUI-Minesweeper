@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiTest1.HighScoresPage"
+             Title="HighScoresPage">
+    <Grid 
+        RowDefinitions="*, 30, 30, 30, *"
+        ColumnDefinitions="*, *, *"
+        Padding="20"
+        BackgroundColor="#F0F0F0">
+        <Label
+            Text="Fastest Mine Sweepers"
+            VerticalOptions="End"
+            HorizontalOptions="Center"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3" />
+        <!-- 1st row -->
+        <Label
+            Text="Beginner:"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Grid.Row="1"
+            Grid.Column="0" />
+        <Label
+            Text="79 seconds"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Grid.Row="1"
+            Grid.Column="1" />
+        <Label
+            Text="Ass"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Grid.Row="1"
+            Grid.Column="2" />
+        <!-- 2nd row -->
+        <Label
+            Text="Intermediate:"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Grid.Row="2"
+            Grid.Column="0" />
+        <Label
+            Text="999 seconds"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Grid.Row="2"
+            Grid.Column="1" />
+        <Label
+            Text="Anonymous"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Grid.Row="2"
+            Grid.Column="2" />
+        <!-- 3rd row -->
+        <Label
+            Text="Expert:"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Grid.Row="3"
+            Grid.Column="0" />
+        <Label
+            Text="999 seconds"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Grid.Row="3"
+            Grid.Column="1" />
+        <Label
+            Text="Anonymous"
+            VerticalOptions="Center"
+            HorizontalOptions="Start"
+            Grid.Row="3"
+            Grid.Column="2" />
+        <!-- Buttons -->
+        <FlexLayout
+            Grid.Row="4"
+            Grid.ColumnSpan="3"
+            Direction="Row"
+            JustifyContent="SpaceEvenly"
+            AlignItems="Center">
+            <Button 
+                Text="Reset Scores" 
+                Padding="5"
+                CornerRadius="0"
+                HeightRequest="30"
+                TextColor="Black"
+                BackgroundColor="#F0F0F0"
+                BorderColor="#A0A0A0"/>
+            <Button 
+                Text="OK"
+                Padding="5"
+                CornerRadius="0"
+                HeightRequest="30"
+                WidthRequest="75"
+                TextColor="Black"
+                BackgroundColor="#F0F0F0"
+                BorderColor="#A0A0A0"/>
+        </FlexLayout>
+    </Grid>
+</ContentPage>

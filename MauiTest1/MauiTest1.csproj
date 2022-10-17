@@ -63,6 +63,9 @@
 	  <MauiXaml Update="GameboardOptionsPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="HighScoresPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\Custom.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

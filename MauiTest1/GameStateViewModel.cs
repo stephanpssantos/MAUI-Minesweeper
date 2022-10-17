@@ -27,6 +27,7 @@ namespace MauiTest1
         {
             MessagingCenter.Subscribe<Toolbar>(this, "NewGame", (sender) => { NewGame(); });
             MessagingCenter.Subscribe<SmileyButton>(this, "NewGame", (sender) => { NewGame(); });
+            //MessagingCenter.Subscribe<SmileyButton>(this, "NewGame", (sender) => { CheckHighScores(); });
             MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
             MessagingCenter.Subscribe<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", (sender, args) => { PopupCellOptionClicked(args); });
             MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => 
@@ -38,23 +39,17 @@ namespace MauiTest1
             });
 
             string difficulty = LocalConfig.ConfigJson.LastGameDifficulty;
-            switch (difficulty)
+            Gameboard = difficulty switch
             {
-                case "Intermediate":
-                    Gameboard = GameboardSetupFactory.NewIntermediateSetup();
-                    break;
-                case "Expert":
-                    Gameboard = GameboardSetupFactory.NewExpertSetup();
-                    break;
-                // TODO
-                case "Custom":
-                    Gameboard = GameboardSetupFactory.NewBeginnerSetup();
-                    break;
-                default:
-                case "Beginner":
-                    Gameboard = GameboardSetupFactory.NewBeginnerSetup();
-                    break;
-            }
+                "Intermediate" => GameboardSetupFactory.NewIntermediateSetup(),
+                "Expert" => GameboardSetupFactory.NewExpertSetup(),
+                "Custom" => GameboardSetupFactory.NewCustomSetup(
+                                        LocalConfig.ConfigJson.CustomBoardWidth,
+                                        LocalConfig.ConfigJson.CustomBoardHeight,
+                                        LocalConfig.ConfigJson.CustomBoardMines
+                                    ),
+                _ => GameboardSetupFactory.NewBeginnerSetup(),
+            };
         }
 
         public string MineCount
@@ -238,8 +233,15 @@ namespace MauiTest1
                 MineCount = "000";
                 OpenAll();
                 LockBoard();
+                CheckHighScores();
                 MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 2);
             }
+        }
+
+        private void CheckHighScores()
+        {
+            //Window secondWindow = new Window(new MainPage());
+            //Application.Current.OpenWindow(secondWindow);
         }
 
         private void OpenAll()

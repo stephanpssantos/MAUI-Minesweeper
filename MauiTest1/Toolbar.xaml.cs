@@ -159,6 +159,7 @@ public partial class Toolbar : ContentView
 
     private void OnGameMenuBestTimesButtonClicked(object sender, EventArgs e)
     {
+        OpenBestTimesWindow();
     }
 
     private void OnGameMenuExitButtonClicked(object sender, EventArgs e)
@@ -171,5 +172,22 @@ public partial class Toolbar : ContentView
         gameMenuIntermediateCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
         gameMenuExpertCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
         gameMenuCustomCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
+    }
+
+    private void OpenBestTimesWindow()
+    {
+        Window secondWindow = new Window(new HighScoresPage());
+
+        Application.Current.OpenWindow(secondWindow);
+
+        //Microsoft.Maui.Handlers.WindowHandler.Mapper.AppendToMapping(nameof(IWindow), (handler, view) =>
+        //{
+        //    var mauiWindow = handler.VirtualView;
+        //    var nativeWindow = handler.PlatformView;
+        //    nativeWindow.Activate();
+        //    IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
+        //    WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
+        //    AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
+        //});
     }
 }
