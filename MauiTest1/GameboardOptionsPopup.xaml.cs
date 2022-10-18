@@ -24,6 +24,7 @@ public partial class GameboardOptionsPopup : ContentView
         });
 
         MessagingCenter.Subscribe<OptionsPopupCell>(this, "ClosePopup", (sender) => { ClosePopup(null, null); });
+        MessagingCenter.Subscribe<Toolbar>(this, "ClosePopup", (sender) => { ClosePopup(this, null); });
     }
 
 	private void ClosePopupButtonClicked(object sender, EventArgs e)
@@ -68,8 +69,8 @@ public partial class GameboardOptionsPopup : ContentView
 
 	private void ClosePopup(object sender, EventArgs e)
 	{
-		if (sender is not null && lastClicked is not null)
-		{
+        if (sender is not null && lastClicked is not null)
+        {
             lastClicked.ResetCellStatus();
         }
 

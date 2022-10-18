@@ -12,6 +12,15 @@ public partial class Toolbar : ContentView
 		InitializeComponent();
         GameMenu.IsVisible = false;
         HelpMenu.IsVisible = false;
+
+        MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) =>
+        {
+            if (GameMenu.IsVisible == true) GameMenu.IsVisible = false;
+            if (HelpMenu.IsVisible == true) HelpMenu.IsVisible = false;
+            GameButton.Style = (Style)Resources["neutralToolbarButtonStyle"];
+            HelpButton.Style = (Style)Resources["neutralToolbarButtonStyle"];
+            activeButton = null;
+        });
     }
 
     public static readonly BindableProperty GameboardProperty =
@@ -70,6 +79,8 @@ public partial class Toolbar : ContentView
             activeButton = triggeredControl;
             activeButton.Style = (Style)Resources["openToolbarButtonStyle"];
         }
+
+        MessagingCenter.Send<Toolbar>(this, "ClosePopup");
     }
 
     private void OnGameMenuNewButtonClicked(object sender, EventArgs e)

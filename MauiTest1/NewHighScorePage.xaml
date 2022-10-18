@@ -14,7 +14,7 @@
             x:Name="RecordName"
             Margin="0, 40, 0, 0"
             Placeholder="Anonymous"
-            MaxLength="15"/>
+            MaxLength="12"/>
         <Button 
             x:Name="OKButton"
             Text="OK"
