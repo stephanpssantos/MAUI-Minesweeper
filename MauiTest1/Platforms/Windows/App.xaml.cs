@@ -19,6 +19,7 @@ public partial class App : MauiWinUIApplication
 
     static internal WindowId MainWindowId;
     static internal WindowId ScoreWindowId;
+    static internal WindowId NewScoreWindowId;
 
     public App()
 	{
@@ -37,7 +38,12 @@ public partial class App : MauiWinUIApplication
             {
                 ScoreWindowId = windowId;
                 ResizeHighScoreWindow();
-            } 
+            }
+            else if (appWindow.Title == "New High Score")
+            {
+                NewScoreWindowId = windowId;
+                ResizeNewHighScoreWindow();
+            }
             else
             {
                 MainWindowId = windowId;
@@ -116,6 +122,22 @@ public partial class App : MauiWinUIApplication
             //presenter.IsMaximizable = false;
             //presenter.IsMinimizable = false;
             //presenter.SetBorderAndTitleBar(true, false);
+        };
+
+        appWindow.Move(GetGameWindowOffset());
+    }
+
+    static void ResizeNewHighScoreWindow()
+    {
+        AppWindow appWindow = AppWindow.GetFromWindowId(NewScoreWindowId);
+        if (appWindow == null) return;
+
+        appWindow.Resize(new SizeInt32(350, 280));
+
+        if (appWindow.Presenter is OverlappedPresenter presenter)
+        {
+            presenter.IsResizable = false;
+            presenter.IsAlwaysOnTop = true;
         };
 
         appWindow.Move(GetGameWindowOffset());

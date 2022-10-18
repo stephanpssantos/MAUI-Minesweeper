@@ -127,7 +127,7 @@ namespace MauiTest1
 
         private void LockBoard()
         {
-            // Each button has a listener that individually disables them.
+            // Each button has a listener that individually disables it.
             // This is what I am doing because I cannot just disable the gameboard. It is a MAUI bug.
             MessagingCenter.Send<GameStateViewModel>(this, "LockBoard");
         }
@@ -270,12 +270,14 @@ namespace MauiTest1
 
             LocalConfig.OverwriteConfig();
 
-            // Should open new high score window instead
-            //Window secondWindow = new(new HighScoresPage())
-            //{
-            //    Title = "Fasetest Mine Sweepers"
-            //};
-            //Application.Current.OpenWindow(secondWindow);
+            Window secondWindow = new(new NewHighScorePage() 
+            { 
+                Difficulty = Gameboard.BoardPreset 
+            })
+            {
+                Title = "New High Score",
+            };
+            Application.Current.OpenWindow(secondWindow);
         }
 
         private void OpenAll()
