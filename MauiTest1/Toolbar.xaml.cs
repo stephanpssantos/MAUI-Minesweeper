@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace MauiTest1;
 
 public partial class Toolbar : ContentView
@@ -12,6 +14,8 @@ public partial class Toolbar : ContentView
 		InitializeComponent();
         GameMenu.IsVisible = false;
         HelpMenu.IsVisible = false;
+
+        PropertyChanged += ToggleGameDifficulty;
 
         MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) =>
         {
@@ -176,6 +180,34 @@ public partial class Toolbar : ContentView
 
     private void OnGameMenuExitButtonClicked(object sender, EventArgs e)
     {
+    }
+
+    private void ToggleGameDifficulty(object sender, EventArgs e)
+    {
+        if (e is not PropertyChangedEventArgs args) return;
+        if (args.PropertyName != "Gameboard") return;
+        ResetGameMenuDifficultyButtons();
+
+        if (Gameboard.BoardPreset == "Beginner")
+        {
+            difficultySetting = "Beginner";
+            gameMenuBeginnerCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+        }
+        else if (Gameboard.BoardPreset == "Intermediate")
+        {
+            difficultySetting = "Intermediate";
+            gameMenuIntermediateCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+        }
+        else if (Gameboard.BoardPreset == "Expert")
+        {
+            difficultySetting = "Expert";
+            gameMenuExpertCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+        }
+        else if (Gameboard.BoardPreset == "Custom")
+        {
+            difficultySetting = "Beginner";
+            gameMenuBeginnerCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+        }
     }
 
     private void ResetGameMenuDifficultyButtons()
