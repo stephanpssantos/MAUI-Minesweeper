@@ -27,9 +27,9 @@ namespace MauiTest1
         {
             MessagingCenter.Subscribe<Toolbar>(this, "NewGame", (sender) => { NewGame(); });
             MessagingCenter.Subscribe<SmileyButton>(this, "NewGame", (sender) => { NewGame(); });
-            //MessagingCenter.Subscribe<SmileyButton>(this, "NewGame", (sender) => { CheckHighScores(); });
             MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
             MessagingCenter.Subscribe<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", (sender, args) => { PopupCellOptionClicked(args); });
+            MessagingCenter.Subscribe<CustomGamePage, GameboardSetup>(this, "NewCustomGame", (sender, args) => { NewCustomGame(args); });
             MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => 
             {
                 if (ClockIsRunning == false)
@@ -122,6 +122,12 @@ namespace MauiTest1
             GameboardSetup newGameboardSetup = new(Gameboard.BoardWidth, Gameboard.BoardHeight, Gameboard.BoardMines, Gameboard.BoardPreset);
 
             Gameboard = newGameboardSetup;
+            TimeElapsed = "000";
+        }
+
+        private void NewCustomGame(GameboardSetup setup)
+        {
+            Gameboard = setup;
             TimeElapsed = "000";
         }
 

@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using System.ComponentModel; // PropertyChangedEventArgs
 
 namespace MauiTest1;
 
@@ -96,44 +96,26 @@ public partial class Toolbar : ContentView
     // Refactor these
     private void OnGameMenuDifficultyButtonClicked(object sender, EventArgs e)
     {
-        ResetGameMenuDifficultyButtons();
         OnToolbarButtonClicked(GameButton, null);
 
         if (sender == gameMenuBeginnerButton)
         {
-            gameMenuBeginnerCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
-
             if (difficultySetting == "Beginner") return;
-
-            difficultySetting = "Beginner";
             Gameboard = GameboardSetupFactory.NewBeginnerSetup();
         }
         else if (sender == gameMenuIntermediateButton)
         {
-            gameMenuIntermediateCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
-
             if (difficultySetting == "Intermediate") return;
-
-            difficultySetting = "Intermediate";
             Gameboard = GameboardSetupFactory.NewIntermediateSetup();
         }
         else if (sender == gameMenuExpertButton)
         {
-            gameMenuExpertCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
-
             if (difficultySetting == "Expert") return;
-
-            difficultySetting = "Expert";
             Gameboard = GameboardSetupFactory.NewExpertSetup();
         }
         else if (sender == gameMenuCustomButton)
         {
-            gameMenuCustomCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
-
-            if (difficultySetting == "Custom") return;
-
-            difficultySetting = "Custom";
-            Gameboard = GameboardSetupFactory.NewBeginnerSetup();
+            OpenCustomGameWindow();
         }
         else
         {
@@ -186,6 +168,8 @@ public partial class Toolbar : ContentView
     {
         if (e is not PropertyChangedEventArgs args) return;
         if (args.PropertyName != "Gameboard") return;
+        if (Gameboard.BoardPreset == difficultySetting) return;
+        
         ResetGameMenuDifficultyButtons();
 
         if (Gameboard.BoardPreset == "Beginner")
@@ -205,8 +189,8 @@ public partial class Toolbar : ContentView
         }
         else if (Gameboard.BoardPreset == "Custom")
         {
-            difficultySetting = "Beginner";
-            gameMenuBeginnerCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            difficultySetting = "Custom";
+            gameMenuCustomCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
         }
     }
 
@@ -216,6 +200,15 @@ public partial class Toolbar : ContentView
         gameMenuIntermediateCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
         gameMenuExpertCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
         gameMenuCustomCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
+    }
+
+    private void OpenCustomGameWindow()
+    {
+        Window secondWindow = new(new CustomGamePage())
+        {
+            Title = "Custom Game Settings",
+        };
+        Application.Current.OpenWindow(secondWindow);
     }
 
     private void OpenBestTimesWindow()

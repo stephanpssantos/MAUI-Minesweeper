@@ -20,6 +20,7 @@ public partial class App : MauiWinUIApplication
     static internal WindowId MainWindowId;
     static internal WindowId ScoreWindowId;
     static internal WindowId NewScoreWindowId;
+    static internal WindowId CustomGameWindowId;
 
     public App()
 	{
@@ -37,12 +38,17 @@ public partial class App : MauiWinUIApplication
             if (appWindow.Title == "Fasetest Mine Sweepers")
             {
                 ScoreWindowId = windowId;
-                ResizeHighScoreWindow();
+                ResizeHighScoreWindow(); // Refactor
             }
             else if (appWindow.Title == "New High Score")
             {
                 NewScoreWindowId = windowId;
-                ResizeNewHighScoreWindow();
+                ResizeNewHighScoreWindow(); // Refactor
+            }
+            else if (appWindow.Title == "Custom Game Settings")
+            {
+                CustomGameWindowId = windowId;
+                ResizeCustomGameWindow(); // Refactor
             }
             else
             {
@@ -75,8 +81,8 @@ public partial class App : MauiWinUIApplication
                 boardHeight = 16;
                 break;
             case "Custom":
-                boardWidth = 16;
-                boardHeight = 16;
+                boardWidth = LocalConfig.ConfigJson.CustomBoardWidth;
+                boardHeight = LocalConfig.ConfigJson.CustomBoardHeight;
                 break;
             case "Beginner":
             default:
@@ -122,6 +128,22 @@ public partial class App : MauiWinUIApplication
             //presenter.IsMaximizable = false;
             //presenter.IsMinimizable = false;
             //presenter.SetBorderAndTitleBar(true, false);
+        };
+
+        appWindow.Move(GetGameWindowOffset());
+    }
+
+    static void ResizeCustomGameWindow()
+    {
+        AppWindow appWindow = AppWindow.GetFromWindowId(CustomGameWindowId);
+        if (appWindow == null) return;
+
+        appWindow.Resize(new SizeInt32(350, 300));
+
+        if (appWindow.Presenter is OverlappedPresenter presenter)
+        {
+            presenter.IsResizable = false;
+            presenter.IsAlwaysOnTop = true;
         };
 
         appWindow.Move(GetGameWindowOffset());
