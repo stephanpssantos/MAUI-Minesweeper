@@ -32,11 +32,11 @@ public partial class CustomGamePage : ContentPage
         }
         if (int.TryParse(MineCountEntry.Text, out mines))
         {
-            if (mines < 3 || mines > 999) mines = 8;
+            if (mines < 3 || mines > 999) mines = 10;
         }
         else
         {
-            mines = 8;
+            mines = 10;
         }
 
 		GameboardSetup newSetup = GameboardSetupFactory.NewCustomSetup(width, height, mines);

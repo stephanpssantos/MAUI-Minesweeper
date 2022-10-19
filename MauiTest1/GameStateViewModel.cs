@@ -112,6 +112,8 @@ namespace MauiTest1
             {
                 gameboard = value;
                 MineCount = gameboard.BoardMines.ToString();
+                TimeElapsed = "000";
+                ClockIsRunning = false;
                 NotifyPropertyChanged();
                 MessagingCenter.Send<GameStateViewModel, GameboardSetup>(this, "Gameboard", value);
             }
@@ -126,15 +128,12 @@ namespace MauiTest1
         private void NewGame()
         {
             GameboardSetup newGameboardSetup = new(Gameboard.BoardWidth, Gameboard.BoardHeight, Gameboard.BoardMines, Gameboard.BoardPreset);
-
             Gameboard = newGameboardSetup;
-            TimeElapsed = "000";
         }
 
         private void NewCustomGame(GameboardSetup setup)
         {
             Gameboard = setup;
-            TimeElapsed = "000";
         }
 
         private void LockBoard()
