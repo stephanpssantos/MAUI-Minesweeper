@@ -15,6 +15,12 @@ public partial class MainPage : ContentPage
         // Workaround is to set this property in code.
         ToolbarContainer.ZIndex = 1;
         PopupContainer.ZIndex = 1;
+
+        MessagingCenter.Subscribe<Toolbar>(this, "ExitGame", (sender) => 
+        {
+            Window parentWindow = GetParentWindow();
+            Application.Current.CloseWindow(parentWindow);
+        });
     }
 }
 

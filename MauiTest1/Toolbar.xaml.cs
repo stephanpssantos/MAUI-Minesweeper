@@ -162,6 +162,7 @@ public partial class Toolbar : ContentView
 
     private void OnGameMenuExitButtonClicked(object sender, EventArgs e)
     {
+        MessagingCenter.Send<Toolbar>(this, "ExitGame");
     }
 
     private void ToggleGameDifficulty(object sender, EventArgs e)
