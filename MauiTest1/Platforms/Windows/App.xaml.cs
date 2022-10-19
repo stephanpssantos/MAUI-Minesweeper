@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Windowing;
+using System.Reflection; // Assembly
 using Windows.Graphics;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -30,10 +31,18 @@ public partial class App : MauiWinUIApplication
         {
             var mauiWindow = handler.VirtualView;
             var nativeWindow = handler.PlatformView;
-            nativeWindow.Activate();
+            // Will extend into title bar by default
+            // Set to false so the app icon can be set
+            nativeWindow.ExtendsContentIntoTitleBar = false;
             IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(nativeWindow);
             WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
             AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
+            // This icon is automatically converted to a .ico file and added to the
+            // build folder from (I assume) the resources/appicon folder
+            string iconName = "appicon.ico";
+            string path = Assembly.GetExecutingAssembly().Location;
+            string filePath = Path.Combine(Path.GetDirectoryName(path), iconName);
+            appWindow.SetIcon(filePath);
 
             if (appWindow.Title == "Fasetest Mine Sweepers")
             {
@@ -55,6 +64,8 @@ public partial class App : MauiWinUIApplication
                 MainWindowId = windowId;
                 ResizeMainWindow();
             }
+
+            nativeWindow.Activate();
         });
     }
 

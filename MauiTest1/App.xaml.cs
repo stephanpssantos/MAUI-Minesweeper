@@ -12,11 +12,11 @@ public partial class App : Application
     protected override Window CreateWindow(IActivationState activationState)
 	{
 		var window = base.CreateWindow(activationState);
-		window.Deactivated += OnDeactivated;
-		window.Activated += OnActivated;
 		if (window != null)
 		{
-			window.Title = "[TODO: icon] Minesweeper";
+            window.Deactivated += OnDeactivated;
+            window.Activated += OnActivated;
+            window.Title = "Minesweeper";
 		}
 		return window;
 	}
