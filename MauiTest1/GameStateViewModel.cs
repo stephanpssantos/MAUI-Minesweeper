@@ -30,6 +30,12 @@ namespace MauiTest1
             MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
             MessagingCenter.Subscribe<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", (sender, args) => { PopupCellOptionClicked(args); });
             MessagingCenter.Subscribe<CustomGamePage, GameboardSetup>(this, "NewCustomGame", (sender, args) => { NewCustomGame(args); });
+            MessagingCenter.Subscribe<Application>(this, "WindowStopped", (sender) => { ClockIsRunning = false; });
+            MessagingCenter.Subscribe<Application>(this, "WindowResumed", (sender) => 
+            {
+                if (timeElapsed == "000") return;
+                ClockIsRunning = true; 
+            });
             MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => 
             {
                 if (ClockIsRunning == false)
