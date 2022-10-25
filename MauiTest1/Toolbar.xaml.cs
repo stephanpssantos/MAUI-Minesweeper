@@ -156,8 +156,8 @@ public partial class Toolbar : ContentView
 
     private void OnGameMenuBestTimesButtonClicked(object sender, EventArgs e)
     {
-        OpenBestTimesWindow();
         OnToolbarButtonClicked(GameButton, null); // Close game menu
+        OpenBestTimesWindow();
     }
 
     private void OnGameMenuExitButtonClicked(object sender, EventArgs e)
