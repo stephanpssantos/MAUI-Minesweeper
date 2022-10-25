@@ -5,12 +5,13 @@
              x:Class="MauiTest1.MainPage">
     
     <Grid>
-        <AbsoluteLayout ZIndex="1">
+        <AbsoluteLayout x:Name="ToolbarContainer">
             <custom_components:Toolbar 
                 AbsoluteLayout.LayoutFlags="None"
                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                GameMode="{Binding GameMode, Mode=TwoWay}" />
+                Gameboard="{Binding Gameboard, Mode=TwoWay}" />
         </AbsoluteLayout>
+        <custom_components:GameboardOptionsPopup x:Name="PopupContainer" Margin="0, 30, 0, 0" />
         <Grid Margin="0, 30, 0, 0"
             ColumnDefinitions="*"
             RowDefinitions="40, *"
@@ -23,7 +24,7 @@
                 </x:Arguments>
             </custom_components:DiagonalBlockShape>
             <FlexLayout Grid.Row="0" Grid.Column="0" JustifyContent="SpaceBetween" AlignItems="Center">
-                <custom_components:Scoreboard Margin="4" Number="{Binding Number}" />
+                <custom_components:Scoreboard Margin="4" Number="{Binding MineCount}" />
                 <custom_components:SmileyButton HeightRequest="26" WidthRequest="26" ClockIsRunning="{Binding ClockIsRunning, Mode=TwoWay}" />
                 <custom_components:Scoreboard Margin="4" Number="{Binding TimeElapsed}" />
             </FlexLayout>
@@ -32,7 +33,13 @@
                     <x:Int32>5</x:Int32>
                 </x:Arguments>
             </custom_components:DiagonalBlockShape>
-            <custom_components:Gameboard Grid.Row="1" Grid.Column="0" Margin="3"  HorizontalOptions="Center" VerticalOptions="Center"/>
+            <custom_components:Gameboard Grid.Row="1" 
+                                         Grid.Column="0" 
+                                         BoardSetup="{Binding Gameboard}"
+                                         BoardState="{Binding GameboardState, Mode=TwoWay}"
+                                         Margin="3"  
+                                         HorizontalOptions="Center" 
+                                         VerticalOptions="Center"/>
         </Grid>
     </Grid>
 

@@ -6,16 +6,28 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-        MainPage = new AppShell(); 
+        MainPage = new AppShell();
     }
 
-	protected override Window CreateWindow(IActivationState activationState)
+    protected override Window CreateWindow(IActivationState activationState)
 	{
 		var window = base.CreateWindow(activationState);
 		if (window != null)
 		{
-			window.Title = "[TODO: icon] Minesweeper";
+            window.Deactivated += OnDeactivated;
+            window.Activated += OnActivated;
+            window.Title = "Minesweeper";
 		}
 		return window;
 	}
+
+    private void OnDeactivated(object sender, EventArgs e)
+    {
+        MessagingCenter.Send<Application>(this, "WindowStopped");
+    }
+
+    private void OnActivated(object sender, EventArgs e)
+	{
+        MessagingCenter.Send<Application>(this, "WindowResumed");
+    }
 }

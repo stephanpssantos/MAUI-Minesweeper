@@ -7,40 +7,20 @@ public partial class MainPage : ContentPage
     public MainPage()
 	{
         InitializeComponent();
+        GameTimer Timer = new();
         GameStateViewModel GameState = new();
         BindingContext = GameState;
-        GameState.PropertyChanged += GameStateEventHandler;      
-    }
 
-    private void GameStateEventHandler(object sender, EventArgs e)
-    {
-        if (e is not PropertyChangedEventArgs args) return;
-        if (BindingContext is not GameStateViewModel context) return;
+        // Markup written in XAML crashes when compiling this property for release.
+        // Workaround is to set this property in code.
+        ToolbarContainer.ZIndex = 1;
+        PopupContainer.ZIndex = 1;
 
-        switch (args.PropertyName)
+        MessagingCenter.Subscribe<Toolbar>(this, "ExitGame", (sender) => 
         {
-            case "ClockIsRunning":
-                if (context.ClockIsRunning)
-                {
-                    GameTimer.InitiateClock(BindingContext);
-                }
-                else
-                {
-                    GameTimer.StopClock();
-                }
-                break;
-            default:
-                break;
-        }
+            Window parentWindow = GetParentWindow();
+            Application.Current.CloseWindow(parentWindow);
+        });
     }
-
-    //private void TestIncrementValue(object sender, EventArgs e)
-    //{
-    //    Button button = sender as Button;
-    //    if (button.BindingContext is not GameStateViewModel s) return;
-    //    int tempScoreboardNumber = Int32.Parse(s.Number);
-    //    tempScoreboardNumber++;
-    //    s.Number = tempScoreboardNumber.ToString();
-    //}
 }
 

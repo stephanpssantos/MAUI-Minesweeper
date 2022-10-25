@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiTest1.CustomGamePage"
+             Title="CustomGamePage">
+    <Grid
+        RowDefinitions="*, *, *, *, *, *"
+        ColumnDefinitions="*, *, 2*, *"
+        ColumnSpacing="5"
+        BackgroundColor="#F0F0F0">
+        <Label
+            Text="Width:"
+            Grid.Row="1"
+            Grid.Column="1"
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="End" />
+        <Entry
+            x:Name="WidthEntry"
+            Grid.Row="1"
+            Grid.Column="2"
+            HeightRequest="30" 
+            WidthRequest="100"
+            MaxLength="3"
+            Placeholder="30"
+            HorizontalOptions="Start" />
+        <Label
+            Text="Height:"
+            Grid.Row="2"
+            Grid.Column="1"
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="End" />
+        <Entry
+            x:Name="HeightEntry"
+            Grid.Row="2"
+            Grid.Column="2"
+            HeightRequest="30" 
+            WidthRequest="100"
+            MaxLength="3"
+            Placeholder="18"
+            HorizontalOptions="Start" />
+        <Label
+            Text="Mines:"
+            Grid.Row="3"
+            Grid.Column="1"
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="End" />
+        <Entry
+            x:Name="MineCountEntry"
+            Grid.Row="3"
+            Grid.Column="2"
+            HeightRequest="30" 
+            WidthRequest="100"
+            MaxLength="3"
+            Placeholder="99"
+            HorizontalOptions="Start" />
+        <Button
+            x:Name="OKButton"
+            Grid.Row="4"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Margin="0, 20, 0, 0"
+            Padding="5"
+            HeightRequest="30"
+            WidthRequest="75"
+            Text="OK"
+            CornerRadius="0"
+            TextColor="Black"
+            BackgroundColor="#F0F0F0"
+            BorderColor="Black" />
+    </Grid>
+</ContentPage>

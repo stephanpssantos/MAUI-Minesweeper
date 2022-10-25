@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiTest1.GameboardOptionsPopup"
+             xmlns:custom_components="clr-namespace:MauiTest1">
+    <AbsoluteLayout>
+        <Border 
+            x:Name="PopupGridWrapper"
+            AbsoluteLayout.LayoutFlags="None"
+            Stroke="#C0C0C0"
+            StrokeThickness="1"
+            BackgroundColor="#EEE"
+            Padding="1">
+            <Border.Shadow>
+                <Shadow Brush="#808080"
+                    Offset="5, 5"
+                    Radius="10"
+                    Opacity="0.4" />
+            </Border.Shadow>
+            <Border Stroke="#C0C0C0"
+                    StrokeThickness="1">
+                <Grid x:Name="PopupGrid"  
+                    RowDefinitions="16, 16"
+                    ColumnDefinitions="16, 16, 16, 16"
+                    RowSpacing="0"
+                    ColumnSpacing="0"
+                    BackgroundColor="#EEE">
+                    <custom_components:OptionsPopupCell x:Name="ClearButton" Grid.Row="0" Grid.Column="0" CellStyle="Clear">
+                        <x:Arguments>
+                            <x:String>Clear</x:String>
+                        </x:Arguments>
+                    </custom_components:OptionsPopupCell>
+                    <custom_components:OptionsPopupCell x:Name="MarkButton" Grid.Row="0" Grid.Column="1" CellStyle="Mark">
+                        <x:Arguments>
+                            <x:String>Mark</x:String>
+                        </x:Arguments>
+                    </custom_components:OptionsPopupCell>
+                    <custom_components:OptionsPopupCell x:Name="FlagButton" Grid.Row="0" Grid.Column="2" CellStyle="Flag">
+                        <x:Arguments>
+                            <x:String>Flag</x:String>
+                        </x:Arguments>
+                    </custom_components:OptionsPopupCell>
+                    <custom_components:OptionsPopupCell x:Name="CancelButton" Grid.Row="0" Grid.Column="3" CellStyle="Cancel">
+                        <x:Arguments>
+                            <x:String>Cancel</x:String>
+                        </x:Arguments>
+                    </custom_components:OptionsPopupCell>
+                    <Button Text="Cancel" 
+                        Grid.Row="1" 
+                        Grid.ColumnSpan="4" 
+                        HorizontalOptions="Fill" 
+                        VerticalOptions="Center"
+                        Padding="0"
+                        CornerRadius="0"
+                        FontSize="10"
+                        BackgroundColor="#EEEEEE"
+                        TextColor="Black"
+                        Pressed="ClosePopupButtonClicked"/>
+                </Grid>
+            </Border>
+        </Border>
+    </AbsoluteLayout>
+    
+</ContentView>
