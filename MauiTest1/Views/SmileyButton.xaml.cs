@@ -7,6 +7,10 @@ public partial class SmileyButton : ContentView
 	public SmileyButton()
 	{
 		InitializeComponent();
+
+        UnframedSmileyButton.Pressed += OnUnframedSmileyButtonPressed;
+        UnframedSmileyButton.Released += OnUnframedSmileyButtonReleased;
+
         MessagingCenter.Subscribe<GameboardCell, int>(this, "SmileyFace", (sender, args) => { DisplayFace(args); });
         MessagingCenter.Subscribe<GameStateViewModel, int>(this, "SmileyFace", (sender, args) => { DisplayFace(args); });
     }

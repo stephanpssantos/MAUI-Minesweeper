@@ -33,8 +33,6 @@
                         BackgroundColor="#00000000"
                         CornerRadius="0"
                         Source="smiley_face.png" 
-                        Aspect="Fill"
-                        Pressed="OnUnframedSmileyButtonPressed" 
-                        Released="OnUnframedSmileyButtonReleased" />
+                        Aspect="Fill" />
     </AbsoluteLayout>
 </ContentView>

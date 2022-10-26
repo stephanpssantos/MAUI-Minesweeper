@@ -45,7 +45,9 @@
                             <x:String>Cancel</x:String>
                         </x:Arguments>
                     </custom_components:OptionsPopupCell>
-                    <Button Text="Cancel" 
+                    <Button 
+                        x:Name="ClosePopupButton"
+                        Text="Cancel" 
                         Grid.Row="1" 
                         Grid.ColumnSpan="4" 
                         HorizontalOptions="Fill" 
@@ -54,8 +56,7 @@
                         CornerRadius="0"
                         FontSize="10"
                         BackgroundColor="#EEEEEE"
-                        TextColor="Black"
-                        Pressed="ClosePopupButtonClicked"/>
+                        TextColor="Black" />
                 </Grid>
             </Border>
         </Border>
