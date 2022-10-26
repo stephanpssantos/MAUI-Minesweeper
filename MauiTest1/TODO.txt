@@ -1,0 +1,89 @@
+-Cancel Button in gameboard options popup (OK)
+-PopupCellOptionClicked() in GameStateViewModel (OK)
+	-first make clicking any option close the options popup (OK)
+	-then, work on the open command (OK)
+		-if cell value is just a number, reveal just the number (OK)
+		-if cell value is 0, open all "connected" 0's (OK)
+		-if cell is mine, explode mine (OK)
+			-reveal mine image in selected cell (OK)
+			-turn selected cell red (OK)
+			-reveal mine image in all mine cells (OK)
+	-then, work on the mark command (OK)
+	-flag command (OK)
+		-UI (OK)
+		-wire up mine counter on new game (OK)
+		-wire up mine counter on flag (OK)
+		-wire up "Not a mine" icon (OK)
+		-wire up "Not a mine" code (OK)
+	-clear command (OK)
+		-up flag count if appr. (OK)
+		
+-Make game buttons pop back up when not opening  (OK)
+
+-shocked face on click (OK)
+	
+-Game start and game end procedures
+	-Start timer on any cell clicking (OK)
+	-New game procedures (OK)
+	-New game buttons (OK)
+		-The smiely face (OK)
+		-On toolbar (OK)
+			-Close toolbar on click "new game" (OK)
+		-Reset timer on new game (OK)
+	-Game loss (OK)
+		-End timer (OK)
+		-disable all game cell buttons  (OK)
+		-change smiley icon  (OK)
+	-New game from menu click after loss doesn't reset dead face (OK)
+	
+-Game win
+	-Lock board (OK)
+	-Change smiley face (OK)
+	-Stop timer (OK)
+	-Open all numbered slots, flag all mines (OK)
+		-Doesn't reset mine count (OK)
+	-Doesn't stop pause timer on new game (OK)
+	-Checks for high score data (OK)
+	-Opens new window if is highest for difficulty (OK)
+	
+-New High Score window (OK)
+	-UI (OK)
+	-Wire (OK)
+	
+-Open High Score menu (OK)
+	-UI (OK)
+	-Wire toolbar button (OK)
+	-Read LocalConfig data and display (OK)
+	-Wire up OK button (OK)
+	-Wire up reset button (OK)
+	
+-Save local config data (OK)
+	-Make model (OK)
+	-Write file to disk (OK)
+	-Read file and load config to memory (OK)
+	-Update difficulty on click (OK)
+	-Set config to read file (OK)
+
+-GameWindowPopup goes over game menu (OK)
+-Game difficulty checkbox not updated when loading from disk (OK)
+-Custom difficulty (OK)
+	-Fix the menu checkbox (OK)
+	-Make sure it saves changes to disk (OK)
+-Pause timer on focus lost (OK)
+-Exit game button (OK)
+-Timer isn't resetting when changing difficulty (OK)
+-Make game/help menus their own windows?? (I don't think it's possible. Haven't found a way to hide the title bar)
+-Set app window icon (https://nicksnettravels.builttoroam.com/winappsdk-windowing/) (OK)
+-Activate new windows (OK)
+-Refactor/organize files
+	-organize content into Folders (OK)
+	-Add TODO text to git (OK)
+	-Make consistent: set event handlers in behind code
+	-refactor styles
+	-look into converters (see MS maui samples / WeatherTwentyOne)
+	-look into ending event/signfying that it's been handled
+	-look into dumping events using debug.writeline to see what it does/look for refinements
+	-"Retrieve the Window object" in https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/app-lifecycle
+	-store window reference in static class? (Probably better not? only useful for the exit button, and the current solution is cross-platform)
+	-store gamestateviewmodel in static class???
+	-Win platform app.xaml.cs needs refactoring
