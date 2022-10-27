@@ -6,7 +6,7 @@
         RowDefinitions="*, 30, 30, 30, *"
         ColumnDefinitions="*, *, *"
         Padding="20"
-        BackgroundColor="#F0F0F0">
+        BackgroundColor="{StaticResource OffWhite1}">
         <Label
             Text="Fastest Mine Sweepers"
             VerticalOptions="Center"
@@ -85,8 +85,8 @@
                 CornerRadius="0"
                 HeightRequest="30"
                 TextColor="Black"
-                BackgroundColor="#F0F0F0"
-                BorderColor="#A0A0A0"/>
+                BackgroundColor="{StaticResource OffWhite1}"
+                BorderColor="{StaticResource Gray1}"/>
             <Button 
                 x:Name="OKButton"
                 Text="OK"
@@ -95,8 +95,8 @@
                 HeightRequest="30"
                 WidthRequest="75"
                 TextColor="Black"
-                BackgroundColor="#F0F0F0"
-                BorderColor="#A0A0A0"/>
+                BackgroundColor="{StaticResource OffWhite1}"
+                BorderColor="{StaticResource Gray1}"/>
         </FlexLayout>
     </Grid>
 </ContentPage>

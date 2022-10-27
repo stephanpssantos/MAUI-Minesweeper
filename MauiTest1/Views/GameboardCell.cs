@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using static MauiTest1.OptionsPopupCell;
+//using static MauiTest1.OptionsPopupCell;
 
 namespace MauiTest1
 {
@@ -106,7 +106,7 @@ namespace MauiTest1
 
         protected virtual void GenerateCell()
         {
-            DiagonalBlockShape frame = new(3, 3, "#FFFFFF", "#808080");
+            DiagonalBlockShape frame = new (3, 3, "WhiteBrush", "Gray3Brush");
             Button button = new();
             button.CornerRadius = 0;
             button.HeightRequest = 14;

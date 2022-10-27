@@ -17,7 +17,7 @@
             RowDefinitions="40, *"
             Padding="10"
             RowSpacing="10"
-            BackgroundColor="#C0C0C0">
+            BackgroundColor="{StaticResource Gray2}">
             <custom_components:DiagonalBlockShape Grid.Row="0" Grid.Column="0">
                 <x:Arguments>
                     <x:Int32>3</x:Int32>

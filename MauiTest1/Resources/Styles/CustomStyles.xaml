@@ -11,14 +11,14 @@
     <Style x:Key="toolbarMenuLine" TargetType="BoxView">
         <Setter Property="Margin" Value="10, 0, 10, 0" />
         <Setter Property="HeightRequest" Value="1" />
-        <Setter Property="Color" Value="#999" />
+        <Setter Property="Color" Value="{StaticResource Gray5}" />
     </Style>
 
     <Style x:Key="toolbarMenuButton" TargetType="Button">
         <Setter Property="HorizontalOptions" Value="Fill"/>
         <Setter Property="VerticalOptions" Value="Fill" />
-        <Setter Property="BackgroundColor" Value="#00000000" />
-        <Setter Property="BorderColor" Value="#00000000" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+        <Setter Property="BorderColor" Value="{StaticResource Transparent}" />
         <Setter Property="CornerRadius" Value="0" />
     </Style>
 

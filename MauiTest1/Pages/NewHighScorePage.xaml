@@ -5,7 +5,7 @@
              Title="New High Score">
     <VerticalStackLayout
         Padding="20"
-        BackgroundColor="#F0F0F0">
+        BackgroundColor="{StaticResource OffWhite1}">
         <Label
             x:Name="VictoryText"
             HorizontalOptions="Center" 
@@ -25,7 +25,7 @@
             WidthRequest="75"
             VerticalOptions="End"
             TextColor="Black"
-            BackgroundColor="#F0F0F0"
-            BorderColor="#A0A0A0"/>
+            BackgroundColor="{StaticResource OffWhite1}"
+            BorderColor="{StaticResource Gray1}"/>
     </VerticalStackLayout>
 </ContentPage>

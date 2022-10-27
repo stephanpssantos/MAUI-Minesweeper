@@ -11,8 +11,8 @@
         </Style>
 
         <Style x:Key="neutralToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource baseToolbarButtonStyle}">
-            <Setter Property="BackgroundColor" Value="#0051A0E1" />
-            <Setter Property="BorderColor" Value="#00000000" />
+            <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+            <Setter Property="BorderColor" Value="{StaticResource Transparent}" />
         </Style>
 
         <!--Can't use this because MAUI doesn't have a concept of a cursor-->
@@ -22,8 +22,8 @@
         </Style>-->
 
         <Style x:Key="openToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource baseToolbarButtonStyle}">
-            <Setter Property="BackgroundColor" Value="#5551A0E1" />
-            <Setter Property="BorderColor" Value="#AA51A0E1" />
+            <Setter Property="BackgroundColor" Value="{StaticResource BlueTrans1}" />
+            <Setter Property="BorderColor" Value="{StaticResource BlueTrans2}" />
         </Style>
 
         <Style x:Key="toolbarMenuCheckbox" TargetType="Label">
@@ -35,7 +35,7 @@
         </Style>
 
         <Style x:Key="toolbarMenuCheckboxChecked" TargetType="Label" BasedOn="{StaticResource toolbarMenuCheckbox}">
-            <Setter Property="BackgroundColor" Value="#AA51A0E1" />
+            <Setter Property="BackgroundColor" Value="{StaticResource BlueTrans2}" />
             <Setter Property="Text" Value="✔" />
         </Style>
     </ContentView.Resources>
@@ -51,14 +51,14 @@
                     Style="{StaticResource neutralToolbarButtonStyle}" />
             </HorizontalStackLayout>
 
-            <BoxView HeightRequest="2" HorizontalOptions="Fill" Color="#EEE"/>
+            <BoxView HeightRequest="2" HorizontalOptions="Fill" Color="{StaticResource Gray4}"/>
         </VerticalStackLayout>
         <Grid x:Name="GameMenu"
             WidthRequest="200" 
             Margin="0, 30, 0, 0" 
             RowDefinitions="5, 25, 5, 25, 25, 25, 25, 5, 25, 25, 5, 25, 5, 25, 10"
             ColumnDefinitions="30, *, 30"
-            Background="#EEE">
+            Background="{StaticResource Gray4}">
             <!--GAME MENU VISUALS-->
             <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
             <Label Grid.Row="1" Grid.Column="1" Text="New" Style="{StaticResource toolbarMenuText}"/>
@@ -112,7 +112,7 @@
             Margin="56, 30, 0, 0" 
             RowDefinitions="5, 25, 25, 5, 25, 10"
             ColumnDefinitions="30, *, 30"
-            Background="#EEE">
+            Background="{StaticResource Gray4}">
             <!--HELP MENU VISUALS-->
             <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource toolbarMenuCheckbox}" />
             <Label Grid.Row="1" Grid.Column="1" Text="Contents" Style="{StaticResource toolbarMenuText}"/>

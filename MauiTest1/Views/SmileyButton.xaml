@@ -10,8 +10,8 @@
             <x:Arguments>
                 <x:Int32>3</x:Int32>
                 <x:Int32>3</x:Int32>
-                <x:String>#FFFFFF</x:String>
-                <x:String>#808080</x:String>
+                <x:String>WhiteBrush</x:String>
+                <x:String>Gray3Brush</x:String>
             </x:Arguments>
         </custom_components:DiagonalBlockShape>
         <custom_components:DiagonalBlockShape 
@@ -21,8 +21,8 @@
             <x:Arguments>
                 <x:Int32>3</x:Int32>
                 <x:Int32>2</x:Int32>
-                <x:String>#808080</x:String>
-                <x:String>#808080</x:String>
+                <x:String>Gray3Brush</x:String>
+                <x:String>Gray3Brush</x:String>
             </x:Arguments>
         </custom_components:DiagonalBlockShape>
         <ImageButton x:Name="UnframedSmileyButton"
@@ -30,7 +30,8 @@
                         HeightRequest="20"
                         WidthRequest="20"
                         Padding="2, 2, 1, 1"
-                        BackgroundColor="#00000000"
+                        BorderWidth="0"
+                        BackgroundColor="{StaticResource Transparent}"
                         CornerRadius="0"
                         Source="smiley_face.png" 
                         Aspect="Fill" />

@@ -7,7 +7,7 @@
         RowDefinitions="*, *, *, *, *, *"
         ColumnDefinitions="*, *, 2*, *"
         ColumnSpacing="5"
-        BackgroundColor="#F0F0F0">
+        BackgroundColor="{StaticResource OffWhite1}">
         <Label
             Text="Width:"
             Grid.Row="1"
@@ -67,7 +67,7 @@
             Text="OK"
             CornerRadius="0"
             TextColor="Black"
-            BackgroundColor="#F0F0F0"
+            BackgroundColor="{StaticResource OffWhite1}"
             BorderColor="Black" />
     </Grid>
 </ContentPage>

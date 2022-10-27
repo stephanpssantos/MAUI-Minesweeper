@@ -78,8 +78,10 @@
 -Refactor/organize files
 	-organize content into Folders (OK)
 	-Add TODO text to git (OK)
-	-Make consistent: set event handlers in behind code
+	-Make consistent: set event handlers in behind code (OK)
+	-Reconcile all colors (OK)
 	-refactor styles
+	-Move Custom game OK button to second column
 	-look into converters (see MS maui samples / WeatherTwentyOne)
 	-look into ending event/signfying that it's been handled
 	-look into dumping events using debug.writeline to see what it does/look for refinements
