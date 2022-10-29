@@ -3,41 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiTest1.Toolbar">
     <ContentView.Resources>
-        <Style x:Key="baseToolbarButtonStyle" TargetType="Button">
-            <Setter Property="Padding" Value="8, 3, 8, 3" />
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="CornerRadius" Value="0" />
-            <Setter Property="TextColor" Value="Black" />
-        </Style>
-
-        <Style x:Key="neutralToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource baseToolbarButtonStyle}">
-            <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
-            <Setter Property="BorderColor" Value="{StaticResource Transparent}" />
-        </Style>
-
-        <!--Can't use this because MAUI doesn't have a concept of a cursor-->
-        <!--<Style x:Key="focusedToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource baseToolbarButtonStyle}">
-            <Setter Property="BackgroundColor" Value="Blue" />
-            <Setter Property="BorderColor" Value="Blue" />
-        </Style>-->
-
-        <Style x:Key="openToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource baseToolbarButtonStyle}">
-            <Setter Property="BackgroundColor" Value="{StaticResource BlueTrans1}" />
-            <Setter Property="BorderColor" Value="{StaticResource BlueTrans2}" />
-        </Style>
-
-        <Style x:Key="toolbarMenuCheckbox" TargetType="Label">
-            <Setter Property="Margin" Value="3, 0, 3, 0" />
-            <Setter Property="Text" Value=" " />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="14" />
-        </Style>
-
-        <Style x:Key="toolbarMenuCheckboxChecked" TargetType="Label" BasedOn="{StaticResource toolbarMenuCheckbox}">
-            <Setter Property="BackgroundColor" Value="{StaticResource BlueTrans2}" />
-            <Setter Property="Text" Value="✔" />
-        </Style>
+        <Style x:Key="local_neutralToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource neutralToolbarButtonStyle}" />
+        <Style x:Key="local_openToolbarButtonStyle" TargetType="Button" BasedOn="{StaticResource openToolbarButtonStyle}" />
+        <Style x:Key="local_toolbarMenuCheckbox" TargetType="Label" BasedOn="{StaticResource toolbarMenuCheckbox}" />
+        <Style x:Key="local_toolbarMenuCheckboxChecked" TargetType="Label" BasedOn="{StaticResource toolbarMenuCheckboxChecked}" />
     </ContentView.Resources>
     
     <AbsoluteLayout>

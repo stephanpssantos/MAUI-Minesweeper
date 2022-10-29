@@ -1,12 +1,15 @@
 ﻿using System.ComponentModel;
 //using static MauiTest1.OptionsPopupCell;
+using MauiTest1.Helpers;
 
 namespace MauiTest1
 {
     public class GameboardCell : AbsoluteLayout
     {
-        private Button thisButton;
-        private DiagonalBlockShape thisFrame;
+        protected Button thisButton;
+        protected DiagonalBlockShape thisFrame;
+        protected Style buttonStyle;
+        protected Style pressedButtonStyle;
         protected int internalValue = 0;
         protected int xPosition = 0;
         protected int yPosition = 0;
@@ -24,6 +27,9 @@ namespace MauiTest1
             this.xBoardSize = xBoardSize;
             this.yBoardSize = yBoardSize;
             this.internalValue = internalValue;
+
+            buttonStyle = (Style)ResourceHelper.FindResource(this, "gameboardCellButton");
+            pressedButtonStyle = (Style)ResourceHelper.FindResource(this, "pressedGameboardCellButton");
 
             HeightRequest = 16;
             WidthRequest = 16;
@@ -108,14 +114,7 @@ namespace MauiTest1
         {
             DiagonalBlockShape frame = new (3, 3, "WhiteBrush", "Gray3Brush");
             Button button = new();
-            button.CornerRadius = 0;
-            button.HeightRequest = 14;
-            button.WidthRequest = 14;
-            button.Padding = 1;
-            button.BackgroundColor = Color.FromArgb("#C0C0C0");
-            button.FontFamily = "8Bit";
-            button.FontSize = 12;
-            button.ContentLayout = new Button.ButtonContentLayout(Button.ButtonContentLayout.ImagePosition.Left, 0);
+            button.Style = buttonStyle;
 
             switch (internalValue)
             {
@@ -185,11 +184,7 @@ namespace MauiTest1
 
         protected void SetPressedStatus()
         {
-            thisButton.HeightRequest = 16;
-            thisButton.WidthRequest = 16;
-            thisButton.Padding = 2;
-
-            //thisButton.BackgroundColor = Color.FromArgb("#808080");
+            thisButton.Style = pressedButtonStyle;
 
             AbsoluteLayout.SetLayoutBounds(thisButton, new Rect(0, 0, 16, 16));
 
@@ -199,10 +194,7 @@ namespace MauiTest1
 
         internal void ResetCellStatus()
         {
-            thisButton.BackgroundColor = Color.FromArgb("#C0C0C0");
-            thisButton.HeightRequest = 14;
-            thisButton.WidthRequest = 14;
-            thisButton.Padding = 1;
+            thisButton.Style = buttonStyle;
             AbsoluteLayout.SetLayoutBounds(thisButton, new Rect(1, 1, 14, 14));
 
             thisFrame.IsVisible = true;

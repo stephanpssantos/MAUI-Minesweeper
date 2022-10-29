@@ -80,12 +80,14 @@
 	-Add TODO text to git (OK)
 	-Make consistent: set event handlers in behind code (OK)
 	-Reconcile all colors (OK)
-	-refactor styles
-	-Move Custom game OK button to second column
+	-refactor styles (OK)
+	-Move Custom game OK button to second column (OK)
+	-Timer continues after setting new high score
 	-look into converters (see MS maui samples / WeatherTwentyOne)
 	-look into ending event/signfying that it's been handled
 	-look into dumping events using debug.writeline to see what it does/look for refinements
 	-"Retrieve the Window object" in https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/app-lifecycle
 	-store window reference in static class? (Probably better not? only useful for the exit button, and the current solution is cross-platform)
 	-store gamestateviewmodel in static class???
+	-Look into VisualStateManagers. Maybe visual state changes can be managed better from there (lol)
 	-Win platform app.xaml.cs needs refactoring

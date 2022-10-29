@@ -26,14 +26,8 @@
             </x:Arguments>
         </custom_components:DiagonalBlockShape>
         <ImageButton x:Name="UnframedSmileyButton"
-                        AbsoluteLayout.LayoutBounds="3, 3, 20, 20" 
-                        HeightRequest="20"
-                        WidthRequest="20"
-                        Padding="2, 2, 1, 1"
-                        BorderWidth="0"
-                        BackgroundColor="{StaticResource Transparent}"
-                        CornerRadius="0"
-                        Source="smiley_face.png" 
-                        Aspect="Fill" />
+                     AbsoluteLayout.LayoutBounds="3, 3, 20, 20" 
+                     Source="smiley_face.png" 
+                     Style="{StaticResource unframedSmileyButtonStyle}" />
     </AbsoluteLayout>
 </ContentView>

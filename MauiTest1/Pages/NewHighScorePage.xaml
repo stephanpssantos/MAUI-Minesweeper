@@ -8,8 +8,7 @@
         BackgroundColor="{StaticResource OffWhite1}">
         <Label
             x:Name="VictoryText"
-            HorizontalOptions="Center" 
-            HorizontalTextAlignment="Center"/>
+            class="labelCenterAlign"/>
         <Entry 
             x:Name="RecordName"
             Margin="0, 40, 0, 0"
@@ -18,14 +17,8 @@
         <Button 
             x:Name="OKButton"
             Text="OK"
-            Padding="5"
-            Margin="0, 20, 0, 0"
-            CornerRadius="0"
-            HeightRequest="30"
-            WidthRequest="75"
-            VerticalOptions="End"
-            TextColor="Black"
-            BackgroundColor="{StaticResource OffWhite1}"
-            BorderColor="{StaticResource Gray1}"/>
+            class="buttonGeneric, button-mt20"
+            HorizontalOptions="Center"
+            VerticalOptions="End" />
     </VerticalStackLayout>
 </ContentPage>

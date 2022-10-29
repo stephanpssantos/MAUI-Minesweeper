@@ -7,24 +7,13 @@
         <Border 
             x:Name="PopupGridWrapper"
             AbsoluteLayout.LayoutFlags="None"
-            Stroke="{StaticResource Gray2Brush}"
-            StrokeThickness="1"
-            BackgroundColor="{StaticResource White}"
-            Padding="1">
-            <Border.Shadow>
-                <Shadow Brush="{StaticResource Gray3Brush}"
-                    Offset="5, 5"
-                    Radius="10"
-                    Opacity="0.4" />
-            </Border.Shadow>
+            Style="{StaticResource popupGridWrapper}">
             <Border Stroke="{StaticResource Gray2Brush}"
                     StrokeThickness="1">
                 <Grid x:Name="PopupGrid"  
                     RowDefinitions="16, 16"
                     ColumnDefinitions="16, 16, 16, 16"
-                    RowSpacing="0"
-                    ColumnSpacing="0"
-                    BackgroundColor="{StaticResource White}">
+                    Style="{StaticResource popupGrid}">
                     <custom_components:OptionsPopupCell x:Name="ClearButton" Grid.Row="0" Grid.Column="0" CellStyle="Clear">
                         <x:Arguments>
                             <x:String>Clear</x:String>
@@ -50,13 +39,7 @@
                         Text="Cancel" 
                         Grid.Row="1" 
                         Grid.ColumnSpan="4" 
-                        HorizontalOptions="Fill" 
-                        VerticalOptions="Center"
-                        Padding="0"
-                        CornerRadius="0"
-                        FontSize="10"
-                        BackgroundColor="{StaticResource White}"
-                        TextColor="Black" />
+                        Style="{StaticResource closePopupButton}" />
                 </Grid>
             </Border>
         </Border>

@@ -31,8 +31,8 @@ public partial class Toolbar : ContentView
         {
             if (GameMenu.IsVisible == true) GameMenu.IsVisible = false;
             if (HelpMenu.IsVisible == true) HelpMenu.IsVisible = false;
-            GameButton.Style = (Style)Resources["neutralToolbarButtonStyle"];
-            HelpButton.Style = (Style)Resources["neutralToolbarButtonStyle"];
+            GameButton.Style = (Style)Resources["local_neutralToolbarButtonStyle"];
+            HelpButton.Style = (Style)Resources["local_neutralToolbarButtonStyle"];
             activeButton = null;
         });
     }
@@ -82,16 +82,16 @@ public partial class Toolbar : ContentView
         if (triggeredControl == activeButton)
         {
             activeButton = null;
-            triggeredControl.Style = (Style)Resources["neutralToolbarButtonStyle"];
+            triggeredControl.Style = (Style)Resources["local_neutralToolbarButtonStyle"];
         }
         else
         {
             if (activeButton != null)
             {
-                activeButton.Style = (Style)Resources["neutralToolbarButtonStyle"];
+                activeButton.Style = (Style)Resources["local_neutralToolbarButtonStyle"];
             }
             activeButton = triggeredControl;
-            activeButton.Style = (Style)Resources["openToolbarButtonStyle"];
+            activeButton.Style = (Style)Resources["local_openToolbarButtonStyle"];
         }
 
         MessagingCenter.Send<Toolbar>(this, "ClosePopup");
@@ -141,12 +141,12 @@ public partial class Toolbar : ContentView
         if (marks)
         {
             marks = false;
-            GameMenuMarksCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
+            GameMenuMarksCheckbox.Style = (Style)Resources["local_toolbarMenuCheckbox"];
         }
         else
         {
             marks = true;
-            GameMenuMarksCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            GameMenuMarksCheckbox.Style = (Style)Resources["local_toolbarMenuCheckboxChecked"];
         }
     }
 
@@ -155,12 +155,12 @@ public partial class Toolbar : ContentView
         if (color)
         {
             color = false;
-            GameMenuColorCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
+            GameMenuColorCheckbox.Style = (Style)Resources["local_toolbarMenuCheckbox"];
         }
         else
         {
             color = true;
-            GameMenuColorCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            GameMenuColorCheckbox.Style = (Style)Resources["local_toolbarMenuCheckboxChecked"];
         }
     }
 
@@ -186,31 +186,31 @@ public partial class Toolbar : ContentView
         if (Gameboard.BoardPreset == "Beginner")
         {
             difficultySetting = "Beginner";
-            GameMenuBeginnerCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            GameMenuBeginnerCheckbox.Style = (Style)Resources["local_toolbarMenuCheckboxChecked"];
         }
         else if (Gameboard.BoardPreset == "Intermediate")
         {
             difficultySetting = "Intermediate";
-            GameMenuIntermediateCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            GameMenuIntermediateCheckbox.Style = (Style)Resources["local_toolbarMenuCheckboxChecked"];
         }
         else if (Gameboard.BoardPreset == "Expert")
         {
             difficultySetting = "Expert";
-            GameMenuExpertCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            GameMenuExpertCheckbox.Style = (Style)Resources["local_toolbarMenuCheckboxChecked"];
         }
         else if (Gameboard.BoardPreset == "Custom")
         {
             difficultySetting = "Custom";
-            GameMenuCustomCheckbox.Style = (Style)Resources["toolbarMenuCheckboxChecked"];
+            GameMenuCustomCheckbox.Style = (Style)Resources["local_toolbarMenuCheckboxChecked"];
         }
     }
 
     private void ResetGameMenuDifficultyButtons()
     {
-        GameMenuBeginnerCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
-        GameMenuIntermediateCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
-        GameMenuExpertCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
-        GameMenuCustomCheckbox.Style = (Style)Resources["toolbarMenuCheckbox"];
+        GameMenuBeginnerCheckbox.Style = (Style)Resources["local_toolbarMenuCheckbox"];
+        GameMenuIntermediateCheckbox.Style = (Style)Resources["local_toolbarMenuCheckbox"];
+        GameMenuExpertCheckbox.Style = (Style)Resources["local_toolbarMenuCheckbox"];
+        GameMenuCustomCheckbox.Style = (Style)Resources["local_toolbarMenuCheckbox"];
     }
 
     private void OpenCustomGameWindow()

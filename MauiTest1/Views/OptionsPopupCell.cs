@@ -1,4 +1,4 @@
-﻿using static MauiTest1.OptionsPopupCell;
+﻿using MauiTest1.Helpers;
 
 namespace MauiTest1
 {
@@ -19,6 +19,9 @@ namespace MauiTest1
             HeightRequest = 16;
             WidthRequest = 16;
 
+            buttonStyle = (Style)ResourceHelper.FindResource(this, "gameboardCellButton");
+            pressedButtonStyle = (Style)ResourceHelper.FindResource(this, "pressedOptionsGameboardCellButton");
+
             GenerateCell();
             PropertyChanged += SetCellStyle;
         }
@@ -29,9 +32,7 @@ namespace MauiTest1
             if (sender is not Button button) return;
             if (Children[0] is not DiagonalBlockShape frame) return;
 
-            button.HeightRequest = 16;
-            button.WidthRequest = 16;
-            button.Padding = new Thickness(3, 3, 1, 1);
+            button.Style = pressedButtonStyle;
             AbsoluteLayout.SetLayoutBounds(button, new Rect(0, 0, 16, 16));
             
             frame.IsVisible = false;
@@ -43,10 +44,8 @@ namespace MauiTest1
             if (sender is not Button button) return;
             if (Children[0] is not DiagonalBlockShape frame) return;
 
-            button.HeightRequest = 12;
-            button.WidthRequest = 12;
-            button.Padding = 0;
-            AbsoluteLayout.SetLayoutBounds(button, new Rect(2, 2, 12, 12));
+            button.Style = buttonStyle;
+            AbsoluteLayout.SetLayoutBounds(button, new Rect(1, 1, 14, 14));
 
             frame.IsVisible = true;
 
