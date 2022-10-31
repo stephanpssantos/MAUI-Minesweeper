@@ -82,7 +82,7 @@
 	-Reconcile all colors (OK)
 	-refactor styles (OK)
 	-Move Custom game OK button to second column (OK)
-	-Timer continues after setting new high score
+	-Timer continues after setting new high score (OK)
 	-look into converters (see MS maui samples / WeatherTwentyOne)
 	-look into ending event/signfying that it's been handled
 	-look into dumping events using debug.writeline to see what it does/look for refinements
