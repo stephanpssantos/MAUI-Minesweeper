@@ -1,3 +1,10 @@
+Big TODOs:
+-Get it working on Android
+-Marks command
+-Alternate color command
+
+@@@@@@@@@@@@@@@@@@@@@@@
+
 -Cancel Button in gameboard options popup (OK)
 -PopupCellOptionClicked() in GameStateViewModel (OK)
 	-first make clicking any option close the options popup (OK)
