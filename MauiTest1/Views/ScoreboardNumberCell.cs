@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
 using System.ComponentModel; // PropertyChangedEventArgs
+using MauiTest1.Helpers;
 using Path = Microsoft.Maui.Controls.Shapes.Path;
 
 namespace MauiTest1
@@ -51,18 +52,18 @@ namespace MauiTest1
 
             if (Children.Count != 6) return;
             
-            string rowAColor;
-            string rowBColor;
+            Color rowAColor;
+            Color rowBColor;
 
             if (ThisState == CellState.RedEnabled)
             {
-                rowAColor = "#FFFF0000";
-                rowBColor = "#FFFF0000";
+                rowAColor = (Color)ResourceHelper.FindResource(this, "Red1");
+                rowBColor = (Color)ResourceHelper.FindResource(this, "Red1");
             }
             else
             {
-                rowAColor = "#FF800000";
-                rowBColor = "#FF000000";
+                rowAColor = (Color)ResourceHelper.FindResource(this, "Red2");
+                rowBColor = Colors.Black;
             }
 
             Path line1_1 = Children[0] as Path;
@@ -72,12 +73,12 @@ namespace MauiTest1
             Path line3_1 = Children[4] as Path;
             Path line3_2 = Children[5] as Path;
 
-            line1_1.Fill = Color.FromArgb(rowAColor);
-            line1_2.Fill = Color.FromArgb(rowBColor);
-            line2_1.Fill = Color.FromArgb(rowAColor);
-            line2_2.Fill = Color.FromArgb(rowBColor);
-            line3_1.Fill = Color.FromArgb(rowAColor);
-            line3_2.Fill = Color.FromArgb(rowBColor);
+            line1_1.Fill = rowAColor;
+            line1_2.Fill = rowBColor;
+            line2_1.Fill = rowAColor;
+            line2_2.Fill = rowBColor;
+            line3_1.Fill = rowAColor;
+            line3_2.Fill = rowBColor;
         }
 
         private void CreateCell()
@@ -166,9 +167,11 @@ namespace MauiTest1
         private Path CreateLine(
             int size = 3,
             int offset = 0,
-            string color = "#FFFF0000",
-            LineOrientation orientation = LineOrientation.Horizontal)
+            Color color = null,
+            LineOrientation orientation = LineOrientation.Horizontal
+            )
         {
+            if (color is null) color = (Color)ResourceHelper.FindResource(this, "Red1");
             int verticalOffset = 0;
             int horizontalOffset = 0;
             int verticalPosition = 0;
@@ -201,7 +204,7 @@ namespace MauiTest1
             }
 
             Path path = new();
-            path.Fill = Color.FromArgb(color);
+            path.Fill = color;
             path.StrokeThickness = 0;
             path.Margin = new Thickness(horizontalOffset, verticalOffset, 0, 0);
 

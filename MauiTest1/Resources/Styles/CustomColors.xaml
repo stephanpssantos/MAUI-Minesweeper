@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="Transparent">#00000000</Color>
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="OffWhite1">#F0F0F0</Color>
+    <Color x:Key="Gray1">#A0A0A0</Color>
+    <Color x:Key="Gray2">#C0C0C0</Color>
+    <Color x:Key="Gray3">#808080</Color>
+    <Color x:Key="Gray4">#EEEEEE</Color>
+    <Color x:Key="Gray5">#999999</Color>
+    <Color x:Key="Red1">#FF0000</Color>
+    <Color x:Key="Red2">#800000</Color>
+    <Color x:Key="BlueTrans1">#5551A0E1</Color>
+    <Color x:Key="BlueTrans2">#AA51A0E1</Color>
+
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
+    <SolidColorBrush x:Key="Gray2Brush" Color="{StaticResource Gray2}"/>
+    <SolidColorBrush x:Key="Gray3Brush" Color="{StaticResource Gray3}"/>
+</ResourceDictionary>

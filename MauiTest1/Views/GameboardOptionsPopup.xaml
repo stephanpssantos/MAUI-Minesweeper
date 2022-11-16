@@ -7,24 +7,13 @@
         <Border 
             x:Name="PopupGridWrapper"
             AbsoluteLayout.LayoutFlags="None"
-            Stroke="#C0C0C0"
-            StrokeThickness="1"
-            BackgroundColor="#EEE"
-            Padding="1">
-            <Border.Shadow>
-                <Shadow Brush="#808080"
-                    Offset="5, 5"
-                    Radius="10"
-                    Opacity="0.4" />
-            </Border.Shadow>
-            <Border Stroke="#C0C0C0"
+            Style="{StaticResource popupGridWrapper}">
+            <Border Stroke="{StaticResource Gray2Brush}"
                     StrokeThickness="1">
                 <Grid x:Name="PopupGrid"  
                     RowDefinitions="16, 16"
                     ColumnDefinitions="16, 16, 16, 16"
-                    RowSpacing="0"
-                    ColumnSpacing="0"
-                    BackgroundColor="#EEE">
+                    Style="{StaticResource popupGrid}">
                     <custom_components:OptionsPopupCell x:Name="ClearButton" Grid.Row="0" Grid.Column="0" CellStyle="Clear">
                         <x:Arguments>
                             <x:String>Clear</x:String>
@@ -45,17 +34,12 @@
                             <x:String>Cancel</x:String>
                         </x:Arguments>
                     </custom_components:OptionsPopupCell>
-                    <Button Text="Cancel" 
+                    <Button 
+                        x:Name="ClosePopupButton"
+                        Text="Cancel" 
                         Grid.Row="1" 
                         Grid.ColumnSpan="4" 
-                        HorizontalOptions="Fill" 
-                        VerticalOptions="Center"
-                        Padding="0"
-                        CornerRadius="0"
-                        FontSize="10"
-                        BackgroundColor="#EEEEEE"
-                        TextColor="Black"
-                        Pressed="ClosePopupButtonClicked"/>
+                        Style="{StaticResource closePopupButton}" />
                 </Grid>
             </Border>
         </Border>

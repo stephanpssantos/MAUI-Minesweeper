@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using MauiTest1.Helpers;
 
 namespace MauiTest1
 {
@@ -7,7 +8,7 @@ namespace MauiTest1
     {
         public Gameboard()
         {
-            BackgroundColor = Color.FromArgb("#808080");
+            BackgroundColor = (Color)ResourceHelper.FindResource(this, "Gray3"); ;
             ColumnSpacing = 0;
             RowSpacing = 0;
             GenerateBoard();

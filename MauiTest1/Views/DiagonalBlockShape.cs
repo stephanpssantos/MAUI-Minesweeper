@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
+using MauiTest1.Helpers;
 
 namespace MauiTest1
 {
@@ -7,13 +8,15 @@ namespace MauiTest1
     {
         private int TopBorderDepth = 5;
         private int BottomBorderDepth = 5;
-        private string TopColor = "#808080";
-        private string BottomColor = "#FFFFFF";
+        private SolidColorBrush TopColor;
+        private SolidColorBrush BottomColor;
 
         public DiagonalBlockShape()
         {
             Loaded += MakeShape;
             SizeChanged += ResizeShape;
+            TopColor = (SolidColorBrush)ResourceHelper.FindResource(this, "Gray3Brush");
+            BottomColor = (SolidColorBrush)ResourceHelper.FindResource(this, "WhiteBrush");
         }
 
         public DiagonalBlockShape(int borderDepth) : this()
@@ -26,16 +29,15 @@ namespace MauiTest1
         {
             TopBorderDepth = topBorderDepth;
             BottomBorderDepth = bottomBorderDepth;
-            TopColor = topColor;
-            BottomColor = bottomColor;
+            TopColor = (SolidColorBrush)ResourceHelper.FindResource(this, topColor);
+            BottomColor = (SolidColorBrush)ResourceHelper.FindResource(this, bottomColor);
         }
 
         private void MakeShape(object sender, EventArgs e)
         {
             AbsoluteLayout ThisObject = sender as AbsoluteLayout;
-
-            Polygon shape1 = new() { Fill = new SolidColorBrush(Color.FromArgb(TopColor)) };
-            Polygon shape2 = new() { Fill = new SolidColorBrush(Color.FromArgb(BottomColor)) };
+            Polygon shape1 = new() { Fill = TopColor };
+            Polygon shape2 = new() { Fill = BottomColor };
 
             ThisObject.Children.Add(shape1);
             ThisObject.Children.Add(shape2);

@@ -9,25 +9,27 @@ public partial class GameboardOptionsPopup : ContentView
 	{
 		IsVisible = false;
 		InitializeComponent();
-        MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => {
-			if (sender is GameboardCell clicked)
-			{
-				if (clicked == lastClicked)
-				{
-                    MessagingCenter.Send<GameboardCell, int>(lastClicked, "SmileyFace", 0);
-                    ClosePopup(this, null);
-					return;
-				}
-                GameboardCellClicked(arg);
-                lastClicked = clicked;
-			}
-        });
+
+        ClosePopupButton.Pressed += ClosePopupButtonPressed;
 
         MessagingCenter.Subscribe<OptionsPopupCell>(this, "ClosePopup", (sender) => { ClosePopup(null, null); });
         MessagingCenter.Subscribe<Toolbar>(this, "ClosePopup", (sender) => { ClosePopup(this, null); });
+        MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => {
+            if (sender is GameboardCell clicked)
+            {
+                if (clicked == lastClicked)
+                {
+                    MessagingCenter.Send<GameboardCell, int>(lastClicked, "SmileyFace", 0);
+                    ClosePopup(this, null);
+                    return;
+                }
+                GameboardCellClicked(arg);
+                lastClicked = clicked;
+            }
+        });
     }
 
-	private void ClosePopupButtonClicked(object sender, EventArgs e)
+	private void ClosePopupButtonPressed(object sender, EventArgs e)
 	{
         MessagingCenter.Send<GameboardCell, int>(lastClicked, "SmileyFace", 0);
         ClosePopup(this, null);

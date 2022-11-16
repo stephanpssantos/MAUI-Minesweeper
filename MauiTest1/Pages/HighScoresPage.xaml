@@ -6,7 +6,7 @@
         RowDefinitions="*, 30, 30, 30, *"
         ColumnDefinitions="*, *, *"
         Padding="20"
-        BackgroundColor="#F0F0F0">
+        BackgroundColor="{StaticResource OffWhite1}">
         <Label
             Text="Fastest Mine Sweepers"
             VerticalOptions="Center"
@@ -17,60 +17,51 @@
         <!-- 1st row -->
         <Label
             Text="Beginner:"
-            VerticalOptions="Center"
-            HorizontalOptions="Start"
             Grid.Row="1"
-            Grid.Column="0" />
+            Grid.Column="0"
+            class="labelLeftAlign" />
         <Label
             x:Name="BeginnerTimeLabel"
-            VerticalOptions="Center"
-            HorizontalOptions="Start"
             Grid.Row="1"
-            Grid.Column="1" />
+            Grid.Column="1" 
+            class="labelLeftAlign" />
         <Label
             x:Name="BeginnerNameLabel"
-            VerticalOptions="Center"
-            HorizontalOptions="Start"
             Grid.Row="1"
-            Grid.Column="2" />
+            Grid.Column="2" 
+            class="labelLeftAlign" />
         <!-- 2nd row -->
         <Label
             Text="Intermediate:"
-            VerticalOptions="Center"
-            HorizontalOptions="Start"
             Grid.Row="2"
-            Grid.Column="0" />
+            Grid.Column="0" 
+            class="labelLeftAlign" />
         <Label
             x:Name="IntermediateTimeLabel"
-            VerticalOptions="Center"
-            HorizontalOptions="Start"
             Grid.Row="2"
-            Grid.Column="1" />
+            Grid.Column="1" 
+            class="labelLeftAlign" />
         <Label
             x:Name="IntermediateNameLabel"
-            VerticalOptions="Center"
-            HorizontalOptions="Start"
             Grid.Row="2"
-            Grid.Column="2" />
+            Grid.Column="2" 
+            class="labelLeftAlign" />
         <!-- 3rd row -->
         <Label
             Text="Expert:"
-            VerticalOptions="Center"
-            HorizontalOptions="Start"
             Grid.Row="3"
-            Grid.Column="0" />
+            Grid.Column="0" 
+            class="labelLeftAlign" />
         <Label
             x:Name="ExpertTimeLabel"
-            VerticalOptions="Center"
-            HorizontalOptions="Start"
             Grid.Row="3"
-            Grid.Column="1" />
+            Grid.Column="1" 
+            class="labelLeftAlign" />
         <Label
             x:Name="ExpertNameLabel"
-            VerticalOptions="Center"
-            HorizontalOptions="Start"
             Grid.Row="3"
-            Grid.Column="2" />
+            Grid.Column="2" 
+            class="labelLeftAlign" />
         <!-- Buttons -->
         <FlexLayout
             Grid.Row="4"
@@ -81,22 +72,12 @@
             <Button 
                 x:Name="ResetButton"
                 Text="Reset Scores" 
-                Padding="5"
-                CornerRadius="0"
-                HeightRequest="30"
-                TextColor="Black"
-                BackgroundColor="#F0F0F0"
-                BorderColor="#A0A0A0"/>
+                class="buttonGeneric"
+                WidthRequest="100" />
             <Button 
                 x:Name="OKButton"
                 Text="OK"
-                Padding="5"
-                CornerRadius="0"
-                HeightRequest="30"
-                WidthRequest="75"
-                TextColor="Black"
-                BackgroundColor="#F0F0F0"
-                BorderColor="#A0A0A0"/>
+                class="buttonGeneric" />
         </FlexLayout>
     </Grid>
 </ContentPage>

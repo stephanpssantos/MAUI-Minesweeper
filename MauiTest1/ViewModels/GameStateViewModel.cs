@@ -11,6 +11,7 @@ namespace MauiTest1
         private string mineCount = "000";
         private string timeElapsed = "000";
         private bool clockIsRunning = false;
+        private bool gameOver = false;
         private GameboardSetup gameboard;
         private ObservableCollection<int> gameboardState = new();
 
@@ -34,6 +35,7 @@ namespace MauiTest1
             MessagingCenter.Subscribe<Application>(this, "WindowResumed", (sender) => 
             {
                 if (timeElapsed == "000") return;
+                if (gameOver == true) return;
                 ClockIsRunning = true; 
             });
             MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => 
@@ -127,12 +129,14 @@ namespace MauiTest1
 
         private void NewGame()
         {
+            gameOver = false;
             GameboardSetup newGameboardSetup = new(Gameboard.BoardWidth, Gameboard.BoardHeight, Gameboard.BoardMines, Gameboard.BoardPreset);
             Gameboard = newGameboardSetup;
         }
 
         private void NewCustomGame(GameboardSetup setup)
         {
+            gameOver = false;
             Gameboard = setup;
         }
 
@@ -173,6 +177,7 @@ namespace MauiTest1
                 else if (cellValue < 0)
                 {
                     // Game over
+                    gameOver = true;
                     ClockIsRunning = false;
                     ExplodeAll(options.XPosition, options.YPosition);
                     LockBoard();
@@ -240,6 +245,7 @@ namespace MauiTest1
 
             if (!unflaggedMines || !unopenedNumbers)
             {
+                gameOver = true;
                 ClockIsRunning = false;
                 MineCount = "000";
                 OpenAll();
