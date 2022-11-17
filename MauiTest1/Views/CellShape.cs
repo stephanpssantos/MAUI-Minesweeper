@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui.Controls.Shapes;
 using Microsoft.Maui.Layouts;
 using MauiTest1.Helpers;
+using System.IO;
 
 namespace MauiTest1
 {
@@ -22,12 +23,19 @@ namespace MauiTest1
             get { return true; }
         }
 
-        public void Draw(Layout canvas)
+        public void Draw(ICanvas canvas)
         {
-            Polygon shape1 = new Polygon() { Fill = cellType.TopFill, Points = cellType.TopShape };
-            Polygon shape2 = new Polygon() { Fill = cellType.BottomFill, Points = cellType.BottomShape };
-            canvas.Children.Add(shape1);
-            canvas.Children.Add(shape2);
+            int x = this.xPosition * this.cellType.Size;
+            int y = this.yPosition * this.cellType.Size;
+            canvas.Translate(x, y);
+
+            canvas.FillColor = cellType.TopFill;
+            canvas.FillPath(cellType.TopShape);
+
+            canvas.FillColor = cellType.BottomFill;
+            canvas.FillPath(cellType.BottomShape);
+
+            canvas.Translate(-x, -y);
         }
     }
 }

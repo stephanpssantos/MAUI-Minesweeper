@@ -9,8 +9,8 @@ namespace MauiTest1
         private int bottomBorderDepth;
         private Color topFill;
         private Color bottomFill;
-        private PointCollection topShape;
-        private PointCollection bottomShape;
+        private PathF topShape;
+        private PathF bottomShape;
 
         public CellType(int size, int topBorderDepth, int bottomBorderDepth, Color topFill, Color bottomFill)
         {
@@ -19,38 +19,35 @@ namespace MauiTest1
             this.bottomBorderDepth = bottomBorderDepth;
             this.topFill = topFill;
             this.bottomFill = bottomFill;
-            this.Draw();
+            this.MakePaths();
         }
 
-        public PointCollection TopShape { get { return topShape; } }
-        public PointCollection BottomShape { get { return bottomShape; } }
+        public int Size { get { return size; } }
+        public PathF TopShape { get { return topShape; } }
+        public PathF BottomShape { get { return bottomShape; } }
         public Color TopFill { get { return topFill; } }
         public Color BottomFill { get { return bottomFill; } }
 
-        public void Draw()
+        public void MakePaths()
         {
-            PointCollection new0 = new()
-            {
-                new Point(0, 0),
-                new Point(size, 0),
-                new Point(size - topBorderDepth, topBorderDepth),
-                new Point(topBorderDepth, topBorderDepth),
-                new Point(topBorderDepth, size - topBorderDepth),
-                new Point(0, size)
-            };
+            PathF topPath = new PathF();
+            topPath.MoveTo(0, 0);
+            topPath.LineTo(size, 0);
+            topPath.LineTo(size - topBorderDepth, topBorderDepth);
+            topPath.LineTo(topBorderDepth, topBorderDepth);
+            topPath.LineTo(topBorderDepth, size - topBorderDepth);
+            topPath.LineTo(0, size);
 
-            PointCollection new1 = new()
-            {
-                new Point(size, 0),
-                new Point(size - bottomBorderDepth, bottomBorderDepth),
-                new Point(size - bottomBorderDepth, size - bottomBorderDepth),
-                new Point(bottomBorderDepth, size - bottomBorderDepth),
-                new Point(0, size),
-                new Point(size, size)
-            };
+            PathF bottomPath = new PathF();
+            bottomPath.MoveTo(size, 0);
+            bottomPath.LineTo(size - bottomBorderDepth, bottomBorderDepth);
+            bottomPath.LineTo(size - bottomBorderDepth, size - bottomBorderDepth);
+            bottomPath.LineTo(bottomBorderDepth, size - bottomBorderDepth);
+            bottomPath.LineTo(0, size);
+            bottomPath.LineTo(size, size);
 
-            topShape = new0;
-            bottomShape = new1;
+            topShape = topPath;
+            bottomShape = bottomPath;
         }
     }
 }

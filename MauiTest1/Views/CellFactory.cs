@@ -1,5 +1,6 @@
 ﻿namespace MauiTest1
 {
+    // Convert this into a singleton
     public class CellFactory
     {
         private Dictionary<int, CellType> cellTypes = new();
@@ -12,6 +13,7 @@
             }
             else
             {
+                // Log an exception
                 return null;
             }
         }
@@ -20,6 +22,7 @@
         {
             if (cellTypes.ContainsKey(id)) 
             {
+                // Log an exception
                 return;
             }
             else
