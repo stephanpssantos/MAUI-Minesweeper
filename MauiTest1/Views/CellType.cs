@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Controls.Shapes;
-
-namespace MauiTest1
+﻿namespace MauiTest1
 {
     public class CellType
     {

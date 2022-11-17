@@ -1,9 +1,13 @@
 ﻿namespace MauiTest1
 {
-    // Convert this into a singleton
-    public class CellFactory
+    public sealed class CellFactory
     {
-        private Dictionary<int, CellType> cellTypes = new();
+        private static readonly Lazy<CellFactory> lazy = new Lazy<CellFactory>(() => new CellFactory());
+        private static Dictionary<int, CellType> cellTypes = new();
+
+        private CellFactory() { }
+
+        public static CellFactory Instance { get { return lazy.Value; } }
 
         public CellType GetCellType(int id)
         {
