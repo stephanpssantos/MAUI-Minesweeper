@@ -6,14 +6,14 @@ namespace MauiTest1
 {
     public class GameStateViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private string mineCount = "000";
         private string timeElapsed = "000";
         private bool clockIsRunning = false;
         private bool gameOver = false;
         private GameboardSetup gameboard;
         private ObservableCollection<int> gameboardState = new();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         // this attribute sets the propertyName parameter
         // using the context in which this method is called

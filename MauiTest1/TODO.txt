@@ -1,3 +1,5 @@
+!!Read information about how SetBinding works.
+
 Big TODOs:
 -Get it working on Android
 -Marks command

@@ -54,6 +54,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Views\CellFactory.bak.cs" />
+	  <Compile Remove="Views\CellShape.bak.cs" />
+	  <Compile Remove="Views\CellType.bak.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Monitoring\Monitoring.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Update="Pages\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
 	  </Compile>

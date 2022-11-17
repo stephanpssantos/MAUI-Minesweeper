@@ -33,13 +33,16 @@
                     <x:Int32>5</x:Int32>
                 </x:Arguments>
             </custom_components:DiagonalBlockShape>
-            <custom_components:Gameboard Grid.Row="1" 
+            <!--<Grid x:Name="TestLayout" />-->
+            <!--<AbsoluteLayout x:Name="TestLayout1" />-->
+            <AbsoluteLayout x:Name="TestLayout2" />
+            <!--<custom_components:Gameboard Grid.Row="1" 
                                          Grid.Column="0" 
                                          BoardSetup="{Binding Gameboard}"
                                          BoardState="{Binding GameboardState, Mode=TwoWay}"
                                          Margin="3"  
                                          HorizontalOptions="Center" 
-                                         VerticalOptions="Center"/>
+                                         VerticalOptions="Center"/>-->
         </Grid>
     </Grid>
 
