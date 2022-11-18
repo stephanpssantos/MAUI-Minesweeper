@@ -1,9 +1,4 @@
-﻿using Microsoft.Maui.Controls.Shapes;
-using Microsoft.Maui.Layouts;
-using MauiTest1.Helpers;
-using System.IO;
-
-namespace MauiTest1
+﻿namespace MauiTest1
 {
     public class CellShape
     {

@@ -8,7 +8,7 @@
         private CellFactory() 
         {
             // Use stored resources for the colors
-            // Add comments here for the different cell types
+            // These are the defaults. Add comments here for the different cell types.
             this.MakeCellType(0, 16, 3, 3, Color.FromArgb("#FFDDDDDD"), Color.FromArgb("#FF999999"));
             this.MakeCellType(1, 16, 3, 3, Color.FromArgb("#FFAADDAA"), Color.FromArgb("#FF009900"));
         }

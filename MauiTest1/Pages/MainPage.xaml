@@ -3,9 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:custom_components="clr-namespace:MauiTest1"
              x:Class="MauiTest1.MainPage">
-    <ContentPage.Resources>
-        <custom_components:GameboardCanvas x:Key="DrawableCanvas" />
-    </ContentPage.Resources>
     <Grid>
         <AbsoluteLayout x:Name="ToolbarContainer">
             <custom_components:Toolbar 
@@ -32,16 +29,10 @@
             </FlexLayout>
             <custom_components:DiagonalBlockShape Grid.Row="1" Grid.Column="0">
                 <x:Arguments>
-                    <x:Int32>5</x:Int32>
+                    <x:Int32>4</x:Int32>
                 </x:Arguments>
             </custom_components:DiagonalBlockShape>
-            <GraphicsView 
-                Grid.Row="1"
-                Grid.Column="0"
-                Margin="5"
-                HorizontalOptions="Fill" 
-                VerticalOptions="Fill" 
-                Drawable="{StaticResource DrawableCanvas}" />
+            <custom_components:GameboardGraphicsView Grid.Row="1" Grid.Column="0" BoardSetup="{Binding Gameboard}" />
             <!--<custom_components:Gameboard Grid.Row="1" 
                                          Grid.Column="0" 
                                          BoardSetup="{Binding Gameboard}"
