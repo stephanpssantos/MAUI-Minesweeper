@@ -11,7 +11,8 @@ namespace MauiTest1
         private bool clockIsRunning = false;
         private bool gameOver = false;
         private GameboardSetup gameboard;
-        private ObservableCollection<int> gameboardState = new();
+        private ObservableCollection<int> gameboardState;
+        private ObservableCollection<CellShape> gameboardState_new;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -125,6 +126,12 @@ namespace MauiTest1
         {
             get => gameboardState;
             set { gameboardState = value; NotifyPropertyChanged(); }
+        }
+
+        public ObservableCollection<CellShape> GameboardState_new
+        {
+            get => gameboardState_new;
+            set { gameboardState_new = value; NotifyPropertyChanged(); }
         }
 
         private void NewGame()

@@ -137,7 +137,7 @@
         <Setter Property="TextColor" Value="Black" />
     </Style>
 
-    <!-- Smiley Button -->
+    <!-- GameboardCell Button -->
     <Style x:Key="gameboardCellButton" TargetType="Button">
         <Setter Property="HeightRequest" Value="14" />
         <Setter Property="WidthRequest" Value="14" />

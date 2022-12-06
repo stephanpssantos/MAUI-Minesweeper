@@ -10,9 +10,8 @@ namespace MauiTest1
         private CellFactory() 
         {
             // Use stored resources for the colors
-            // These are the defaults. Add comments here for the different cell types.
-            this.MakeCellType(0, 16, 2, 2, Color.FromArgb("#FFFFFFFF"), Color.FromArgb("#FF808080"));
-            this.MakeCellType(1, 16, 3, 3, Color.FromArgb("#FFAADDAA"), Color.FromArgb("#FF009900"));
+            this.MakeCellType(0, 16, 2, 2, Color.FromArgb("#FFFFFFFF"), Color.FromArgb("#FF808080")); // Default cell style
+            this.MakeCellType(1, 16, 1, 0, Color.FromArgb("#FF808080"), Color.FromArgb("#FF000000")); // Pressed cell style
         }
 
         public static CellFactory Instance { get { return lazy.Value; } }
