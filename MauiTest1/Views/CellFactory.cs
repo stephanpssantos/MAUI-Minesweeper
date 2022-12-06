@@ -1,4 +1,6 @@
-﻿namespace MauiTest1
+﻿using MauiTest1.Helpers;
+
+namespace MauiTest1
 {
     public sealed class CellFactory
     {
@@ -9,7 +11,7 @@
         {
             // Use stored resources for the colors
             // These are the defaults. Add comments here for the different cell types.
-            this.MakeCellType(0, 16, 3, 3, Color.FromArgb("#FFDDDDDD"), Color.FromArgb("#FF999999"));
+            this.MakeCellType(0, 16, 2, 2, Color.FromArgb("#FFFFFFFF"), Color.FromArgb("#FF808080"));
             this.MakeCellType(1, 16, 3, 3, Color.FromArgb("#FFAADDAA"), Color.FromArgb("#FF009900"));
         }
 
