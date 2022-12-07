@@ -80,6 +80,7 @@ public class GameboardGraphicsView : GraphicsView
         if (args.PropertyName != "BoardSetup") return;
 
         // Clear old board (if any)
+        GameBoardState.CollectionChanged -= RedrawBoard;
         Invalidate();
 
         canvas.Height = BoardSetup.BoardHeight;
@@ -97,8 +98,6 @@ public class GameboardGraphicsView : GraphicsView
             }
         }
 
-        // I'm not sure, but it's possible that I should remove previous additions
-        // to GameBoardState.CollectionChanged before adding new ones.
         GameBoardState = newShapes;
         canvas.Shapes = GameBoardState;
         GameBoardState.CollectionChanged += RedrawBoard; 
