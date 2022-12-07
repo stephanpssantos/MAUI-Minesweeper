@@ -11,7 +11,7 @@ public partial class SmileyButton : ContentView
         UnframedSmileyButton.Pressed += OnUnframedSmileyButtonPressed;
         UnframedSmileyButton.Released += OnUnframedSmileyButtonReleased;
 
-        MessagingCenter.Subscribe<GameboardCell, int>(this, "SmileyFace", (sender, args) => { DisplayFace(args); });
+        MessagingCenter.Subscribe<Application, int>(this, "SmileyFace", (sender, args) => { DisplayFace(args); });
         MessagingCenter.Subscribe<GameStateViewModel, int>(this, "SmileyFace", (sender, args) => { DisplayFace(args); });
     }
 
@@ -42,7 +42,7 @@ public partial class SmileyButton : ContentView
             ClockIsRunning = !ClockIsRunning;
         }
         
-        MessagingCenter.Send<SmileyButton>(this, "NewGame");
+        MessagingCenter.Send<Application>(Application.Current, "NewGame");
         DisplayFace(0);
     }
 

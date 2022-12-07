@@ -49,8 +49,28 @@ public class GameboardGraphicsView : GraphicsView
         int cellY = (int)clickLocation.Y / 16;
         int cellIndex = (cellY * BoardSetup.BoardWidth) + cellX;
 
-        // This should just be a click indicator GameboardOptionsPopup(?)
-        GameBoardState[cellIndex] = new CellShape(cellX, cellY, CellFactory.Instance.GetCellType(1));
+        // Prevent clicks on non-open cells.
+        if (GameBoardState[cellIndex].CellType.TypeID == 3) return;
+
+        // This has to be a clone so that GameBoardState.CollectionChanged triggers.
+        CellShape newCell = GameBoardState[cellIndex].Clone();
+        newCell.CellType = CellFactory.Instance.GetCellType(7);
+        GameBoardState[cellIndex] = newCell;
+
+        // Taken from GameboardCell.cs; should work the same.
+        GameboardCellOptions options = new()
+        {
+            BoardWidth = BoardSetup.BoardWidth,
+            BoardHeight = BoardSetup.BoardHeight,
+            XPosition = cellX,
+            YPosition = cellY,
+            ParentX = (int)this.X,
+            ParentY = (int)this.Y,
+            CellIndex = cellIndex
+        };
+
+        MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 1);
+        MessagingCenter.Send<GameboardGraphicsView, GameboardCellOptions>(this, "CellClick", options);
     }
 
     private void RegenerateBoard(object sender, EventArgs e)
@@ -58,7 +78,10 @@ public class GameboardGraphicsView : GraphicsView
         if (!this.IsLoaded) return;
         if (e is not PropertyChangedEventArgs args) return;
         if (args.PropertyName != "BoardSetup") return;
-        
+
+        // Clear old board (if any)
+        Invalidate();
+
         canvas.Height = BoardSetup.BoardHeight;
         canvas.Width = BoardSetup.BoardWidth;
         this.WidthRequest = 16 * BoardSetup.BoardWidth;
@@ -69,7 +92,8 @@ public class GameboardGraphicsView : GraphicsView
         {
             for (int x = 0; x < BoardSetup.BoardWidth; x++)
             {
-                newShapes.Add(new CellShape(x, y, CellFactory.Instance.GetCellType(0)));
+                int internalValue = BoardSetup.BoardPositions[x, y];
+                newShapes.Add(new CellShape(x, y, internalValue, CellFactory.Instance.GetCellType(0)));
             }
         }
 

@@ -2,6 +2,7 @@
 {
     public class CellType
     {
+        private int typeID;
         private int size;
         private int topBorderDepth;
         private int bottomBorderDepth;
@@ -10,8 +11,9 @@
         private PathF topShape;
         private PathF bottomShape;
 
-        public CellType(int size, int topBorderDepth, int bottomBorderDepth, Color topFill, Color bottomFill)
+        public CellType(int typeID, int size, int topBorderDepth, int bottomBorderDepth, Color topFill, Color bottomFill)
         {
+            this.typeID = typeID;
             this.size = size;
             this.topBorderDepth = topBorderDepth;
             this.bottomBorderDepth = bottomBorderDepth;
@@ -20,6 +22,7 @@
             this.MakePaths();
         }
 
+        public int TypeID { get { return typeID; } }
         public int Size { get { return size; } }
         public PathF TopShape { get { return topShape; } }
         public PathF BottomShape { get { return bottomShape; } }

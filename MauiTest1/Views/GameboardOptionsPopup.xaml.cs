@@ -3,7 +3,7 @@ namespace MauiTest1;
 public partial class GameboardOptionsPopup : ContentView
 {
 	private bool isOpen = false;
-	private GameboardCell lastClicked;
+	private GameboardCellOptions lastClicked;
 
 	public GameboardOptionsPopup()
 	{
@@ -14,12 +14,13 @@ public partial class GameboardOptionsPopup : ContentView
 
         MessagingCenter.Subscribe<OptionsPopupCell>(this, "ClosePopup", (sender) => { ClosePopup(null, null); });
         MessagingCenter.Subscribe<Toolbar>(this, "ClosePopup", (sender) => { ClosePopup(this, null); });
-        MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => {
-            if (sender is GameboardCell clicked)
+        MessagingCenter.Subscribe<GameboardGraphicsView, GameboardCellOptions>(this, "CellClick", (sender, arg) => 
+        {
+            if (arg is GameboardCellOptions clicked)
             {
-                if (clicked == lastClicked)
+                if (lastClicked is not null && clicked.XPosition == lastClicked.XPosition && clicked.YPosition == lastClicked.YPosition)
                 {
-                    MessagingCenter.Send<GameboardCell, int>(lastClicked, "SmileyFace", 0);
+                    MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 0);
                     ClosePopup(this, null);
                     return;
                 }
@@ -31,18 +32,20 @@ public partial class GameboardOptionsPopup : ContentView
 
 	private void ClosePopupButtonPressed(object sender, EventArgs e)
 	{
-        MessagingCenter.Send<GameboardCell, int>(lastClicked, "SmileyFace", 0);
+        MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 0);
         ClosePopup(this, null);
 	}
 
 	private void GameboardCellClicked(GameboardCellOptions options)
 	{
-		if (isOpen && lastClicked is not null)
-		{
-            lastClicked.ResetCellStatus();
-		}
+        if (isOpen && lastClicked is not null)
+        {
+            MessagingCenter.Send<Application, int>(Application.Current, "ResetCell", lastClicked.CellIndex);
+        }
 
-		ClearButton.xPosition = options.XPosition;
+        // This is so when one of these buttons is clicked, it gets a
+        // reference to the active gameboard cell.
+        ClearButton.xPosition = options.XPosition;
 		ClearButton.yPosition = options.YPosition;
         MarkButton.xPosition = options.XPosition;
         MarkButton.yPosition = options.YPosition;
@@ -51,15 +54,15 @@ public partial class GameboardOptionsPopup : ContentView
         CancelButton.xPosition = options.XPosition;
         CancelButton.yPosition = options.YPosition;
 
-        // 27 = 16 block size + (16 / 2) to center + 3 padding of one side
-        int newX = options.ParentX + (options.XPosition * 16) - 27;
-        // 38 = 16 block size * 2 rows + 6 padding
-        int newY = options.ParentY + (options.YPosition * 16) - 38;
+        // 26 = 16 block size + (16 / 2) to center + 2 padding of one side
+        int newX = options.ParentX + (options.XPosition * 16) - 26;
+        // 37 = 16 block size * 2 rows + 5 padding
+        int newY = options.ParentY + (options.YPosition * 16) - 37;
 
-		// 14 = 10 padding + 4 border (?)
-		int xWidthCalc = (options.XBoardSize * 16) + (options.ParentX * 2) - 14;
+		// 13 = 10 padding + 3 border (?)
+		int xWidthCalc = (options.BoardWidth * 16) + (options.ParentX * 2) - 13;
 		if (newX + 70 > xWidthCalc) newX = xWidthCalc - 70;
-        if (newX < 14) newX = 14;
+        if (newX < 14) newX = 13;
 
 		AbsoluteLayout.SetLayoutBounds(PopupGridWrapper, new Rect(newX, newY, 70, 38));
 		
@@ -73,7 +76,7 @@ public partial class GameboardOptionsPopup : ContentView
 	{
         if (sender is not null && lastClicked is not null)
         {
-            lastClicked.ResetCellStatus();
+            MessagingCenter.Send<Application, int>(Application.Current, "ResetCell", lastClicked.CellIndex);
         }
 
         isOpen = false;

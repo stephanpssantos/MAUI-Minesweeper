@@ -27,9 +27,9 @@ namespace MauiTest1
 
         public GameStateViewModel()
         {
-            MessagingCenter.Subscribe<Toolbar>(this, "NewGame", (sender) => { NewGame(); });
-            MessagingCenter.Subscribe<SmileyButton>(this, "NewGame", (sender) => { NewGame(); });
+            MessagingCenter.Subscribe<Application>(this, "NewGame", (sender) => { NewGame(); });
             MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
+            MessagingCenter.Subscribe<Application, int>(this, "ResetCell", (sender, args) => { ResetCell(args); });
             MessagingCenter.Subscribe<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", (sender, args) => { PopupCellOptionClicked(args); });
             MessagingCenter.Subscribe<CustomGamePage, GameboardSetup>(this, "NewCustomGame", (sender, args) => { NewCustomGame(args); });
             MessagingCenter.Subscribe<Application>(this, "WindowStopped", (sender) => { ClockIsRunning = false; });
@@ -39,7 +39,7 @@ namespace MauiTest1
                 if (gameOver == true) return;
                 ClockIsRunning = true; 
             });
-            MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) => 
+            MessagingCenter.Subscribe<GameboardGraphicsView, GameboardCellOptions>(this, "CellClick", (sender, arg) =>
             {
                 if (ClockIsRunning == false)
                 {
@@ -136,6 +136,7 @@ namespace MauiTest1
 
         private void NewGame()
         {
+            MessagingCenter.Send<GameStateViewModel>(this, "UnlockBoard");
             gameOver = false;
             GameboardSetup newGameboardSetup = new(Gameboard.BoardWidth, Gameboard.BoardHeight, Gameboard.BoardMines, Gameboard.BoardPreset);
             Gameboard = newGameboardSetup;
@@ -143,15 +144,34 @@ namespace MauiTest1
 
         private void NewCustomGame(GameboardSetup setup)
         {
+            MessagingCenter.Send<GameStateViewModel>(this, "UnlockBoard");
             gameOver = false;
             Gameboard = setup;
         }
 
-        private void LockBoard()
+        // Used when you are setting multiple cells at once (e.g. in a loop.)
+        // Set all cell values, then call this to avoid having to redraw multiple times.
+        private void RedrawCells()
         {
-            // Each button has a listener that individually disables it.
-            // This is what I am doing because I cannot just disable the gameboard. It is a MAUI bug.
-            MessagingCenter.Send<GameStateViewModel>(this, "LockBoard");
+            if (GameboardState_new is null) return;
+            CellShape newCell = GameboardState_new[0].Clone();
+            GameboardState_new[0] = newCell;
+        }
+
+        // Will immediately redraw.
+        private void SetCellState(int cellIndex, int newState)
+        {
+            if (GameboardState_new is null || cellIndex >= GameboardState_new.Count) return;
+            if (newState < 0 || newState > 7) return;
+
+            CellShape newCell = GameboardState_new[cellIndex].Clone();
+            newCell.CellType = CellFactory.Instance.GetCellType(newState);
+            GameboardState_new[cellIndex] = newCell;
+        }
+
+        private void ResetCell(int cellIndex)
+        {
+            SetCellState(cellIndex, 0);
         }
 
         private void IncrementTimeElapsed(int value = 1)
@@ -177,7 +197,7 @@ namespace MauiTest1
             {
                 if (cellValue > 0) 
                 {
-                    GameboardState[cellIndex] = 3;
+                    SetCellState(cellIndex, 3);
                     MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                     CheckVictory();
                 }
@@ -187,19 +207,20 @@ namespace MauiTest1
                     gameOver = true;
                     ClockIsRunning = false;
                     ExplodeAll(options.XPosition, options.YPosition);
-                    LockBoard();
+                    MessagingCenter.Send<GameStateViewModel>(this, "LockBoard");
                     MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 3);
                 }
                 else if (cellValue == 0)
                 {
                     OpenSurroundings(options.XPosition, options.YPosition);
+                    this.RedrawCells();
                     MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                 }
             }
             else if (options.ActionName == "Mark")
             {
                 MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
-                GameboardState[cellIndex] = 1;
+                SetCellState(cellIndex, 1);
             }
             else if (options.ActionName == "Flag")
             {
@@ -207,21 +228,19 @@ namespace MauiTest1
                 int mineCountInt = Int32.Parse(MineCount);
                 mineCountInt--;
                 MineCount = mineCountInt.ToString();
-                GameboardState[cellIndex] = 2;
+                SetCellState(cellIndex, 2);
                 if (mineCountInt == 0) CheckVictory();
             }
             else if (options.ActionName == "Cancel")
             {
                 MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
-                if (GameboardState[cellIndex] == 2)
+                if (GameboardState_new[cellIndex].CellType.TypeID == 2)
                 {
                     int mineCountInt = Int32.Parse(MineCount);
                     mineCountInt++;
                     MineCount = mineCountInt.ToString();
                 }
-                // 7 is 'reset' to force property changed event trigger
-                GameboardState[cellIndex] = 7;
-                GameboardState[cellIndex] = 0;
+                SetCellState(cellIndex, 0);
             }
         }
 
@@ -238,12 +257,12 @@ namespace MauiTest1
                     int currentCellValue = Gameboard.BoardPositions[x, y];
 
                     // if currentCell has mine and is not flagged
-                    if (currentCellValue == -1 && GameboardState[currentCellIndex] != 2)
+                    if (currentCellValue == -1 && GameboardState_new[currentCellIndex].CellType.TypeID != 2)
                     {
                         unflaggedMines = true;
                     }
                     // if currentCell is number and is not open
-                    if (currentCellValue > 0 && GameboardState[currentCellIndex] != 3)
+                    if (currentCellValue > 0 && GameboardState_new[currentCellIndex].CellType.TypeID != 3)
                     {
                         unopenedNumbers = true;
                     }
@@ -256,9 +275,9 @@ namespace MauiTest1
                 ClockIsRunning = false;
                 MineCount = "000";
                 OpenAll();
-                LockBoard();
-                CheckHighScores();
+                MessagingCenter.Send<GameStateViewModel>(this, "LockBoard");
                 MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 2);
+                CheckHighScores();
             }
         }
 
@@ -313,23 +332,25 @@ namespace MauiTest1
                     int currentCellIndex = (y * Gameboard.BoardWidth) + x;
                     int currentCellValue = Gameboard.BoardPositions[x, y];
 
-                    if (currentCellValue == -1 && GameboardState[currentCellIndex] != 2)
+                    if (currentCellValue == -1 && GameboardState_new[currentCellIndex].CellType.TypeID != 2)
                     {
-                        GameboardState[currentCellIndex] = 2;
+                        GameboardState_new[currentCellIndex].CellType = CellFactory.Instance.GetCellType(2);
                     }
-                    if (currentCellValue > 0 && GameboardState[currentCellIndex] != 3)
+                    if (currentCellValue > 0 && GameboardState_new[currentCellIndex].CellType.TypeID != 3)
                     {
-                        GameboardState[currentCellIndex] = 3;
+                        GameboardState_new[currentCellIndex].CellType = CellFactory.Instance.GetCellType(3);
                     }
                 }
             }
+
+            this.RedrawCells();
         }
 
         private void ExplodeAll(int xPosition, int yPosition)
         {
             // xPosition and yPosition are the coordinates for the clicked mine
             int cellIndex = (yPosition * Gameboard.BoardWidth) + xPosition;
-            GameboardState[cellIndex] = 5;
+            GameboardState_new[cellIndex].CellType = CellFactory.Instance.GetCellType(5);
 
             for (int y = 0; y < Gameboard.BoardHeight; y++)
             {
@@ -338,16 +359,18 @@ namespace MauiTest1
                     int currentCellIndex = (y * Gameboard.BoardWidth) + x;
                     int currentCellValue = Gameboard.BoardPositions[x, y];
 
-                    if (currentCellValue == -1 && GameboardState[currentCellIndex] == 0)
+                    if (currentCellValue == -1 && GameboardState_new[currentCellIndex].CellType.TypeID == 0)
                     {
-                        GameboardState[currentCellIndex] = 4;
+                        GameboardState_new[currentCellIndex].CellType = CellFactory.Instance.GetCellType(4);
                     }
-                    if (currentCellValue != -1 && GameboardState[currentCellIndex] == 2)
+                    if (currentCellValue != -1 && GameboardState_new[currentCellIndex].CellType.TypeID == 2)
                     {
-                        GameboardState[currentCellIndex] = 6;
+                        GameboardState_new[currentCellIndex].CellType = CellFactory.Instance.GetCellType(6);
                     }
                 }
             }
+
+            this.RedrawCells();
         }
 
         private void OpenSurroundings(int xPosition, int yPosition)
@@ -355,9 +378,10 @@ namespace MauiTest1
             int cellIndex = (yPosition * Gameboard.BoardWidth) + xPosition;
             int cellValue = Gameboard.BoardPositions[xPosition, yPosition];
 
-            if (GameboardState[cellIndex] != 0) return;
+            // Pressed or open, because it will check the surroundings as well as the currently pressed button
+            if (GameboardState_new[cellIndex].CellType.TypeID != 0 && GameboardState_new[cellIndex].CellType.TypeID != 7) return;
             if (cellValue == -1) return;
-            if (cellValue >= 0) GameboardState[cellIndex] = 3;
+            if (cellValue >= 0) GameboardState_new[cellIndex].CellType = CellFactory.Instance.GetCellType(3);
             if (cellValue == 0)
             {
                 // Check left

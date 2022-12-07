@@ -17,6 +17,16 @@ public partial class MainPage : ContentPage
         ToolbarContainer.ZIndex = 1;
         PopupContainer.ZIndex = 1;
 
+        MessagingCenter.Subscribe<GameStateViewModel>(this, "LockBoard", (sender) => 
+        {
+            GameboardCanvas.IsEnabled = false;
+        });
+
+        MessagingCenter.Subscribe<GameStateViewModel>(this, "UnlockBoard", (sender) =>
+        {
+            GameboardCanvas.IsEnabled = true;
+        });
+
         MessagingCenter.Subscribe<Toolbar>(this, "ExitGame", (sender) => 
         {
             Window parentWindow = GetParentWindow();

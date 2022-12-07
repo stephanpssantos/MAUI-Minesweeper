@@ -32,7 +32,8 @@
                     <x:Int32>4</x:Int32>
                 </x:Arguments>
             </custom_components:DiagonalBlockShapeResizable>
-            <custom_components:GameboardGraphicsView Grid.Row="1" 
+            <custom_components:GameboardGraphicsView x:Name="GameboardCanvas"
+                                                     Grid.Row="1" 
                                                      Grid.Column="0" 
                                                      BoardSetup="{Binding Gameboard}" 
                                                      GameBoardState="{Binding GameboardState_new, Mode=TwoWay}" />
