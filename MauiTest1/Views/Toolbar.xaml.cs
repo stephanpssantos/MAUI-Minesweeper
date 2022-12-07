@@ -99,7 +99,7 @@ public partial class Toolbar : ContentView
 
     private void OnGameMenuNewButtonClicked(object sender, EventArgs e)
     {
-        MessagingCenter.Send<Application>(Application.Current, "NewGame");
+        MessagingCenter.Send<Application, GameboardSetup>(Application.Current, "NewGame", null);
         OnToolbarButtonClicked(GameButton, null);
     }
 

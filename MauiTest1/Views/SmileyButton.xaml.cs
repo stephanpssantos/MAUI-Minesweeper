@@ -41,7 +41,7 @@ public partial class SmileyButton : ContentView
             ClockIsRunning = !ClockIsRunning;
         }
         
-        MessagingCenter.Send<Application>(Application.Current, "NewGame");
+        MessagingCenter.Send<Application, GameboardSetup>(Application.Current, "NewGame", null);
         DisplayFace(0);
     }
 

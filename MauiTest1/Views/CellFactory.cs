@@ -19,6 +19,7 @@ namespace MauiTest1
             this.MakeCellType(3, 16, 1, 0, Color.FromArgb("#FF808080"), Color.FromArgb("#FF000000")); // Open 
             this.MakeCellType(4, 16, 1, 0, Color.FromArgb("#FF808080"), Color.FromArgb("#FF000000")); // Exploded
             this.MakeCellType(5, 16, 1, 0, Color.FromArgb("#FF808080"), Color.FromArgb("#FF000000")); // Explosion
+            this.MakeCellType(6, 16, 1, 0, Color.FromArgb("#FF808080"), Color.FromArgb("#FF000000")); // False flag
             this.MakeCellType(7, 16, 1, 0, Color.FromArgb("#FF808080"), Color.FromArgb("#FF000000")); // Pressed
         }
 

@@ -14,20 +14,7 @@ public partial class GameboardOptionsPopup : ContentView
 
         MessagingCenter.Subscribe<OptionsPopupCell>(this, "ClosePopup", (sender) => { ClosePopup(null, null); });
         MessagingCenter.Subscribe<Toolbar>(this, "ClosePopup", (sender) => { ClosePopup(this, null); });
-        MessagingCenter.Subscribe<GameboardGraphicsView, GameboardCellOptions>(this, "CellClick", (sender, arg) => 
-        {
-            if (arg is GameboardCellOptions clicked)
-            {
-                if (lastClicked is not null && clicked.XPosition == lastClicked.XPosition && clicked.YPosition == lastClicked.YPosition)
-                {
-                    MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 0);
-                    ClosePopup(this, null);
-                    return;
-                }
-                GameboardCellClicked(arg);
-                lastClicked = clicked;
-            }
-        });
+        MessagingCenter.Subscribe<GameboardGraphicsView, GameboardCellOptions>(this, "CellClick", (sender, arg) => { GameboardCellClicked(arg); });
     }
 
 	private void ClosePopupButtonPressed(object sender, EventArgs e)
@@ -36,7 +23,19 @@ public partial class GameboardOptionsPopup : ContentView
         ClosePopup(this, null);
 	}
 
-	private void GameboardCellClicked(GameboardCellOptions options)
+    private void GameboardCellClicked(GameboardCellOptions options)
+    {
+        if (lastClicked is not null && options.XPosition == lastClicked.XPosition && options.YPosition == lastClicked.YPosition)
+        {
+            MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 0);
+            ClosePopup(this, null);
+            return;
+        }
+        OpenPopup(options);
+        lastClicked = options;
+    }
+
+	private void OpenPopup(GameboardCellOptions options)
 	{
         if (isOpen && lastClicked is not null)
         {

@@ -40,7 +40,7 @@ public partial class CustomGamePage : ContentPage
         }
 
 		GameboardSetup newSetup = GameboardSetupFactory.NewCustomSetup(width, height, mines);
-        MessagingCenter.Send<CustomGamePage, GameboardSetup>(this, "NewCustomGame", newSetup);
+        MessagingCenter.Send<Application, GameboardSetup>(Application.Current, "NewGame", newSetup);
 
         LocalConfig.ConfigJson.CustomBoardWidth = width;
         LocalConfig.ConfigJson.CustomBoardHeight = height;

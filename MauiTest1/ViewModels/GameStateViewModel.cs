@@ -16,38 +16,10 @@ namespace MauiTest1
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        // this attribute sets the propertyName parameter
-        // using the context in which this method is called
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            // if an event handler has been set, then invoke
-            // the delegate and pass the name of the property
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public GameStateViewModel()
         {
-            MessagingCenter.Subscribe<Application>(this, "NewGame", (sender) => { NewGame(); });
-            MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
-            MessagingCenter.Subscribe<Application, int>(this, "ResetCell", (sender, args) => { ResetCell(args); });
-            MessagingCenter.Subscribe<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", (sender, args) => { PopupCellOptionClicked(args); });
-            MessagingCenter.Subscribe<CustomGamePage, GameboardSetup>(this, "NewCustomGame", (sender, args) => { NewCustomGame(args); });
-            MessagingCenter.Subscribe<Application>(this, "WindowStopped", (sender) => { ClockIsRunning = false; });
-            MessagingCenter.Subscribe<Application>(this, "WindowResumed", (sender) => 
-            {
-                if (timeElapsed == "000") return;
-                if (gameOver == true) return;
-                ClockIsRunning = true; 
-            });
-            MessagingCenter.Subscribe<GameboardGraphicsView, GameboardCellOptions>(this, "CellClick", (sender, arg) =>
-            {
-                if (ClockIsRunning == false)
-                {
-                    ClockIsRunning = true;
-                }
-            });
-
             string difficulty = LocalConfig.ConfigJson.LastGameDifficulty;
+
             Gameboard = difficulty switch
             {
                 "Intermediate" => GameboardSetupFactory.NewIntermediateSetup(),
@@ -59,6 +31,14 @@ namespace MauiTest1
                                     ),
                 _ => GameboardSetupFactory.NewBeginnerSetup(),
             };
+
+            MessagingCenter.Subscribe<Application, GameboardSetup>(this, "NewGame", (sender, args) => { NewGame(args); });
+            MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
+            MessagingCenter.Subscribe<Application, int>(this, "ResetCell", (sender, args) => { SetCellState(args, 0); });
+            MessagingCenter.Subscribe<GameboardGraphicsView, GameboardCellOptions>(this, "CellClick", (sender, arg) => { if (ClockIsRunning == false) ClockIsRunning = true; });
+            MessagingCenter.Subscribe<OptionsPopupCell, SelectedPopupCellOptions>(this, "OptionCellClicked", (sender, args) => { PopupCellOptionClicked(args); });
+            MessagingCenter.Subscribe<Application>(this, "WindowStopped", (sender) => { ClockIsRunning = false; });
+            MessagingCenter.Subscribe<Application>(this, "WindowResumed", (sender) => { ResumeTimer(); });
         }
 
         public string MineCount
@@ -134,18 +114,21 @@ namespace MauiTest1
             set { gameboardState_new = value; NotifyPropertyChanged(); }
         }
 
-        private void NewGame()
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            MessagingCenter.Send<GameStateViewModel>(this, "UnlockBoard");
-            gameOver = false;
-            GameboardSetup newGameboardSetup = new(Gameboard.BoardWidth, Gameboard.BoardHeight, Gameboard.BoardMines, Gameboard.BoardPreset);
-            Gameboard = newGameboardSetup;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void NewCustomGame(GameboardSetup setup)
+        private void NewGame(GameboardSetup setup = null)
         {
             MessagingCenter.Send<GameStateViewModel>(this, "UnlockBoard");
             gameOver = false;
+
+            if (setup is null)
+            {
+                setup = new(Gameboard.BoardWidth, Gameboard.BoardHeight, Gameboard.BoardMines, Gameboard.BoardPreset);
+            }
+
             Gameboard = setup;
         }
 
@@ -169,9 +152,11 @@ namespace MauiTest1
             GameboardState_new[cellIndex] = newCell;
         }
 
-        private void ResetCell(int cellIndex)
+        private void ResumeTimer()
         {
-            SetCellState(cellIndex, 0);
+            if (timeElapsed == "000") return;
+            if (gameOver == true) return;
+            ClockIsRunning = true;
         }
 
         private void IncrementTimeElapsed(int value = 1)
