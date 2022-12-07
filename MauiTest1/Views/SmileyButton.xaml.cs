@@ -12,7 +12,6 @@ public partial class SmileyButton : ContentView
         UnframedSmileyButton.Released += OnUnframedSmileyButtonReleased;
 
         MessagingCenter.Subscribe<Application, int>(this, "SmileyFace", (sender, args) => { DisplayFace(args); });
-        MessagingCenter.Subscribe<GameStateViewModel, int>(this, "SmileyFace", (sender, args) => { DisplayFace(args); });
     }
 
     public static readonly BindableProperty ClockIsRunningProperty =

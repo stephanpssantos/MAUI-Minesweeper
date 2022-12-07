@@ -198,7 +198,7 @@ namespace MauiTest1
                 if (cellValue > 0) 
                 {
                     SetCellState(cellIndex, 3);
-                    MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
+                    MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 0);
                     CheckVictory();
                 }
                 else if (cellValue < 0)
@@ -208,23 +208,26 @@ namespace MauiTest1
                     ClockIsRunning = false;
                     ExplodeAll(options.XPosition, options.YPosition);
                     MessagingCenter.Send<GameStateViewModel>(this, "LockBoard");
-                    MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 3);
+                    MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 3);
                 }
                 else if (cellValue == 0)
                 {
                     OpenSurroundings(options.XPosition, options.YPosition);
                     this.RedrawCells();
-                    MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
+                    MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 0);
                 }
             }
-            else if (options.ActionName == "Mark")
+            else
             {
-                MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
+                MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 0);
+            }
+            
+            if (options.ActionName == "Mark")
+            {
                 SetCellState(cellIndex, 1);
             }
             else if (options.ActionName == "Flag")
             {
-                MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                 int mineCountInt = Int32.Parse(MineCount);
                 mineCountInt--;
                 MineCount = mineCountInt.ToString();
@@ -233,7 +236,6 @@ namespace MauiTest1
             }
             else if (options.ActionName == "Cancel")
             {
-                MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 0);
                 if (GameboardState_new[cellIndex].CellType.TypeID == 2)
                 {
                     int mineCountInt = Int32.Parse(MineCount);
@@ -276,7 +278,7 @@ namespace MauiTest1
                 MineCount = "000";
                 OpenAll();
                 MessagingCenter.Send<GameStateViewModel>(this, "LockBoard");
-                MessagingCenter.Send<GameStateViewModel, int>(this, "SmileyFace", 2);
+                MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 2);
                 CheckHighScores();
             }
         }
