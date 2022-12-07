@@ -1,9 +1,21 @@
-!!Read information about how SetBinding works.
-
-Big TODOs:
+Big TODOs (12/6/2022):
 -Get it working on Android
+	-Replace ToolBar with mobile friendly nav bar
+-Get images working in canvas/GraphicsView
 -Marks command
 -Alternate color command
+
+@@@@@@@@@@@@@@@@@@@@@@@
+
+board state reminder:
+0 = closed
+1 = question mark
+2 = flag
+3 = opened
+4 = exploded
+5 = explosion
+6 = false flag
+7 = reset
 
 @@@@@@@@@@@@@@@@@@@@@@@
 
@@ -100,3 +112,129 @@ Big TODOs:
 	-store gamestateviewmodel in static class???
 	-Look into VisualStateManagers. Maybe visual state changes can be managed better from there (lol)
 	-Win platform app.xaml.cs needs refactoring
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Refactoring notes (~December)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Goal of refactoring was to see if I could improve performance.
+Use a GraphicsView to draw the board instead of using hundreds of Buttons.
+Possibly also try to make use of the new design patterns I learned about.
+//
+For Minesweeper, maybe I can replace all the buttons with a single giant button. Then all the "cells" can just be a custom component that only draws the shape.
+	Use a prototype for cells?
+Definitely try using the Flyweight pattern for all the cells (or should I? it might only be for storage space). Maybe try combining it with the Composite pattern, too.
+
+When adding children to an empty AbsoluteLayout:
+Adding 820 or fewer AbsoluteLayouts resulted in usualy ~30kb consistently of memory used. It didn't matter if it was 1 or 820 new layouts, it resulted in ~30kb of memory. Time to generate was mostly negligible. 
+Adding any more AbsoluteLayouts resulted in a significant spike in memory used and in time to generate. Where any Absolutelayouts less than 821 cost ~30kb of memory, any additional AbsoluteLayouts resulted in ~30kb of memory EACH. 
+Time to generate seems be going up exponentially regardless of that 820 threshold
+100 took 0 milliseconds
+400 took 4 milliseconds
+820 took 15 milliseconds
+1000 took 22 milliseconds
+1600 took 56 milliseconds
+
+Adding empty rows and columns to grid
+10x10 grid: 45kb, 1ms
+20x20 grid: 40kb, 1ms
+30x30 grid: 45kb, 1ms
+100x100 grid: 40kb, 1ms
+
+IF it makes it easier to use a grid and the cost stays consistent, that may be the way to go.
+It seems like it's a bad idea to put those cellshapes into an absolute layout as a container.
+Now I need to finish making the cellshapes and try either rendering it into a single giant absolute layout, or into a single giant grid.
+Before putting it into either though, I need to measure the performance hit involved with rendering all those shapes.
+It's also worth trying a version of the shape where the parameters are all the same - to see if I can keep that as instrinsic state.
+
+Drawing a "New" shape directly onto an absolute layout
+10 times took 73kb, 2ms
+100 times took 77kb, 4ms
+500 times took 4.9mb, 31ms
+1000 times took 10.8mb, 99ms
+10000 times took 186mb, 10.8s
+
+Drawing a cloned shape directly onto an absolute layer (by adding cloned polygons as children)
+This causes errors because we're adding the same element (polygons) to the same parent multiple times.
+I still have to make new Polygons, but I can share the points. Maybe it'll help?
+10 times took 77kb, 2ms
+100 times took 73kb, 4ms
+500 tiems took 3.9mb, 29ms
+1000 times took 10.5mb, 95ms
+10000 times took as much time as above
+
+There doesn't seem to be any appreciable difference with this approach.
+For fun, I tried to time how long it would take to add 1000 polygons using the same polygon (won't build, will cause errors)
+1000 times took 4.7mb, 55ms
+
+Maybe I can look for different ways of generating the same shape.
+Yes - look into Canvas/Draw graphics. That might be a way to do it. Canvas.DrawPath, maybe?
+https://learn.microsoft.com/en-us/dotnet/maui/user-interface/graphics/draw?view=net-maui-7.0
+convert your points into Path.LineTo thingies
+
+Using canvas + flyweight
+10 x 10 (100) took 671kb, 6ms
+20 x 20 (400) took 770kb, 12ms
+30 x 30 (900) took 2.9mb, 17ms
+100 x 100 (10000) took 22.5mb 150ms
+
+Winner!
+
+Convert factory into singleton
+
+Experiments to see how fast MessagingCenter is compared to just calling a method...
+5 methods no parameters: 36kb physical, 65kb virtual, .000356s; 36kb physical, 0 virtual, .0002609
+5 methods string parameter and concatenation: 36kb physical, 65kb virtual, .0003419; 45kb physical, 65kb virtual, .0004660;
+5 MessagingCenter messages no parameters: 40kb physical, 65kb virtual, .0007507
+5 MessagingCenter messages string parameter and concatenation: 40kb physical, 65kb virtual, .0007215; 49kb physical, 65kb virtual, .0007403s
+
+I need to see if it's worth keeping a reference to all the cellshapes... maybe in an array. See what the memory or time hit is like.
+If it's OK, then I can add Redraw to CellShape and make a CellType setter and make IsClickable work.
+Then I can make a static class with a references to the canvas draw.
+I'd need to figure out how to draw images on to the CellShapes too...
+
+It seems a canvas does need to be redrawn every time... so I do need to keep a reference to all the shapes so that I at least don't recalculate every single shape
+	every time a click or whatever happens.
+At least redrawing seems to be very quick and cheap. 0 memory and .00002 seconds.
+Instead of creating GameboardCanvas with BoardSetup.BoardWidth and BoardHeight, create it with a set of CellShapes. Then canvas can just iterate over it and draw.
+
+OK, so, resuming this after a while.
+I've made a subclass of DiagonalBlockShape that takes on BoardSetup as a property. It will now resize the border around the gameboard accordingly.
+Next, I'm going to: 
+	-add a click handler to the canvas. 
+	-The xy coordinates of the click need to be caught and transformed into cell coordinates
+	-The cell needs to be found and evaluated against gameboardState. (Like how Gameboard does it)
+	-The cell style of the selected cell needs to be updated accordingly.
+	-Redraw.
+	
+I've kinda done the above, but I can't figure out why GameboardState keeps being reset to null on startup urgh.
+Figured it out! It was being set to the property setters default value as soon as it existed the InitializeComponents method.
+Right now, you're trying to rewrite GameboardOptionsPopup.xaml.cs.
+	For some reason, the calculation on line 65 is wrong. newX and newY are way off. need to fix that.
+	Need to also figure out how to reset cell status from within gameboardoptionspopup.xaml.cs
+	OK
+
+Next, the smiley face isn't changing when I click on a cell...OK
+
+I need to make PopupCellOptionsClicked (GameStateViewModel 186) work, but before that, I need to set the innate value of the cells...OK
+And also, I need to add the numbers to it...but I need to make it so it only redraws once!! (OK)
+also, the font is fuxd (OK)
+also, I can click cells that are already clicked... (OK)
+Need to make versions 1-6 of the cell types (OK)
+Start timer on click (OK)
+Lock board on game over (OK)
+Redraw board on new game (OK)
+Make sure you can still win and everything (OK)
+Make GameboardCellOptions its own class (OK)
+Remove previous event handlers in GameboardGraphicsView (OK)
+Remove SmileyFace message on SmileyButton.xaml.cs and GameStateViewModel.cs; replace with generic Application type message. (OK)
+clean up messagingcenter methods in gamestateviewmodel and gameboardpopupoptions (OK)
+NewGame and NewCustomGame can be the same but with a default param (OK)
+Rework GameboardOptionsPopup cell as a standalone class (OK)
+Clear out old Gameboard, GameboardCell, and GameboardState (the old one) references. (OK)
+Remove the "_new" in GameboardState_new in GameStateViewModel (OK)
+Mobile friendly nav menus
+make work with Android
+Get the images working in canvas...
