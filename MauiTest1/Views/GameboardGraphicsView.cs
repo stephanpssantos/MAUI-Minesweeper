@@ -80,8 +80,11 @@ public class GameboardGraphicsView : GraphicsView
         if (args.PropertyName != "BoardSetup") return;
 
         // Clear old board (if any)
-        GameBoardState.CollectionChanged -= RedrawBoard;
-        Invalidate();
+        if (GameBoardState is not null)
+        {
+            GameBoardState.CollectionChanged -= RedrawBoard;
+            Invalidate();
+        }
 
         canvas.Height = BoardSetup.BoardHeight;
         canvas.Width = BoardSetup.BoardWidth;
