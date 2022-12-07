@@ -44,14 +44,14 @@ public partial class GameboardOptionsPopup : ContentView
 
         // This is so when one of these buttons is clicked, it gets a
         // reference to the active gameboard cell.
-        ClearButton.xPosition = options.XPosition;
-		ClearButton.yPosition = options.YPosition;
-        MarkButton.xPosition = options.XPosition;
-        MarkButton.yPosition = options.YPosition;
-        FlagButton.xPosition = options.XPosition;
-        FlagButton.yPosition = options.YPosition;
-        CancelButton.xPosition = options.XPosition;
-        CancelButton.yPosition = options.YPosition;
+        ClearButton.XPosition = options.XPosition;
+		ClearButton.YPosition = options.YPosition;
+        MarkButton.XPosition = options.XPosition;
+        MarkButton.YPosition = options.YPosition;
+        FlagButton.XPosition = options.XPosition;
+        FlagButton.YPosition = options.YPosition;
+        CancelButton.XPosition = options.XPosition;
+        CancelButton.YPosition = options.YPosition;
 
         // 26 = 16 block size + (16 / 2) to center + 2 padding of one side
         int newX = options.ParentX + (options.XPosition * 16) - 26;

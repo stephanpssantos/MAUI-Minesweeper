@@ -14,22 +14,22 @@
                     RowDefinitions="16, 16"
                     ColumnDefinitions="16, 16, 16, 16"
                     Style="{StaticResource popupGrid}">
-                    <custom_components:OptionsPopupCell x:Name="ClearButton" Grid.Row="0" Grid.Column="0" CellStyle="Clear">
+                    <custom_components:OptionsPopupCell x:Name="ClearButton" Grid.Row="0" Grid.Column="0">
                         <x:Arguments>
                             <x:String>Clear</x:String>
                         </x:Arguments>
                     </custom_components:OptionsPopupCell>
-                    <custom_components:OptionsPopupCell x:Name="MarkButton" Grid.Row="0" Grid.Column="1" CellStyle="Mark">
+                    <custom_components:OptionsPopupCell x:Name="MarkButton" Grid.Row="0" Grid.Column="1">
                         <x:Arguments>
                             <x:String>Mark</x:String>
                         </x:Arguments>
                     </custom_components:OptionsPopupCell>
-                    <custom_components:OptionsPopupCell x:Name="FlagButton" Grid.Row="0" Grid.Column="2" CellStyle="Flag">
+                    <custom_components:OptionsPopupCell x:Name="FlagButton" Grid.Row="0" Grid.Column="2">
                         <x:Arguments>
                             <x:String>Flag</x:String>
                         </x:Arguments>
                     </custom_components:OptionsPopupCell>
-                    <custom_components:OptionsPopupCell x:Name="CancelButton" Grid.Row="0" Grid.Column="3" CellStyle="Cancel">
+                    <custom_components:OptionsPopupCell x:Name="CancelButton" Grid.Row="0" Grid.Column="3">
                         <x:Arguments>
                             <x:String>Cancel</x:String>
                         </x:Arguments>
