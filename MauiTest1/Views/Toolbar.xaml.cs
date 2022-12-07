@@ -27,7 +27,7 @@ public partial class Toolbar : ContentView
         GameMenuBestTimesButton.Clicked += OnGameMenuBestTimesButtonClicked;
         GameMenuExitButton.Clicked += OnGameMenuExitButtonClicked;
 
-        MessagingCenter.Subscribe<GameboardCell, GameboardCellOptions>(this, "CellClick", (sender, arg) =>
+        MessagingCenter.Subscribe<GameboardGraphicsView, GameboardCellOptions>(this, "CellClick", (sender, arg) =>
         {
             if (GameMenu.IsVisible == true) GameMenu.IsVisible = false;
             if (HelpMenu.IsVisible == true) HelpMenu.IsVisible = false;

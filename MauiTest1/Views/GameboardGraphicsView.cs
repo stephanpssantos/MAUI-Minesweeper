@@ -57,7 +57,6 @@ public class GameboardGraphicsView : GraphicsView
         newCell.CellType = CellFactory.Instance.GetCellType(7);
         GameBoardState[cellIndex] = newCell;
 
-        // Taken from GameboardCell.cs; should work the same.
         GameboardCellOptions options = new()
         {
             BoardWidth = BoardSetup.BoardWidth,

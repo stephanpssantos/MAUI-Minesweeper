@@ -11,8 +11,7 @@ namespace MauiTest1
         private bool clockIsRunning = false;
         private bool gameOver = false;
         private GameboardSetup gameboard;
-        private ObservableCollection<int> gameboardState;
-        private ObservableCollection<CellShape> gameboardState_new;
+        private ObservableCollection<CellShape> gameboardState;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -102,16 +101,10 @@ namespace MauiTest1
             }
         }
 
-        public ObservableCollection<int> GameboardState
+        public ObservableCollection<CellShape> GameboardState
         {
             get => gameboardState;
             set { gameboardState = value; NotifyPropertyChanged(); }
-        }
-
-        public ObservableCollection<CellShape> GameboardState_new
-        {
-            get => gameboardState_new;
-            set { gameboardState_new = value; NotifyPropertyChanged(); }
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -136,20 +129,20 @@ namespace MauiTest1
         // Set all cell values, then call this to avoid having to redraw multiple times.
         private void RedrawCells()
         {
-            if (GameboardState_new is null) return;
-            CellShape newCell = GameboardState_new[0].Clone();
-            GameboardState_new[0] = newCell;
+            if (gameboardState is null) return;
+            CellShape newCell = gameboardState[0].Clone();
+            gameboardState[0] = newCell;
         }
 
         // Will immediately redraw.
         private void SetCellState(int cellIndex, int newState)
         {
-            if (GameboardState_new is null || cellIndex >= GameboardState_new.Count) return;
+            if (gameboardState is null || cellIndex >= gameboardState.Count) return;
             if (newState < 0 || newState > 7) return;
 
-            CellShape newCell = GameboardState_new[cellIndex].Clone();
+            CellShape newCell = gameboardState[cellIndex].Clone();
             newCell.CellType = CellFactory.Instance.GetCellType(newState);
-            GameboardState_new[cellIndex] = newCell;
+            gameboardState[cellIndex] = newCell;
         }
 
         private void ResumeTimer()
@@ -221,7 +214,7 @@ namespace MauiTest1
             }
             else if (options.ActionName == "Cancel")
             {
-                if (GameboardState_new[cellIndex].CellType.TypeID == 2)
+                if (gameboardState[cellIndex].CellType.TypeID == 2)
                 {
                     int mineCountInt = Int32.Parse(MineCount);
                     mineCountInt++;
@@ -244,12 +237,12 @@ namespace MauiTest1
                     int currentCellValue = Gameboard.BoardPositions[x, y];
 
                     // if currentCell has mine and is not flagged
-                    if (currentCellValue == -1 && GameboardState_new[currentCellIndex].CellType.TypeID != 2)
+                    if (currentCellValue == -1 && gameboardState[currentCellIndex].CellType.TypeID != 2)
                     {
                         unflaggedMines = true;
                     }
                     // if currentCell is number and is not open
-                    if (currentCellValue > 0 && GameboardState_new[currentCellIndex].CellType.TypeID != 3)
+                    if (currentCellValue > 0 && gameboardState[currentCellIndex].CellType.TypeID != 3)
                     {
                         unopenedNumbers = true;
                     }
@@ -319,13 +312,13 @@ namespace MauiTest1
                     int currentCellIndex = (y * Gameboard.BoardWidth) + x;
                     int currentCellValue = Gameboard.BoardPositions[x, y];
 
-                    if (currentCellValue == -1 && GameboardState_new[currentCellIndex].CellType.TypeID != 2)
+                    if (currentCellValue == -1 && gameboardState[currentCellIndex].CellType.TypeID != 2)
                     {
-                        GameboardState_new[currentCellIndex].CellType = CellFactory.Instance.GetCellType(2);
+                        gameboardState[currentCellIndex].CellType = CellFactory.Instance.GetCellType(2);
                     }
-                    if (currentCellValue > 0 && GameboardState_new[currentCellIndex].CellType.TypeID != 3)
+                    if (currentCellValue > 0 && gameboardState[currentCellIndex].CellType.TypeID != 3)
                     {
-                        GameboardState_new[currentCellIndex].CellType = CellFactory.Instance.GetCellType(3);
+                        gameboardState[currentCellIndex].CellType = CellFactory.Instance.GetCellType(3);
                     }
                 }
             }
@@ -337,7 +330,7 @@ namespace MauiTest1
         {
             // xPosition and yPosition are the coordinates for the clicked mine
             int cellIndex = (yPosition * Gameboard.BoardWidth) + xPosition;
-            GameboardState_new[cellIndex].CellType = CellFactory.Instance.GetCellType(5);
+            gameboardState[cellIndex].CellType = CellFactory.Instance.GetCellType(5);
 
             for (int y = 0; y < Gameboard.BoardHeight; y++)
             {
@@ -346,13 +339,13 @@ namespace MauiTest1
                     int currentCellIndex = (y * Gameboard.BoardWidth) + x;
                     int currentCellValue = Gameboard.BoardPositions[x, y];
 
-                    if (currentCellValue == -1 && GameboardState_new[currentCellIndex].CellType.TypeID == 0)
+                    if (currentCellValue == -1 && gameboardState[currentCellIndex].CellType.TypeID == 0)
                     {
-                        GameboardState_new[currentCellIndex].CellType = CellFactory.Instance.GetCellType(4);
+                        gameboardState[currentCellIndex].CellType = CellFactory.Instance.GetCellType(4);
                     }
-                    if (currentCellValue != -1 && GameboardState_new[currentCellIndex].CellType.TypeID == 2)
+                    if (currentCellValue != -1 && gameboardState[currentCellIndex].CellType.TypeID == 2)
                     {
-                        GameboardState_new[currentCellIndex].CellType = CellFactory.Instance.GetCellType(6);
+                        gameboardState[currentCellIndex].CellType = CellFactory.Instance.GetCellType(6);
                     }
                 }
             }
@@ -366,9 +359,9 @@ namespace MauiTest1
             int cellValue = Gameboard.BoardPositions[xPosition, yPosition];
 
             // Pressed or open, because it will check the surroundings as well as the currently pressed button
-            if (GameboardState_new[cellIndex].CellType.TypeID != 0 && GameboardState_new[cellIndex].CellType.TypeID != 7) return;
+            if (gameboardState[cellIndex].CellType.TypeID != 0 && gameboardState[cellIndex].CellType.TypeID != 7) return;
             if (cellValue == -1) return;
-            if (cellValue >= 0) GameboardState_new[cellIndex].CellType = CellFactory.Instance.GetCellType(3);
+            if (cellValue >= 0) gameboardState[cellIndex].CellType = CellFactory.Instance.GetCellType(3);
             if (cellValue == 0)
             {
                 // Check left

@@ -18,7 +18,7 @@
             Grid.Row="1"
             Grid.Column="2"
             MaxLength="3"
-            Placeholder="30"
+            Placeholder="8"
             class="entryGeneric" />
         <Label
             Text="Height:"
@@ -30,7 +30,7 @@
             Grid.Row="2"
             Grid.Column="2"
             MaxLength="3"
-            Placeholder="18"
+            Placeholder="8"
             class="entryGeneric" />
         <Label
             Text="Mines:"
@@ -42,7 +42,7 @@
             Grid.Row="3"
             Grid.Column="2"
             MaxLength="3"
-            Placeholder="99"
+            Placeholder="10"
             class="entryGeneric" />
         <Button
             x:Name="OKButton"
