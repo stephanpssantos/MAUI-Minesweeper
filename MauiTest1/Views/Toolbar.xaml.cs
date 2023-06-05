@@ -111,17 +111,23 @@ public partial class Toolbar : ContentView
         if (sender == GameMenuBeginnerButton)
         {
             if (difficultySetting == "Beginner") return;
-            Gameboard = GameboardSetupFactory.NewBeginnerSetup();
+
+            GameboardSetup newSetup = GameboardSetupFactory.NewBeginnerSetup();
+            MessagingCenter.Send<Application, GameboardSetup>(Application.Current, "NewGame", newSetup);
         }
         else if (sender == GameMenuIntermediateButton)
         {
             if (difficultySetting == "Intermediate") return;
-            Gameboard = GameboardSetupFactory.NewIntermediateSetup();
+
+            GameboardSetup newSetup = GameboardSetupFactory.NewIntermediateSetup();
+            MessagingCenter.Send<Application, GameboardSetup>(Application.Current, "NewGame", newSetup);
         }
         else if (sender == GameMenuExpertButton)
         {
             if (difficultySetting == "Expert") return;
-            Gameboard = GameboardSetupFactory.NewExpertSetup();
+
+            GameboardSetup newSetup = GameboardSetupFactory.NewExpertSetup();
+            MessagingCenter.Send<Application, GameboardSetup>(Application.Current, "NewGame", newSetup);
         }
         else if (sender == GameMenuCustomButton)
         {

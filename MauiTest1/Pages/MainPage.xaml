@@ -8,7 +8,7 @@
             <custom_components:Toolbar 
                 AbsoluteLayout.LayoutFlags="SizeProportional"
                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                Gameboard="{Binding Gameboard, Mode=TwoWay}" />
+                Gameboard="{Binding Gameboard}" />
         </AbsoluteLayout>
         <custom_components:GameboardOptionsPopup x:Name="PopupContainer" Margin="0, 30, 0, 0" />
         <Grid Margin="0, 30, 0, 0"

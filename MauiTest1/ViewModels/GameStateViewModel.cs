@@ -115,6 +115,7 @@ namespace MauiTest1
         private void NewGame(GameboardSetup setup = null)
         {
             MessagingCenter.Send<GameStateViewModel>(this, "UnlockBoard");
+            MessagingCenter.Send<Application, int>(Application.Current, "SmileyFace", 0);
             gameOver = false;
 
             if (setup is null)
