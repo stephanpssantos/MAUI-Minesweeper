@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using System.Reflection; // Assembly
+using System.Runtime.CompilerServices;
 using Windows.Graphics;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -135,10 +136,9 @@ public partial class App : MauiWinUIApplication
         {
             presenter.IsResizable = false;
             presenter.IsAlwaysOnTop = true;
-            //Properties below do not work as expected
-            //presenter.IsMaximizable = false;
-            //presenter.IsMinimizable = false;
-            //presenter.SetBorderAndTitleBar(true, false);
+            presenter.IsMaximizable = false;
+            presenter.IsMinimizable = false;
+            presenter.SetBorderAndTitleBar(true, false);
         };
 
         appWindow.Move(GetGameWindowOffset());
@@ -149,12 +149,15 @@ public partial class App : MauiWinUIApplication
         AppWindow appWindow = AppWindow.GetFromWindowId(CustomGameWindowId);
         if (appWindow == null) return;
 
-        appWindow.Resize(new SizeInt32(350, 300));
+        appWindow.Resize(new SizeInt32(300, 250));
 
         if (appWindow.Presenter is OverlappedPresenter presenter)
         {
             presenter.IsResizable = false;
             presenter.IsAlwaysOnTop = true;
+            presenter.IsMaximizable = false;
+            presenter.IsMinimizable = false;
+            presenter.SetBorderAndTitleBar(true, false);
         };
 
         appWindow.Move(GetGameWindowOffset());
@@ -165,12 +168,15 @@ public partial class App : MauiWinUIApplication
         AppWindow appWindow = AppWindow.GetFromWindowId(NewScoreWindowId);
         if (appWindow == null) return;
 
-        appWindow.Resize(new SizeInt32(350, 280));
+        appWindow.Resize(new SizeInt32(250, 250));
 
         if (appWindow.Presenter is OverlappedPresenter presenter)
         {
             presenter.IsResizable = false;
             presenter.IsAlwaysOnTop = true;
+            presenter.IsMaximizable = false;
+            presenter.IsMinimizable = false;
+            presenter.SetBorderAndTitleBar(true, false);
         };
 
         appWindow.Move(GetGameWindowOffset());
@@ -190,6 +196,8 @@ public partial class App : MauiWinUIApplication
         int width = (setup.BoardWidth * 16) + 44;
         int height = (setup.BoardHeight * 16) + 146;
 
+        // This can be removed when finished
+        // But you need to make the game toolbar menus their own windows.
         width = width < 340 ? 340 : width;
         height = height < 332 ? 332 : height;
 

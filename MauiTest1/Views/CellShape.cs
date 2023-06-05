@@ -1,4 +1,5 @@
-﻿namespace MauiTest1
+﻿using Microsoft.Maui.Graphics;
+namespace MauiTest1
 {
     public class CellShape
     {

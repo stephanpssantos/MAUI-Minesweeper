@@ -1,7 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!-- Global Defaults -->
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="Black" />
+    </Style>
+    
     <!-- Common -->
     <Style Class="labelRightAlign" TargetType="Label">
         <Setter Property="VerticalTextAlignment" Value="Center" />
@@ -22,6 +27,9 @@
         <Setter Property="HeightRequest" Value="30" />
         <Setter Property="WidthRequest" Value="100" />
         <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="PlaceholderColor" Value="Black" />
     </Style>
 
     <Style Class="button-mt20" TargetType="Button">
@@ -45,6 +53,7 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="Margin" Value="10, 0, 0, 0" />
+        <Setter Property="TextColor" Value="Black" />
     </Style>
 
     <Style x:Key="toolbarMenuLine" TargetType="BoxView">

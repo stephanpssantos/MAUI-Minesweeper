@@ -27,6 +27,11 @@ public partial class NewHighScorePage : ContentPage
 
 	private void SetRecordName()
 	{
+		if (string.IsNullOrEmpty(RecordName.Text))
+		{
+			RecordName.Text = "Anonymous";
+		}
+
 		switch (difficulty)
 		{
 			case "Beginner":

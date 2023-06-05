@@ -13,7 +13,10 @@
             x:Name="RecordName"
             Margin="0, 40, 0, 0"
             Placeholder="Anonymous"
-            MaxLength="12"/>
+            MaxLength="12"
+            TextColor="Black"
+            PlaceholderColor="Black"
+            BackgroundColor="White"/>
         <Button 
             x:Name="OKButton"
             Text="OK"

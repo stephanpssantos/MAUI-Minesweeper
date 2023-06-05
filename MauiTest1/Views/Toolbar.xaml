@@ -8,8 +8,12 @@
         <Style x:Key="local_toolbarMenuCheckbox" TargetType="Label" BasedOn="{StaticResource toolbarMenuCheckbox}" />
         <Style x:Key="local_toolbarMenuCheckboxChecked" TargetType="Label" BasedOn="{StaticResource toolbarMenuCheckboxChecked}" />
     </ContentView.Resources>
-    
+
     <AbsoluteLayout>
+        <BoxView 
+            AbsoluteLayout.LayoutFlags="WidthProportional" 
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 30" 
+            Color="{StaticResource Gray4}" />
         <VerticalStackLayout 
             AbsoluteLayout.LayoutFlags="WidthProportional"
             AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
@@ -19,8 +23,6 @@
                 <Button x:Name="HelpButton" Text="Help" 
                     Style="{StaticResource neutralToolbarButtonStyle}" />
             </HorizontalStackLayout>
-
-            <BoxView HeightRequest="2" HorizontalOptions="Fill" Color="{StaticResource Gray4}"/>
         </VerticalStackLayout>
         <Grid x:Name="GameMenu"
             WidthRequest="200" 
