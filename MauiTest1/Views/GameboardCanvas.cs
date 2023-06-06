@@ -4,15 +4,18 @@ namespace MauiTest1
 {
     public class GameboardCanvas : IDrawable
     {
-        public GameboardCanvas(int height, int width)
+        public GameboardCanvas(int height, int width, View parentView)
         {
             Height = height;
             Width = width;
+            ParentView = parentView;
         }
 
         public int Height { get; set; }
 
         public int Width { get; set; }
+
+        public View ParentView { get; }
 
         public ObservableCollection<CellShape> Shapes { get; set; }
 
@@ -26,7 +29,7 @@ namespace MauiTest1
                 {
                     boardPosition = (y * Width) + x;
                     CellShape shape = Shapes[boardPosition];
-                    shape.Draw(canvas);
+                    shape.Draw(canvas, ParentView);
                 }
             }
         }

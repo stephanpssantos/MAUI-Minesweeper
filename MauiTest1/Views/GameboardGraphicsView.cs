@@ -12,7 +12,7 @@ public class GameboardGraphicsView : GraphicsView
 
     public GameboardGraphicsView()
 	{
-        canvas = new GameboardCanvas(BoardSetup.BoardWidth, BoardSetup.BoardHeight);
+        canvas = new GameboardCanvas(BoardSetup.BoardWidth, BoardSetup.BoardHeight, this);
         Drawable = canvas;
         Loaded += GameboardGraphicsViewLoaded;
         PropertyChanged += RegenerateBoard;
