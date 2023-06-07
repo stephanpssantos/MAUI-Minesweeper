@@ -1,3 +1,15 @@
+@@@@@@@@@@@@@@@@@@
+
+Revisit (June 2023):
+-Custom fonts are now working. It's kind of an ugly workaround, though.
+-Fixed the lack of color in the toolbar. It seems like it was an adjustment to the way BoxView fills a layout.
+-Fixed an issue where starting a new game after dying left the board locked and the smiley face dead
+-In .NET 7, the app window can now be resized to any size. I think it's worth changing the toolbar menus to be their own windows OR to use Flyouts
+-But the biggest bummer is that images on canvases are STILL broken!!
+
+
+@@@@@@@@@@@@@@@@@@
+
 Big TODOs (12/6/2022):
 -Get it working on Android
 	-Replace ToolBar with mobile friendly nav bar
