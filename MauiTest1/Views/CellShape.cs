@@ -35,7 +35,7 @@ namespace MauiTest1
             return clone;
         }
 
-        public void Draw(ICanvas canvas, View parentView)
+        public void Draw(ICanvas canvas, GameboardGraphicsView parentView)
         {
             int x = this.xPosition * this.CellType.Size;
             int y = this.yPosition * this.CellType.Size;
@@ -43,13 +43,13 @@ namespace MauiTest1
 
             Rect position = new Rect(0, 0, this.CellType.Size, this.CellType.Size);
 
+            // canvas.Font is bugged for windows.
+            canvas.Font = new Microsoft.Maui.Graphics.Font("8Bit", 800);
 #if WINDOWS
             // Any number is fine for font size. It won't be used. We're using this method only 
             // because it's the only available method of getting a custom Maui.Font.
             Microsoft.Maui.Font customFont = Microsoft.Maui.Font.OfSize("8Bit", 12);
-            MauiCanvasFont canvasFont = new MauiCanvasFont(parentView, customFont);
-#else
-            canvas.Font = new Microsoft.Maui.Graphics.Font("8Bit", 800); // (12/6/2022) bugged. Font family cannot be set.
+            MauiCanvasFont canvasFont = new MauiCanvasFont(parentView, customFont);     
 #endif
 
             if (this.CellType.TypeID == 3 && this.internalValue > 0)
@@ -88,6 +88,19 @@ namespace MauiTest1
             }
             // This is a temporary solution.
             // It's only in place because drawing images on a canvas is currently unsupported.
+
+            //Microsoft.Maui.Graphics.IImage image = null;
+            //Assembly assembly = GetType().GetTypeInfo().Assembly;
+            //using (Stream stream = assembly.GetManifestResourceStream("MauiTest1.Resources.Images.question_emb.png"))
+            //{
+            //    var imageService = new Microsoft.Maui.Graphics.Win2D.W2DImageLoadingService();
+            //    image = imageService.FromStream(stream, ImageFormat.Png);
+            //    if (image != null)
+            //    {
+            //        canvas.DrawImage(image, 5, 3, image.Width, image.Height);
+            //    }
+            //}
+
             else if (this.CellType.TypeID == 1)
             {
                 canvas.FontColor = Colors.Black;

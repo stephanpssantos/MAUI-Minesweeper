@@ -4,7 +4,7 @@ namespace MauiTest1
 {
     public class GameboardCanvas : IDrawable
     {
-        public GameboardCanvas(int height, int width, View parentView)
+        public GameboardCanvas(int height, int width, GameboardGraphicsView parentView)
         {
             Height = height;
             Width = width;
@@ -15,7 +15,7 @@ namespace MauiTest1
 
         public int Width { get; set; }
 
-        public View ParentView { get; }
+        public GameboardGraphicsView ParentView { get; }
 
         public ObservableCollection<CellShape> Shapes { get; set; }
 

@@ -1,7 +1,4 @@
-﻿using Microsoft.Maui.Controls;
-using System.ComponentModel;
-
-namespace MauiTest1;
+﻿namespace MauiTest1;
 
 public partial class MainPage : ContentPage
 {
