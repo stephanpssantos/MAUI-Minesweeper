@@ -1,10 +1,13 @@
-﻿using Microsoft.Maui.Graphics.Win2D;
+﻿#if WINDOWS
+using Microsoft.Maui.Graphics.Win2D;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.Brushes;
+#endif
 using System.Numerics;
 
 namespace MauiTest1.Helpers
 {
+#if WINDOWS
     public static class MauiWindowsCanvas
     {
         public static void DrawString(
@@ -22,13 +25,8 @@ namespace MauiTest1.Helpers
             TextFlow textFlow = TextFlow.ClipBounds,
             float lineAdjustment = 0)
         {
-#if !WINDOWS
-            return;
-#endif
-#if DEBUG
             try
             {
-#endif
                 var textFormat = new CanvasTextFormat() { FontFamily = font.Source, FontSize = fontSize };
                 textFormat.VerticalAlignment = CanvasVerticalAlignment.Top;
 
@@ -79,15 +77,12 @@ namespace MauiTest1.Helpers
                 var brush = new CanvasSolidColorBrush(canvas.Session, color);
 
                 canvas.Session.DrawTextLayout(textLayout, _point1, brush);
-
-#if DEBUG
-
             }
             catch (Exception exc)
             {
                 System.Diagnostics.Debug.WriteLine(exc);
             }
-#endif
         }
     }
+#endif
 }

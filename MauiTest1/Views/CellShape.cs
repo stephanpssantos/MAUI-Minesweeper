@@ -1,5 +1,8 @@
-﻿using MauiTest1.Helpers;
+﻿#if WINDOWS
 using Microsoft.Maui.Graphics.Win2D;
+#endif
+
+using MauiTest1.Helpers;
 
 namespace MauiTest1
 {
@@ -86,21 +89,6 @@ namespace MauiTest1
                 canvas.DrawString(this.internalValue.ToString(), position, HorizontalAlignment.Center, VerticalAlignment.Center);   
 #endif
             }
-            // This is a temporary solution.
-            // It's only in place because drawing images on a canvas is currently unsupported.
-
-            //Microsoft.Maui.Graphics.IImage image = null;
-            //Assembly assembly = GetType().GetTypeInfo().Assembly;
-            //using (Stream stream = assembly.GetManifestResourceStream("MauiTest1.Resources.Images.question_emb.png"))
-            //{
-            //    var imageService = new Microsoft.Maui.Graphics.Win2D.W2DImageLoadingService();
-            //    image = imageService.FromStream(stream, ImageFormat.Png);
-            //    if (image != null)
-            //    {
-            //        canvas.DrawImage(image, 5, 3, image.Width, image.Height);
-            //    }
-            //}
-
             else if (this.CellType.TypeID == 1)
             {
                 canvas.FontColor = Colors.Black;
