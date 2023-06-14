@@ -12,6 +12,7 @@ namespace MauiTest1
         private bool gameOver = false;
         private GameboardSetup gameboard;
         private ObservableCollection<CellShape> gameboardState;
+        private ImageOverlayState imageOverlayState;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -30,6 +31,8 @@ namespace MauiTest1
                                     ),
                 _ => GameboardSetupFactory.NewBeginnerSetup(),
             };
+
+            ImageOverlayState = new ImageOverlayState();
 
             MessagingCenter.Subscribe<Application, GameboardSetup>(this, "NewGame", (sender, args) => { NewGame(args); });
             MessagingCenter.Subscribe<GameTimer>(this, "ClockTick", (sender) => { IncrementTimeElapsed(); });
@@ -107,6 +110,12 @@ namespace MauiTest1
             set { gameboardState = value; NotifyPropertyChanged(); }
         }
 
+        public ImageOverlayState ImageOverlayState
+        {
+            get => imageOverlayState;
+            set { imageOverlayState = value; NotifyPropertyChanged(); }
+        }
+
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -124,6 +133,7 @@ namespace MauiTest1
             }
 
             Gameboard = setup;
+            ImageOverlayState.Reset();
         }
 
         // Used when you are setting multiple cells at once (e.g. in a loop.)

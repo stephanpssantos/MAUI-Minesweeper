@@ -32,11 +32,18 @@
                     <x:Int32>4</x:Int32>
                 </x:Arguments>
             </custom_components:DiagonalBlockShapeResizable>
+            <custom_components:ImageOverlayWrapper BoardSetup="{Binding Gameboard}" Grid.Row="1" Grid.Column="0">
+                <custom_components:ImageOverlay x:Name="ImageOverlay"
+                                                AbsoluteLayout.LayoutFlags="SizeProportional"
+                                                AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                                ImageOverlayState="{Binding ImageOverlayState}"/>
+            </custom_components:ImageOverlayWrapper>
             <custom_components:GameboardGraphicsView x:Name="GameboardCanvas"
                                                      Grid.Row="1" 
                                                      Grid.Column="0" 
                                                      BoardSetup="{Binding Gameboard}" 
-                                                     GameBoardState="{Binding GameboardState, Mode=TwoWay}" />
+                                                     GameBoardState="{Binding GameboardState, Mode=TwoWay}"
+                                                     ImageOverlayState="{Binding ImageOverlayState}" />
         </Grid>
     </Grid>
 

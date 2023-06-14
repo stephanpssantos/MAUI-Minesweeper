@@ -1,5 +1,9 @@
 @@@@@@@@@@@@@@@@@@
 
+Revisit Part 2 (June 2023):
+-Instead of trying to get canvas images to work, I'm overlaying standard image controls over the canvas. Works great!!
+	and we should be able to rip the "ImageOverlay" class off of this project and drop it into any other project.
+
 Revisit (June 2023):
 -Custom fonts are now working. It's kind of an ugly workaround, though.
 -Fixed the lack of color in the toolbar. It seems like it was an adjustment to the way BoxView fills a layout.

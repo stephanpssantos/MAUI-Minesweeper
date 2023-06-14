@@ -24,6 +24,13 @@ public class GameboardGraphicsView : GraphicsView
     public static readonly BindableProperty BoardSetupProperty =
         BindableProperty.Create(nameof(BoardSetup), typeof(GameboardSetup), typeof(GameboardGraphicsView), GameboardSetupFactory.NewBeginnerSetup());
 
+    public static readonly BindableProperty ImageOverlayStateProperty =
+    BindableProperty.Create(
+        nameof(ImageOverlayState),
+        typeof(ImageOverlayState),
+        typeof(GameboardGraphicsView)
+    );
+
     public ObservableCollection<CellShape> GameBoardState
     {
         get { return (ObservableCollection<CellShape>)GetValue(GameBoardStateProperty); }
@@ -34,6 +41,12 @@ public class GameboardGraphicsView : GraphicsView
     {
         get { return (GameboardSetup)GetValue(BoardSetupProperty); }
         set { SetValue(BoardSetupProperty, value); }
+    }
+
+    public ImageOverlayState ImageOverlayState
+    {
+        get { return (ImageOverlayState)GetValue(ImageOverlayStateProperty); }
+        set { SetValue(ImageOverlayStateProperty, value); }
     }
 
     private void GameboardGraphicsViewLoaded(object sender, EventArgs e)

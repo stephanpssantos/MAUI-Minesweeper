@@ -11,14 +11,16 @@ namespace MauiTest1
         private int xPosition = 0;
         private int yPosition = 0;
         private int internalValue = 0;
+        private int imageOverlayId = 0;
         private CellType cellType;
 
-        public CellShape(int x, int y, int internalValue, CellType cellType)
+        public CellShape(int x, int y, int internalValue, CellType cellType, int imageOverlayId = 0)
         {
             this.xPosition = x;
             this.yPosition = y;
             this.internalValue = internalValue;
             this.cellType = cellType;
+            this.imageOverlayId = imageOverlayId;
         }
 
         public int InternalValue
@@ -34,7 +36,7 @@ namespace MauiTest1
 
         public CellShape Clone()
         {
-            CellShape clone = new CellShape(xPosition, yPosition, internalValue, cellType);
+            CellShape clone = new CellShape(xPosition, yPosition, internalValue, cellType, imageOverlayId);
             return clone;
         }
 
@@ -88,31 +90,69 @@ namespace MauiTest1
                 canvas.FontColor = fontColor;
                 canvas.DrawString(this.internalValue.ToString(), position, HorizontalAlignment.Center, VerticalAlignment.Center);   
 #endif
+                if (this.imageOverlayId != 0)
+                {
+                    parentView.ImageOverlayState.RemoveImageBlock(imageOverlayId);
+                }
             }
             else if (this.CellType.TypeID == 1)
             {
-                canvas.FontColor = Colors.Black;
-                canvas.DrawString("?", position, HorizontalAlignment.Center, VerticalAlignment.Center);
+                if (this.imageOverlayId != 0)
+                {
+                    parentView.ImageOverlayState.SetImageBlockSource(this.imageOverlayId, "question.png");
+                } 
+                else
+                {
+                    imageOverlayId = parentView.ImageOverlayState.CreateImageBlock(x, y, this.CellType.Size, this.CellType.Size, "question.png");
+                }
             }
             else if (this.CellType.TypeID == 2)
             {
-                canvas.FontColor = Colors.Black;
-                canvas.DrawString("!", position, HorizontalAlignment.Center, VerticalAlignment.Center);
+                if (this.imageOverlayId != 0)
+                {
+                    parentView.ImageOverlayState.SetImageBlockSource(this.imageOverlayId, "flag.png");
+                }
+                else
+                {
+                    imageOverlayId = parentView.ImageOverlayState.CreateImageBlock(x, y, this.CellType.Size, this.CellType.Size, "flag.png");
+                }
+            }
+            else if (this.CellType.TypeID == 3 && this.imageOverlayId != 0)
+            {
+                parentView.ImageOverlayState.RemoveImageBlock(imageOverlayId);
             }
             else if (this.CellType.TypeID == 4)
             {
-                canvas.FontColor = Colors.Black;
-                canvas.DrawString("X", position, HorizontalAlignment.Center, VerticalAlignment.Center);
+                if (this.imageOverlayId != 0)
+                {
+                    parentView.ImageOverlayState.SetImageBlockSource(this.imageOverlayId, "mine.png");
+                }
+                else
+                {
+                    imageOverlayId = parentView.ImageOverlayState.CreateImageBlock(x, y, this.CellType.Size, this.CellType.Size, "mine.png");
+                }
             }
             else if (this.CellType.TypeID == 5)
             {
-                canvas.FontColor = Colors.Red;
-                canvas.DrawString("X", position, HorizontalAlignment.Center, VerticalAlignment.Center);
+                if (this.imageOverlayId != 0)
+                {
+                    parentView.ImageOverlayState.SetImageBlockSource(this.imageOverlayId, "exploded_mine.png");
+                }
+                else
+                {
+                    imageOverlayId = parentView.ImageOverlayState.CreateImageBlock(x, y, this.CellType.Size, this.CellType.Size, "exploded_mine.png");
+                }
             }
             else if (this.CellType.TypeID == 6)
             {
-                canvas.FontColor = Colors.Red;
-                canvas.DrawString("!", position, HorizontalAlignment.Center, VerticalAlignment.Center);
+                if (this.imageOverlayId != 0)
+                {
+                    parentView.ImageOverlayState.SetImageBlockSource(this.imageOverlayId, "not_a_mine.png");
+                }
+                else
+                {
+                    imageOverlayId = parentView.ImageOverlayState.CreateImageBlock(x, y, this.CellType.Size, this.CellType.Size, "not_a_mine.png");
+                }
             }
 
             canvas.FillColor = CellType.TopFill;

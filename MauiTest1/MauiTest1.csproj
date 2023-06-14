@@ -56,19 +56,12 @@
   </ItemGroup>
   
   <ItemGroup>
+    <None Remove="Resources\Images\exploded_mine.png" />
     <None Remove="Resources\Images\exploded_mine_emb.png" />
     <None Remove="Resources\Images\flag_emb.png" />
     <None Remove="Resources\Images\mine_emb.png" />
     <None Remove="Resources\Images\not_a_mine_emb.png" />
     <None Remove="Resources\Images\question_emb.png" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Images\exploded_mine_emb.png" />
-    <EmbeddedResource Include="Resources\Images\flag_emb.png" />
-    <EmbeddedResource Include="Resources\Images\mine_emb.png" />
-    <EmbeddedResource Include="Resources\Images\not_a_mine_emb.png" />
-    <EmbeddedResource Include="Resources\Images\question_emb.png" />
   </ItemGroup>
   
   <ItemGroup>
