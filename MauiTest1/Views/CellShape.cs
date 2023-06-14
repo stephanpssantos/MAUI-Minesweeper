@@ -93,7 +93,13 @@ namespace MauiTest1
                 if (this.imageOverlayId != 0)
                 {
                     parentView.ImageOverlayState.RemoveImageBlock(imageOverlayId);
+                    this.imageOverlayId = 0;
                 }
+            }
+            else if (this.CellType.TypeID == 0 && this.imageOverlayId != 0)
+            {
+                parentView.ImageOverlayState.RemoveImageBlock(imageOverlayId);
+                this.imageOverlayId = 0;
             }
             else if (this.CellType.TypeID == 1)
             {
@@ -120,6 +126,7 @@ namespace MauiTest1
             else if (this.CellType.TypeID == 3 && this.imageOverlayId != 0)
             {
                 parentView.ImageOverlayState.RemoveImageBlock(imageOverlayId);
+                this.imageOverlayId = 0;
             }
             else if (this.CellType.TypeID == 4)
             {
